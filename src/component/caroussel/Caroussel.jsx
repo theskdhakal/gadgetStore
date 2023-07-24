@@ -1,6 +1,9 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import logo from "../assets/image/logo.JPG";
+import games from "../assets/image/games.webp";
+import laptops from "../assets/image/laptops.webp";
+import phones from "../assets/image/phones.avif";
+import tv from "../assets/image/tv.jpg";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
 
 // Import Swiper styles
@@ -11,33 +14,55 @@ import "swiper/css/scrollbar";
 
 export const Caroussel = () => {
   return (
-    <Swiper
-      // install Swiper modules
-      modules={[Navigation, Pagination, Scrollbar, A11y]}
-      spaceBetween={50}
-      slidesPerView={3}
-      navigation
-      pagination={{ clickable: true }}
-      scrollbar={{ draggable: true }}
-      onSwiper={(swiper) => console.log(swiper)}
-      onSlideChange={() => console.log("slide change")}
-    >
-      <SwiperSlide>
-        <img src={logo} />
-      </SwiperSlide>
-      <SwiperSlide>
-        {" "}
-        <img src={logo} />
-      </SwiperSlide>
-      <SwiperSlide>
-        {" "}
-        <img src={logo} />
-      </SwiperSlide>
-      <SwiperSlide>
-        {" "}
-        <img src={logo} />
-      </SwiperSlide>
-      ...
-    </Swiper>
+    <div className="caroussel p-1" style={{ height: "60vh" }}>
+      <Swiper
+        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        spaceBetween={20}
+        slidesPerView={1}
+        navigation
+        pagination={{ clickable: true }}
+        scrollbar={{ draggable: true }}
+        onSwiper={(swiper) => console.log(swiper)}
+        onSlideChange={() => console.log("slide change")}
+      >
+        <SwiperSlide
+          style={{
+            height: "50vh",
+            background: `url(${phones})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+          }}
+        ></SwiperSlide>
+        <SwiperSlide
+          style={{
+            height: "50vh",
+            background: `url(${laptops})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+          }}
+        ></SwiperSlide>
+        <SwiperSlide
+          style={{
+            height: "50vh",
+            background: `url(${tv})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+          }}
+        ></SwiperSlide>
+        <SwiperSlide
+          style={{
+            height: "50vh",
+            background: `url(${games})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center",
+          }}
+        ></SwiperSlide>
+        ...
+      </Swiper>
+    </div>
   );
 };
