@@ -4,7 +4,13 @@ import games from "../assets/image/games.webp";
 import laptops from "../assets/image/laptops.webp";
 import phones from "../assets/image/phones.avif";
 import tv from "../assets/image/tv.jpg";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
+import {
+  Autoplay,
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+} from "swiper/modules";
 
 // Import Swiper styles
 import "swiper/css";
@@ -16,12 +22,16 @@ export const Caroussel = () => {
   return (
     <div className="caroussel p-1" style={{ height: "60vh" }}>
       <Swiper
-        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        modules={[Autoplay, Navigation, Pagination, Scrollbar, A11y]}
         spaceBetween={20}
         slidesPerView={1}
+        autoplay={{
+          delay: 9500,
+          disableOnInteraction: false,
+        }}
         navigation
         pagination={{ clickable: true }}
-        scrollbar={{ draggable: true }}
+        // scrollbar={{ draggable: false }}
         onSwiper={(swiper) => console.log(swiper)}
         onSlideChange={() => console.log("slide change")}
       >
