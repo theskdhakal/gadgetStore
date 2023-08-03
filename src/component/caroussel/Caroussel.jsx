@@ -20,7 +20,7 @@ import "swiper/css/scrollbar";
 
 export const Caroussel = () => {
   return (
-    <div className="caroussel p-1" style={{ height: "60vh" }}>
+    <div className="caroussel " style={{ height: "60vh" }}>
       <Swiper
         modules={[Autoplay, Navigation, Pagination, Scrollbar, A11y]}
         spaceBetween={20}
@@ -37,7 +37,7 @@ export const Caroussel = () => {
       >
         <SwiperSlide
           style={{
-            height: "50vh",
+            height: "60vh",
             background: `url(${phones})`,
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
@@ -46,7 +46,7 @@ export const Caroussel = () => {
         ></SwiperSlide>
         <SwiperSlide
           style={{
-            height: "50vh",
+            height: "60vh",
             background: `url(${laptops})`,
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
@@ -55,7 +55,7 @@ export const Caroussel = () => {
         ></SwiperSlide>
         <SwiperSlide
           style={{
-            height: "50vh",
+            height: "60vh",
             background: `url(${tv})`,
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
@@ -64,7 +64,7 @@ export const Caroussel = () => {
         ></SwiperSlide>
         <SwiperSlide
           style={{
-            height: "50vh",
+            height: "60vh",
             background: `url(${games})`,
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
