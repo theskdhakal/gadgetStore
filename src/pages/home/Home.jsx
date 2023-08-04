@@ -11,7 +11,7 @@ export const Home = () => {
 
   return (
     <MainLayout>
-      <Banner />
+      {/* <Banner /> */}
 
       <div className="py-3">
         <Caroussel />
