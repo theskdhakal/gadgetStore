@@ -163,7 +163,8 @@ export const Header = () => {
                 <Disclosure.Button
                   key={item.name}
                   as="a"
-                  href={item.href}
+                  Link
+                  to={item.href}
                   className={classNames(
                     item.current
                       ? "bg-gray-900 text-white"
