@@ -1,9 +1,16 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/image/logo.JPG";
+import { BsFillCartFill } from "react-icons/bs";
+import { Fragment } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
+  }
 
   return (
     <div class="bg-mycolor">
@@ -46,10 +53,9 @@ export const Header = () => {
             to="/"
             aria-label="Company"
             title="Company"
-            class="inline-flex items-center lg:mx-auto"
+            class="inline-flex  items-center ml-7"
           >
             <img src={logo} alt="" style={{ width: "115px" }} />
-            <span class="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase"></span>
           </Link>
           <ul class="flex items-center hidden ml-auto space-x-8 lg:flex">
             <li>
@@ -73,11 +79,119 @@ export const Header = () => {
               </Link>
             </li>
           </ul>
+
+          {/* //second row of header  */}
+          <div className="col-span-2 lg:col-span-3 mt-2">
+            <div className="grid grid-cols-2 lg:grid-cols-3 ">
+              {/* left and middle grid (col-span-2 on small screen, col-span-1 on large screens */}
+              <div className="lg:col-span-2  bordered round hidden ml-auto lg:flex ">
+                <input
+                  id="searbar"
+                  autocomplete="off"
+                  aria-label="search"
+                  placeholder="search"
+                  className="rounded "
+                  style={{ width: "40vw", height: "3rem" }}
+                />
+                <span>
+                  {" "}
+                  <button
+                    aria-label="search"
+                    className="bg-black text-white p-3 rounded"
+                    style={{ height: "3rem" }}
+                  >
+                    Search
+                  </button>
+                </span>
+              </div>
+
+              {/* right grid (col-span-1) */}
+              <div className="lg:col-span-1 " style={{ marginLeft: "15rem" }}>
+                <ul className="hidden ml-auto lg:flex">
+                  <li>
+                    <Link to="/">
+                      <button className="text-white text-2xl ">
+                        <BsFillCartFill />
+                      </button>
+                    </Link>
+                  </li>
+                  <li>
+                    {/* Profile dropdown */}
+                    <Menu as="div" className="relative ml-3">
+                      <div>
+                        <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                          <span className="absolute -inset-1.5" />
+                          <span className="sr-only">Open user menu</span>
+                          <img
+                            className="h-8 w-8 rounded-full"
+                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                            alt=""
+                          />
+                        </Menu.Button>
+                      </div>
+                      <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                      >
+                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                          <Menu.Item>
+                            {({ active }) => (
+                              <a
+                                href="#"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                Your Profile
+                              </a>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <a
+                                href="#"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                Settings
+                              </a>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <a
+                                href="#"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                Sign out
+                              </a>
+                            )}
+                          </Menu.Item>
+                        </Menu.Items>
+                      </Transition>
+                    </Menu>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
           <div class="ml-auto lg:hidden">
             <button
               aria-label="Open Menu"
               title="Open Menu"
-              class="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline"
+              class="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline absolute top-7 left-0"
               onClick={() => setIsMenuOpen(true)}
             >
               <svg class="w-5 text-white" viewBox="0 0 24 24">
@@ -160,8 +274,8 @@ export const Header = () => {
                       <li>
                         <Link
                           to="/"
-                          aria-label="Sign in"
-                          title="Sign in"
+                          aria-label="register"
+                          title="register"
                           class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
                         >
                           Register
@@ -171,8 +285,8 @@ export const Header = () => {
                         <Link
                           to="/"
                           class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                          aria-label="Sign up"
-                          title="Sign up"
+                          aria-label="login"
+                          title="login"
                         >
                           Login
                         </Link>
