@@ -4,6 +4,7 @@ import logo from "../../assets/image/logo.JPG";
 import { BsFillCartFill } from "react-icons/bs";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
+import "./Header.css";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -83,31 +84,26 @@ export const Header = () => {
           {/* //second row of header  */}
           <div className="col-span-2 lg:col-span-3 mt-2">
             <div className="grid grid-cols-2 lg:grid-cols-3 ">
-              {/* left and middle grid (col-span-2 on small screen, col-span-1 on large screens */}
-              <div className="lg:col-span-2  bordered round hidden ml-auto lg:flex ">
+              {/* left and middle grid (col-span-1 on small screen, col-span-2 on large screens */}
+              <div className="col-span-2 lg:col-span-2  bordered round  ml-auto lg:flex ">
                 <input
-                  id="searbar"
+                  id="searchbar"
                   autocomplete="off"
                   aria-label="search"
                   placeholder="search"
-                  className="rounded "
-                  style={{ width: "40vw", height: "3rem" }}
+                  className="rounded mt-0"
                 />
-                <span>
-                  {" "}
-                  <button
-                    aria-label="search"
-                    className="bg-black text-white p-3 rounded"
-                    style={{ height: "3rem" }}
-                  >
-                    Search
-                  </button>
-                </span>
+                <button
+                  aria-label="search"
+                  className="search-button bg-black text-white p-2 rounded mt-0"
+                >
+                  Search
+                </button>
               </div>
 
               {/* right grid (col-span-1) */}
               <div className="lg:col-span-1 " style={{ marginLeft: "15rem" }}>
-                <ul className="hidden ml-auto lg:flex">
+                <ul className="absolute top-7 right-2 flex ml-auto lg:static">
                   <li>
                     <Link to="/">
                       <button className="text-white text-2xl ">
@@ -210,7 +206,7 @@ export const Header = () => {
               </svg>
             </button>
             {isMenuOpen && (
-              <div class="absolute top-0 left-0 w-50" style={{ zIndex: 999 }}>
+              <div class="absolute top-4 left-0 w-50" style={{ zIndex: 999 }}>
                 <div class="p-2 bg-mycolor border rounded shadow-sm">
                   <div class="flex items-center justify-between mb-4">
                     <div>
