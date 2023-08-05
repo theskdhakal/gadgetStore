@@ -10,6 +10,7 @@ import {
 import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import { Categories } from "./pages/categories/Categories";
+import { NewArrival } from "./pages/new-arrival/NewArrival";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/categories" element={<Categories />} />
+      <Route path="/new" element={<NewArrival />} />
     </Routes>
   );
 }
