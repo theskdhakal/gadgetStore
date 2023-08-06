@@ -1,18 +1,34 @@
+import { useSelector } from "react-redux";
 import { MainLayout } from "../../component/layout/main-layout/MainLayout";
+import { Link } from "react-router-dom";
 
 export const NewArrival = () => {
+  const { product } = useSelector((state) => state.product);
+
+  //create a shallow copy of the product array
+  const sortedProducts = [...product];
+
+  //sort the product array based on timestamp in descending order
+  sortedProducts.sort((a, b) => b.addedDate - a.addedDate);
+
+  //get the first 5 items from the sorted array
+  const lastSevenAddedItems = sortedProducts.slice(0, 7);
+  console.log(lastSevenAddedItems);
+
   return (
     <MainLayout>
       <div className="relative overflow-hidden bg-white">
         <div className="pb-80 pt-16 sm:pb-40 sm:pt-24 lg:pb-48 lg:pt-40">
           <div className="relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
             <div className="sm:max-w-lg">
-              <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                Summer styles are finally here
-              </h1>
+              <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+                Discover the Latest Gadgets: Elevate Your Tech Game Today!
+              </h2>
               <p className="mt-4 text-xl text-gray-500">
-                This year, our new summer collection will shelter you from the
-                harsh elements of a world that doesn't care if you live or die.
+                Welcome to our New Arrival page, where you can explore the
+                latest and most exciting gadgets in the world of technology.
+                Stay up-to-date with the newest innovations and find the perfect
+                gadgets to enhance your life.
               </p>
             </div>
             <div>
@@ -27,37 +43,14 @@ export const NewArrival = () => {
                       <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                         <div className="h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100">
                           <img
-                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg"
+                            src="https://azcd.harveynorman.com.au/media/catalog/product/cache/21/small_image/400x225/9df78eab33525d08d6e5fb8d27136e95/s/a/samsung-galaxy-z-fold5-hero.jpg"
                             alt=""
                             className="h-full w-full object-cover object-center"
                           />
                         </div>
                         <div className="h-64 w-44 overflow-hidden rounded-lg">
                           <img
-                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-02.jpg"
-                            alt=""
-                            className="h-full w-full object-cover object-center"
-                          />
-                        </div>
-                      </div>
-                      <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
-                        <div className="h-64 w-44 overflow-hidden rounded-lg">
-                          <img
-                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-03.jpg"
-                            alt=""
-                            className="h-full w-full object-cover object-center"
-                          />
-                        </div>
-                        <div className="h-64 w-44 overflow-hidden rounded-lg">
-                          <img
-                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-04.jpg"
-                            alt=""
-                            className="h-full w-full object-cover object-center"
-                          />
-                        </div>
-                        <div className="h-64 w-44 overflow-hidden rounded-lg">
-                          <img
-                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-05.jpg"
+                            src="https://9to5mac.com/wp-content/uploads/sites/6/2020/03/MacBook-Air-2020-Top-Features-9to5mac.jpg?quality=82&strip=all&w=1600"
                             alt=""
                             className="h-full w-full object-cover object-center"
                           />
@@ -66,14 +59,37 @@ export const NewArrival = () => {
                       <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                         <div className="h-64 w-44 overflow-hidden rounded-lg">
                           <img
-                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-06.jpg"
+                            src="https://i0.wp.com/insider-gaming.com/wp-content/uploads/2023/03/ps5-pro.png?fit=1920%2C1080&ssl=1"
                             alt=""
                             className="h-full w-full object-cover object-center"
                           />
                         </div>
                         <div className="h-64 w-44 overflow-hidden rounded-lg">
                           <img
-                            src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-07.jpg"
+                            src="https://www.jonnymelon.com/wp-content/uploads/2022/08/nikon-7.jpg"
+                            alt=""
+                            className="h-full w-full object-cover object-center"
+                          />
+                        </div>
+                        <div className="h-64 w-44 overflow-hidden rounded-lg">
+                          <img
+                            src="https://cdn.mos.cms.futurecdn.net/uF2ftGFa8ehpjZpPV6Pz7X.jpg"
+                            alt=""
+                            className="h-full w-full object-cover object-center"
+                          />
+                        </div>
+                      </div>
+                      <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
+                        <div className="h-64 w-44 overflow-hidden rounded-lg">
+                          <img
+                            src="https://www.apple.com/au/iphone/home/images/meta/iphone__ky2k6x5u6vue_og.png"
+                            alt=""
+                            className="h-full w-full object-cover object-center"
+                          />
+                        </div>
+                        <div className="h-64 w-44 overflow-hidden rounded-lg">
+                          <img
+                            src="https://w0.peakpx.com/wallpaper/566/653/HD-wallpaper-laptop-graphy-camera-thumbnail.jpg"
                             alt=""
                             className="h-full w-full object-cover object-center"
                           />
@@ -83,12 +99,12 @@ export const NewArrival = () => {
                   </div>
                 </div>
 
-                <a
-                  href="#"
+                <Link
+                  to="#"
                   className="inline-block rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-center font-medium text-white hover:bg-indigo-700"
                 >
                   Shop Collection
-                </a>
+                </Link>
               </div>
             </div>
           </div>
