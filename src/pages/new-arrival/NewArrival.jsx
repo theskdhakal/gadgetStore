@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { MainLayout } from "../../component/layout/main-layout/MainLayout";
 import { Link } from "react-router-dom";
 

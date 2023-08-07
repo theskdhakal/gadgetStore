@@ -6,28 +6,28 @@ import { BsInstagram } from "react-icons/bs";
 export const Footer = () => {
   const footerNavs = [
     {
-      href: "javascript:void()",
+      href: "/",
       name: "About",
     },
     {
-      href: "javascript:void()",
+      href: "/",
       name: "Blog",
     },
     {
-      href: "javascript:void()",
+      href: "/",
       name: "",
     },
     {
-      href: "javascript:void()",
+      href: "/",
       name: "Team",
     },
     {
-      href: "javascript:void()",
+      href: "/",
       name: "Careers",
     },
 
     {
-      href: "javascript:void()",
+      href: "/",
       name: "Support",
     },
   ];
@@ -61,7 +61,7 @@ export const Footer = () => {
           <div className="mt-6 sm:mt-0">
             <ul className="flex items-center space-x-4 ">
               <li className="w-10 h-10 border rounded-full flex items-center justify-center hover:bg-black">
-                <a href="javascript:void()">
+                <a href="/">
                   <svg
                     class="svg-icon w-6 h-6 text-blue-400 "
                     viewBox="0 0 20 20"
@@ -75,7 +75,7 @@ export const Footer = () => {
               </li>
 
               <li className="w-10 h-10 border rounded-full flex items-center justify-center hover:bg-black">
-                <a href="javascript:void()">
+                <a href="/">
                   <svg
                     class="svg-icon w-6 h-6 text-blue-700"
                     viewBox="0 0 20 20"
@@ -89,7 +89,7 @@ export const Footer = () => {
               </li>
 
               <li className="w-10 h-10 border  rounded-full flex items-center justify-center hover:bg-black">
-                <a href="javascript:void()">
+                <a href="/">
                   <BsInstagram className="text-[#a21caf]" />
                 </a>
               </li>

@@ -2,6 +2,29 @@ import React from "react";
 import { MainLayout } from "../../component/layout/main-layout/MainLayout";
 
 export const CatMobile = () => {
+  const features = [
+    {
+      icon: (
+        <img src="https://images.samsung.com/is/image/samsung/p6pim/au/2302/gallery/au-galaxy-s23-s918-sm-s918bzgfats-thumb-534849288?$252_252_PNG$" />
+      ),
+      title: "Design",
+      desc: "Big yet compact. In your pocket",
+    },
+    {
+      icon: (
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrL31BDEIDJndY3B5cWvFMij5_b87Dp2iOOXj98kI2ehmPyxOqnij_8dKlwEaG5wRnUgI&usqp=CAU" />
+      ),
+      title: "Big Screen",
+      desc: "Immersive viewing experience",
+    },
+    {
+      icon: (
+        <img src="https://lh3.googleusercontent.com/oJPozDOTKzyRGttTgvHZuDYASAi3-lF3r6CO22BcgcrRHeA1xPQyJhYTv362UXzFpdtlctUnxL-zypZv2mw-3TWXlgAMW4r8wA=rw-e365-nu-w1950" />
+      ),
+      title: "Amazing photography, made simple",
+      desc: "With Real Tone, Magic Eraser, and Night Sight, Pixel’s camera captures any moment beautifully",
+    },
+  ];
   return (
     <MainLayout>
       <section>
@@ -43,6 +66,41 @@ export const CatMobile = () => {
               className="w-full shadow-lg rounded-lg border"
               alt=""
             />
+          </div>
+        </div>
+      </section>
+
+      <section className="py-14">
+        <div className="max-w-screen-xl mx-auto px-4 text-gray-600 md:px-8">
+          <div className="max-w-xl space-y-3">
+            <h3 className="text-indigo-600 font-semibold">Features</h3>
+            <p className="text-gray-800 text-3xl font-semibold sm:text-4xl">
+              Get more from your cell phone
+            </p>
+            <p>
+              Level Up Your Cell Phone: Discover an array of accessories and
+              services that take your mobile experience to new heights!
+            </p>
+          </div>
+          <div className="mt-12">
+            <ul className="grid gap-x-12 divide-y [&>.feature-1]:pl-0 sm:grid-cols-2 sm:gap-y-8 sm:divide-y-0 lg:divide-x lg:grid-cols-3 lg:gap-x-0">
+              {features.map((item, idx) => (
+                <li
+                  key={idx}
+                  className={`feature-${
+                    idx + 1
+                  } space-y-3 py-8 lg:px-12 sm:py-0`}
+                >
+                  <div className="w-100 h-100 border text-indigo-600 rounded-full flex items-center justify-center">
+                    {item.icon}
+                  </div>
+                  <h4 className="text-lg text-gray-800 font-semibold">
+                    {item.title}
+                  </h4>
+                  <p>{item.desc}</p>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
