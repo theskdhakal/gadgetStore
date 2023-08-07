@@ -12,12 +12,14 @@ import { Route, Routes } from "react-router-dom";
 import { Categories } from "./pages/categories/Categories";
 import { NewArrival } from "./pages/new-arrival/NewArrival";
 import { NewArrivalProduct } from "./pages/new-arrival/NewArrivalProduct";
+import { getAllCategoriesAction } from "./pages/categories/categoriesAction";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllProductAction());
+    dispatch(getAllCategoriesAction());
   }, [dispatch]);
   return (
     <Routes>

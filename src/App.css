@@ -1,3 +1,28 @@
 .main {
   min-height: 88vh;
 }
+
+.new-arrival {
+  text-shadow: 0 0 10px #15803d, 0 0 20px #44403c, 0 0 30px #155e75;
+  animation: neonGlow 1s ease-in-out infinite alternate;
+}
+
+@keyframes neonGlow {
+  to {
+    text-shadow: 0 0 20px #71717a, 0 0 30px #00ff00, 0 0 40px #f97316;
+  }
+}
+
+.promo-image {
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate (360deg);
+  }
+}
