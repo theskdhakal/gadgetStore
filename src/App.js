@@ -13,6 +13,7 @@ import { Categories } from "./pages/categories/Categories";
 import { NewArrival } from "./pages/new-arrival/NewArrival";
 import { NewArrivalProduct } from "./pages/new-arrival/NewArrivalProduct";
 import { getAllCategoriesAction } from "./pages/categories/categoriesAction";
+import { CatMobile } from "./pages/categories/CatMobile";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function App() {
       <Route path="/categories" element={<Categories />} />
       <Route path="/new" element={<NewArrival />} />
       <Route path="/newProduct" element={<NewArrivalProduct />} />
+      <Route path="/mobile" element={<CatMobile />} />
     </Routes>
   );
 }

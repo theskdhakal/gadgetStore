@@ -9,7 +9,7 @@ export const Categories = () => {
       imageSrc:
         "https://m-cdn.phonearena.com/images/article/64576-wide-two_940/The-Best-Phones-to-buy-in-2023---our-top-10-list",
       imageAlt: "mobile phone from all brands",
-      href: "#",
+      href: "/mobile",
     },
     {
       name: "Televisions",

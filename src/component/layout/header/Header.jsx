@@ -47,8 +47,8 @@ export const Header = () => {
                       <div className="py-1">
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <Link
+                              to="/mobile"
                               className={classNames(
                                 active
                                   ? "bg-gray-100 text-gray-900"
@@ -57,7 +57,7 @@ export const Header = () => {
                               )}
                             >
                               Mobile
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                         <Menu.Item>
