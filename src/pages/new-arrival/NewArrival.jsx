@@ -3,18 +3,6 @@ import { MainLayout } from "../../component/layout/main-layout/MainLayout";
 import { Link } from "react-router-dom";
 
 export const NewArrival = () => {
-  const { product } = useSelector((state) => state.product);
-
-  //create a shallow copy of the product array
-  const sortedProducts = [...product];
-
-  //sort the product array based on timestamp in descending order
-  sortedProducts.sort((a, b) => b.addedDate - a.addedDate);
-
-  //get the first 5 items from the sorted array
-  const lastSevenAddedItems = sortedProducts.slice(0, 7);
-  console.log(lastSevenAddedItems);
-
   return (
     <MainLayout>
       <div className="relative overflow-hidden bg-white">
@@ -100,7 +88,7 @@ export const NewArrival = () => {
                 </div>
 
                 <Link
-                  to="#"
+                  to="/newProduct"
                   className="inline-block rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-center font-medium text-white hover:bg-indigo-700"
                 >
                   Shop Collection
