@@ -70,7 +70,7 @@ export const CatMobile = () => {
         </div>
       </section>
 
-      <section className="py-14">
+      <section className="py-5 mb-5">
         <div className="max-w-screen-xl mx-auto px-4 text-gray-600 md:px-8">
           <div className="max-w-xl space-y-3">
             <h3 className="text-indigo-600 font-semibold">Features</h3>
@@ -89,7 +89,7 @@ export const CatMobile = () => {
                   key={idx}
                   className={`feature-${
                     idx + 1
-                  } space-y-3 py-8 lg:px-12 sm:py-0`}
+                  } space-y-4 py-8 lg:px-12 sm:py-5`}
                 >
                   <div className="w-100 h-100 border text-indigo-600 rounded-full flex items-center justify-center">
                     {item.icon}
