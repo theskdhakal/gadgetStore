@@ -1,5 +1,6 @@
 import React from "react";
 import { MainLayout } from "../../component/layout/main-layout/MainLayout";
+import { Mobile } from "../../component/products/Mobile";
 
 export const CatMobile = () => {
   const features = [
@@ -22,7 +23,7 @@ export const CatMobile = () => {
         <img src="https://lh3.googleusercontent.com/oJPozDOTKzyRGttTgvHZuDYASAi3-lF3r6CO22BcgcrRHeA1xPQyJhYTv362UXzFpdtlctUnxL-zypZv2mw-3TWXlgAMW4r8wA=rw-e365-nu-w1950" />
       ),
       title: "Amazing photography, made simple",
-      desc: "With Real Tone, Magic Eraser, and Night Sight, Pixel’s camera captures any moment beautifully",
+      desc: "With Real Tone, Magic Eraser, and Night Sight",
     },
   ];
   return (
@@ -47,13 +48,13 @@ export const CatMobile = () => {
             </p>
             <div className="items-center justify-center gap-x-3 space-y-3 sm:flex sm:space-y-0">
               <a
-                href="javascript:void(0)"
+                href="#productMobile"
                 className="block py-2 px-4 text-white font-medium bg-indigo-600 duration-150 hover:bg-indigo-500 active:bg-indigo-700 rounded-lg shadow-lg hover:shadow-none"
               >
                 Browse Mobile phones
               </a>
               <a
-                href="javascript:void(0)"
+                href="/"
                 className="block py-2 px-4 text-gray-700 hover:text-gray-500 font-medium duration-150 active:bg-gray-100 border rounded-lg"
               >
                 Contact Us
@@ -104,6 +105,11 @@ export const CatMobile = () => {
           </div>
         </div>
       </section>
+
+      <hr />
+      <div id="productMobile">
+        <Mobile />
+      </div>
     </MainLayout>
   );
 };
