@@ -1,8 +1,12 @@
 import React from "react";
 import { MainLayout } from "../../component/layout/main-layout/MainLayout";
-import { Mobile } from "../../component/products/Mobile";
+import { useSelector } from "react-redux";
+import { ProductsCard } from "../../component/products/ProductsCard";
 
 export const CatMobile = () => {
+  const { product } = useSelector((state) => state.product);
+  const filteredProduct = product.filter((item) => item.parentCat === "mobile");
+
   const features = [
     {
       icon: (
@@ -108,7 +112,7 @@ export const CatMobile = () => {
 
       <hr />
       <div id="productMobile">
-        <Mobile />
+        <ProductsCard filteredProduct={filteredProduct} />
       </div>
     </MainLayout>
   );
