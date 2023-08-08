@@ -24,7 +24,7 @@ export const Categories = () => {
       imageSrc:
         "https://sm.pcmag.com/pcmag_au/guide/t/tested-the/tested-the-lightest-laptops-for-2023_1euq.jpg",
       imageAlt: "Your one way stop to all kinds of laptop",
-      href: "#",
+      href: "/laptop",
     },
     {
       name: "Gaming",

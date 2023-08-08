@@ -112,6 +112,8 @@ export const CatMobile = () => {
 
       <hr />
       <div id="productMobile">
+        <h2 className="text-center underline text-red-500">Mobile-Phones</h2>
+
         <ProductsCard filteredProduct={filteredProduct} />
       </div>
     </MainLayout>
