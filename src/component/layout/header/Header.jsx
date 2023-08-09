@@ -94,8 +94,8 @@ export const Header = () => {
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <Link
+                              to="/categories/Camera"
                               className={classNames(
                                 active
                                   ? "bg-gray-100 text-gray-900"
@@ -104,7 +104,7 @@ export const Header = () => {
                               )}
                             >
                               Camera
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                       </div>

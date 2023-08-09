@@ -55,17 +55,79 @@ export const Home = () => {
         </div>
       </div>
 
-      <div className="deals">
-        <img
-          src={OpeningSoon}
-          alt="image loading..."
-          style={{
-            height: "60vh",
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-          }}
-        />
+      <div className="max-w-screen-xl bg-gray-100 mx-auto px-4 py-1 gap-12 shadow text-gray-600  md:px-8 xl:flex">
+        <div className=" min-h-screen flex flex-col">
+          {/* first row  */}
+
+          <div className="flex flex-col lg:flex-row lg:h-1/2">
+            <div className="lg:w-1/2 p-8">
+              <img
+                src="https://static.toiimg.com/thumb/resizemode-4,width-1200,height-900,msid-90782693/90782693.jpg"
+                alt="First Image"
+                className="w-full h-auto rounded-lg shadow"
+              />
+            </div>
+            <div className="lg:w-1/2 p-8 flex  items-center">
+              <div>
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+                  Intelligent Auto Modes
+                </h2>
+                <p className="text-gray-600">
+                  Streamline your photography experience with intelligent auto
+                  modes that optimize settings like exposure, focus, and white
+                  balance, ensuring great results even for beginners.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Second Row */}
+          <div className="flex flex-col-reverse lg:flex-row lg:h-1/2">
+            <div className="lg:w-1/2 p-8 flex items-center">
+              <div>
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+                  Advanced Sensor Technology
+                </h2>
+                <p className="text-gray-600">
+                  Capture stunning images with precision and clarity thanks to
+                  advanced sensor technology, which enhances low-light
+                  performance and detail in every shot.
+                </p>
+              </div>
+            </div>
+            <div className="lg:w-1/2 p-8">
+              <img
+                src="https://www.findingtheuniverse.com/wp-content/uploads/2017/01/Best-Travel-Camera.jpg"
+                alt="Second Image"
+                className="w-full h-auto rounded-lg shadow"
+              />
+            </div>
+          </div>
+
+          {/* Third Row */}
+          <div className="flex flex-col lg:flex-row lg:h-1/2">
+            <div className="lg:w-1/2 p-8">
+              <img
+                src="https://www.thinkingtech.in/wp-content/uploads/2017/04/photography-camera-wallpaper-hd-resolution-1024x640.jpg"
+                alt="Third Image"
+                className="w-full h-auto rounded-lg shadow"
+              />
+            </div>
+            <div className="lg:w-1/2 p-8 flex items-center">
+              <div>
+                <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+                  Versatile Lens Options
+                </h2>
+                <p className="text-gray-600">
+                  Enjoy creative freedom with interchangeable lenses that cater
+                  to different photography styles, from wide-angle landscapes to
+                  close-up portraits, making them ideal for wildlife
+                  photography.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </MainLayout>
   );

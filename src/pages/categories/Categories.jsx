@@ -9,14 +9,14 @@ export const Categories = () => {
       imageSrc:
         "https://m-cdn.phonearena.com/images/article/64576-wide-two_940/The-Best-Phones-to-buy-in-2023---our-top-10-list",
       imageAlt: "mobile phone from all brands",
-      href: "/mobile",
+      href: "/categories/mobile",
     },
     {
       name: "Televisions",
       description: "All kind of TVs and accessories",
       imageSrc: "https://i.rtings.com/assets/pages/PtBw4Lf8/best-tv-medium.jpg",
       imageAlt: "TV from all brands",
-      href: "#",
+      href: "/categories/tv",
     },
     {
       name: "Laptops",
@@ -24,7 +24,7 @@ export const Categories = () => {
       imageSrc:
         "https://sm.pcmag.com/pcmag_au/guide/t/tested-the/tested-the-lightest-laptops-for-2023_1euq.jpg",
       imageAlt: "Your one way stop to all kinds of laptop",
-      href: "/laptop",
+      href: "/categories/laptop",
     },
     {
       name: "Gaming",
@@ -41,7 +41,7 @@ export const Categories = () => {
       imageSrc:
         "https://www.whatdigitalcamera.com/wp-content/uploads/sites/13/2015/10/Cameras.jpg",
       imageAlt: "All of your camera need is fulfilled here",
-      href: "#",
+      href: "/categories/camera",
     },
   ];
 
