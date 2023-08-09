@@ -32,7 +32,7 @@ export const Categories = () => {
       imageSrc:
         "https://hips.hearstapps.com/hmg-prod/images/gh-index-gamingconsoles-052-print-preview-1659705142.jpg",
       imageAlt: "All kind of gamings you are looking for",
-      href: "#",
+      href: "/categories/gaming",
     },
     {
       name: "Camera",

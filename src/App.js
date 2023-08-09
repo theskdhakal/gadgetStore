@@ -17,6 +17,7 @@ import { CatMobile } from "./pages/categories/CatMobile";
 import { CatLaptop } from "./pages/categories/CatLaptop";
 import { CatTv } from "./pages/categories/CatTv";
 import { CatCamera } from "./pages/categories/CatCamera";
+import { CatGaming } from "./pages/categories/CatGaming";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ function App() {
       <Route path="/categories/laptop" element={<CatLaptop />} />
       <Route path="/categories/tv" element={<CatTv />} />
       <Route path="/categories/camera" element={<CatCamera />} />
+      <Route path="/categories/gaming" element={<CatGaming />} />
     </Routes>
   );
 }
