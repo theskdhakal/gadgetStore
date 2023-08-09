@@ -48,7 +48,7 @@ export const Header = () => {
                         <Menu.Item>
                           {({ active }) => (
                             <Link
-                              to="/mobile"
+                              to="/categories/mobile"
                               className={classNames(
                                 active
                                   ? "bg-gray-100 text-gray-900"
@@ -63,7 +63,7 @@ export const Header = () => {
                         <Menu.Item>
                           {({ active }) => (
                             <Link
-                              to="/laptop"
+                              to="/categories/laptop"
                               className={classNames(
                                 active
                                   ? "bg-gray-100 text-gray-900"
@@ -79,8 +79,8 @@ export const Header = () => {
                       <div className="py-1">
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <Link
+                              to="/categories/tv"
                               className={classNames(
                                 active
                                   ? "bg-gray-100 text-gray-900"
@@ -89,7 +89,7 @@ export const Header = () => {
                               )}
                             >
                               Tv
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                         <Menu.Item>
