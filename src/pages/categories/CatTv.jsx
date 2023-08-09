@@ -1,8 +1,15 @@
 import { useState } from "react";
 import { MainLayout } from "../../component/layout/main-layout/MainLayout";
 import tv from "../../component/assets/video/tv.gif";
+import { useSelector } from "react-redux";
+import { ProductsCard } from "../../component/products/ProductsCard";
 
 export const CatTv = () => {
+  const { product } = useSelector((state) => state.product);
+  const filteredProduct = product.filter(
+    (item) => item.parentCat === "televsions"
+  );
+
   const features = [
     {
       name: "Trusted",
@@ -57,10 +64,37 @@ export const CatTv = () => {
     },
   ];
 
+  const attribute = [
+    {
+      title: "Ultra HD Resolution",
+      desc: " Enjoy breathtaking clarity with Ultra HD (4K) resolution, delivering four times the pixels of Full HD for stunningly detailed visuals.",
+    },
+    {
+      title: "Smart Connectivity",
+      desc: "Seamlessly access streaming platforms, apps, and the internet directly from your TV, offering a world of entertainment at your fingertips",
+    },
+    {
+      title: "High Dynamic Range (HDR)",
+      desc: "Witness lifelike contrasts and vibrant colors with HDR technology, enhancing both bright and dark scenes for a more immersive viewing experience.",
+    },
+    {
+      title: "Voice Control",
+      desc: "Navigate effortlessly using voice commands, allowing you to search for content, change channels, and control settings without lifting a finger.",
+    },
+    {
+      title: "Multiple Ports",
+      desc: "Connect various devices like gaming consoles, soundbars, and Blu-ray players through multiple HDMI and USB ports, expanding your entertainment possibilities.",
+    },
+    {
+      title: "Slim Design and Minimal Bezels",
+      desc: "Enjoy a sleek and stylish look with slim designs and thin bezels, maximizing the screen space and seamlessly blending into your living space.",
+    },
+  ];
+
   return (
     <MainLayout>
-      <section>
-        <div className="max-w-screen-xl mx-auto px-4 py-28 gap-12 text-gray-600 md:px-8 xl:flex">
+      <section className="mt-5">
+        <div className="max-w-screen-xl mx-auto px-4 py-28 gap-12 text-gray-600 shadow md:px-8 xl:flex">
           <div className="space-y-5 max-w-2xl mx-auto text-center xl:text-left">
             <div className="flex flex-wrap items-center justify-center gap-6 xl:justify-start">
               {features.map((item, idx) => (
@@ -129,6 +163,56 @@ export const CatTv = () => {
           </div>
         </div>
       </section>
+
+      <section className="py-14 mt-5">
+        <div className="max-w-screen-xl mx-auto px-4 text-gray-600 md:px-8">
+          <div className="max-w-xl space-y-3">
+            <h3 className="text-indigo-600 font-semibold">Features</h3>
+            <p className="text-gray-800 text-3xl font-semibold sm:text-4xl">
+              What Sets Our TV Apart as the Ultimate Choice!
+            </p>
+            <p>
+              Discover the Pinnacle of Entertainment: What Makes Our TV the Best
+              Fit!
+            </p>
+          </div>
+          <div className="mt-12">
+            <ul className="grid gap-y-8 gap-x-12 sm:grid-cols-2 lg:grid-cols-3">
+              {attribute.map((item, idx) => (
+                <li key={idx} className="space-y-3">
+                  <div className="w-12 h-12 border text-indigo-600 rounded-lg flex items-center justify-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-6 h-6"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M4.5 12.75l6 6 9-13.5"
+                      />
+                    </svg>
+                  </div>
+                  <h4 className="text-lg text-gray-800 font-semibold">
+                    {item.title}
+                  </h4>
+                  <p>{item.desc}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <hr />
+      <div id="productTv">
+        <h2 className="text-center underline text-red-500">Television</h2>
+
+        <ProductsCard filteredProduct={filteredProduct} />
+      </div>
     </MainLayout>
   );
 };
