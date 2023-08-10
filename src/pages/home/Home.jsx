@@ -3,18 +3,68 @@ import { MainLayout } from "../../component/layout/main-layout/MainLayout";
 import { Caroussel } from "../../component/caroussel/Caroussel";
 import { useSelector } from "react-redux";
 import { Banner } from "../../component/banner/Banner";
-import OpeningSoon from "../../component/assets/image/openingSoon.jpg";
+import games from "../../component/assets/image/games.webp";
+import laptops from "../../component/assets/image/laptops.webp";
+import phones from "../../component/assets/image/phones.avif";
+import tv from "../../component/assets/image/tv.jpg";
 
 export const Home = () => {
   const { product } = useSelector((state) => state.product);
   console.log(product);
+
+  const customCarouselHeight = { height: "60vh" };
+
+  const carouselSlides = [
+    {
+      style: {
+        height: "60vh",
+        background: `url(${phones})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+      },
+    },
+
+    {
+      style: {
+        height: "60vh",
+        background: `url(${laptops})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+      },
+    },
+
+    {
+      style: {
+        height: "60vh",
+        background: `url(${tv})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+      },
+    },
+
+    {
+      style: {
+        height: "60vh",
+        background: `url(${games})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+      },
+    },
+  ];
 
   return (
     <MainLayout>
       {/* <Banner /> */}
 
       <div className="py-3">
-        <Caroussel />
+        <Caroussel
+          carouselStyle={customCarouselHeight}
+          slides={carouselSlides}
+        />
       </div>
 
       <div className="bg-white">

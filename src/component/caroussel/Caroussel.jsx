@@ -1,9 +1,6 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import games from "../assets/image/games.webp";
-import laptops from "../assets/image/laptops.webp";
-import phones from "../assets/image/phones.avif";
-import tv from "../assets/image/tv.jpg";
+
 import {
   Autoplay,
   Navigation,
@@ -18,59 +15,26 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
-export const Caroussel = () => {
+export const Caroussel = ({ slides, carouselStyle }) => {
   return (
-    <div className="caroussel " style={{ height: "60vh" }}>
+    <div className="caroussel " style={carouselStyle}>
       <Swiper
         modules={[Autoplay, Navigation, Pagination, Scrollbar, A11y]}
         spaceBetween={20}
         slidesPerView={1}
         autoplay={{
-          delay: 9500,
+          delay: 8500,
           disableOnInteraction: false,
         }}
         navigation
         pagination={{ clickable: true }}
-        // scrollbar={{ draggable: false }}
+        // scrollbar={{ draggable: true }}
         onSwiper={(swiper) => console.log(swiper)}
         onSlideChange={() => console.log("slide change")}
       >
-        <SwiperSlide
-          style={{
-            height: "60vh",
-            background: `url(${phones})`,
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-          }}
-        ></SwiperSlide>
-        <SwiperSlide
-          style={{
-            height: "60vh",
-            background: `url(${laptops})`,
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-          }}
-        ></SwiperSlide>
-        <SwiperSlide
-          style={{
-            height: "60vh",
-            background: `url(${tv})`,
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-          }}
-        ></SwiperSlide>
-        <SwiperSlide
-          style={{
-            height: "60vh",
-            background: `url(${games})`,
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-          }}
-        ></SwiperSlide>
+        {slides.map((slide, index) => (
+          <SwiperSlide key={index} style={slide.style}></SwiperSlide>
+        ))}
         ...
       </Swiper>
     </div>
