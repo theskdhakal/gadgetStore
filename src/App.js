@@ -19,6 +19,7 @@ import { CatTv } from "./pages/categories/CatTv";
 import { CatCamera } from "./pages/categories/CatCamera";
 import { CatGaming } from "./pages/categories/CatGaming";
 import { HotDeals } from "./pages/deals/HotDeals";
+import { Cart } from "./pages/shopping-cart/Cart";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ function App() {
       <Route path="/categories/tv" element={<CatTv />} />
       <Route path="/categories/camera" element={<CatCamera />} />
       <Route path="/categories/gaming" element={<CatGaming />} />
+      <Route path="/shopping-cart" element={<Cart />} />
     </Routes>
   );
 }

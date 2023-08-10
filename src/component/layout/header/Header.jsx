@@ -207,7 +207,7 @@ export const Header = () => {
               <div className="lg:col-span-1 " style={{ marginLeft: "15rem" }}>
                 <ul className="absolute top-7 right-2 flex ml-auto lg:static">
                   <li>
-                    <Link to="/">
+                    <Link to="/shopping-cart">
                       <button className="text-white text-2xl ">
                         <BsFillCartFill />
                       </button>
