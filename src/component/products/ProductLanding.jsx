@@ -62,7 +62,7 @@ export const ProductLanding = () => {
   const selectedProduct = product.find((item) => item.slug === slug) || {};
   console.log(selectedProduct);
 
-  const { productName, price, thumbnail, salesPrice, description } =
+  const { productName, price, thumbnail, salesPrice, description, imgUrlList } =
     selectedProduct;
   //   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
 
@@ -98,14 +98,14 @@ export const ProductLanding = () => {
             <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
               <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
                 <img
-                  src={thumbnail}
+                  src={imgUrlList[1]}
                   alt=""
                   className="h-full w-full object-cover object-center"
                 />
               </div>
               <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
                 <img
-                  src={thumbnail}
+                  src={imgUrlList[2]}
                   alt=""
                   className="h-full w-full object-cover object-center"
                 />
@@ -113,7 +113,7 @@ export const ProductLanding = () => {
             </div>
             <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
               <img
-                src={thumbnail}
+                src={imgUrlList[3]}
                 alt=""
                 className="h-full w-full object-cover object-center"
               />
@@ -131,7 +131,7 @@ export const ProductLanding = () => {
             {/* Options */}
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
-              <p className="text-3xl tracking-tight text-gray-900">{price}</p>
+              <p className="text-3xl tracking-tight text-gray-900">${price}</p>
 
               {/* Reviews */}
               <div className="mt-6">
