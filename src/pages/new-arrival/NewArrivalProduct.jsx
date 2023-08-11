@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { MainLayout } from "../../component/layout/main-layout/MainLayout";
 import dontMiss from "../../component/assets/image/promo/dontMiss.png";
 import { Link } from "react-router-dom";
+import { ProductsCard } from "../../component/products/ProductsCard";
 
 export const NewArrivalProduct = () => {
   const { product } = useSelector((state) => state.product);
@@ -16,8 +17,29 @@ export const NewArrivalProduct = () => {
   sortedProducts.sort((a, b) => b.addedDate - a.addedDate);
 
   //get the first 5 items from the sorted array
-  const lastSevenAddedItems = sortedProducts.slice(0, 7);
-  console.log(lastSevenAddedItems);
+  const filteredProduct = sortedProducts.slice(0, 7);
+
+  console.log(filteredProduct);
+
+  // Create an object to hold products categorized by "parentCat"
+  const productsByParentCat = {};
+
+  // Iterate through each product and categorize them
+  filteredProduct.forEach((product) => {
+    const parentCat = product.parentCat;
+
+    // Check if the category exists in the productsByParentCat object
+    if (!productsByParentCat[parentCat]) {
+      // If the category doesn't exist, create an array for it
+      productsByParentCat[parentCat] = [];
+    }
+
+    // Add the product to the corresponding category array
+    productsByParentCat[parentCat].push(product);
+  });
+
+  // Now, productsByParentCat contains separate arrays for each parentCat
+  console.log(productsByParentCat);
 
   return (
     <MainLayout>
@@ -41,24 +63,10 @@ export const NewArrivalProduct = () => {
               </button>
             ))}
           </div>
-
-          <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-            {lastSevenAddedItems.map((item) => (
-              <a key={item.slug} href={product.href} className="group">
-                <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                  <img
-                    src={item.thumbnail}
-                    alt="image loading soon"
-                    className="h-full w-full border object-cover object-center group-hover:opacity-75"
-                    style={{ width: "450px", height: "150px" }}
-                  />
-                </div>
-                <h3 className="mt-4 text-sm text-gray-700">
-                  {item.productName}-${item.price}
-                </h3>
-              </a>
-            ))}
-          </div>
+        </div>
+        <hr />
+        <div>
+          <ProductsCard filteredProduct={filteredProduct} />
         </div>
       </div>
     </MainLayout>
