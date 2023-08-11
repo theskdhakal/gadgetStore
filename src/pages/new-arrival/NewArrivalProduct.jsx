@@ -21,26 +21,6 @@ export const NewArrivalProduct = () => {
 
   console.log(filteredProduct);
 
-  // Create an object to hold products categorized by "parentCat"
-  const productsByParentCat = {};
-
-  // Iterate through each product and categorize them
-  filteredProduct.forEach((product) => {
-    const parentCat = product.parentCat;
-
-    // Check if the category exists in the productsByParentCat object
-    if (!productsByParentCat[parentCat]) {
-      // If the category doesn't exist, create an array for it
-      productsByParentCat[parentCat] = [];
-    }
-
-    // Add the product to the corresponding category array
-    productsByParentCat[parentCat].push(product);
-  });
-
-  // Now, productsByParentCat contains separate arrays for each parentCat
-  console.log(productsByParentCat);
-
   return (
     <MainLayout>
       <div className="bg-white">

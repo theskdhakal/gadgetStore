@@ -6,13 +6,25 @@ import { AiFillCaretDown } from "react-icons/ai";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import "./Header.css";
+import { Cart } from "../../../pages/shopping-cart/Cart";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
+
+  //function to open the shopping cart
+  const openCart = () => {
+    setIsCartOpen(true);
+  };
+
+  //function to close the shopping cart
+  const closeCart = () => {
+    setIsCartOpen(false);
+  };
 
   return (
     <div class="bg-mycolor">
@@ -207,11 +219,10 @@ export const Header = () => {
               <div className="lg:col-span-1 " style={{ marginLeft: "15rem" }}>
                 <ul className="absolute top-7 right-2 flex ml-auto lg:static">
                   <li>
-                    <Link to="/shopping-cart">
-                      <button className="text-white text-2xl ">
-                        <BsFillCartFill />
-                      </button>
-                    </Link>
+                    <button onClick={openCart} className="text-white text-2xl ">
+                      <BsFillCartFill />
+                    </button>
+                    <Cart isOpen={isCartOpen} onClose={closeCart} />
                   </li>
                   <li>
                     {/* Profile dropdown */}

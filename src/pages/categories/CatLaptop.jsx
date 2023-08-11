@@ -8,6 +8,7 @@ export const CatLaptop = () => {
   const filteredProduct = product.filter(
     (item) => item.parentCat === "laptops"
   );
+  console.log(filteredProduct);
   return (
     <MainLayout>
       <section className="py-28">
@@ -93,9 +94,11 @@ export const CatLaptop = () => {
       </section>
 
       <hr />
-      <div id="productMobile">
+      <div id="productLaptop">
         <h2 className="text-center underline text-red-500">Laptops</h2>
-
+        {/* {filteredProduct.map((item) => (
+          <ProductsCard key={item.slug} {...item} />
+        ))} */}
         <ProductsCard filteredProduct={filteredProduct} />
       </div>
     </MainLayout>

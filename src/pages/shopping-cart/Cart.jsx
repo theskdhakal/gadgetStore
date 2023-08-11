@@ -30,8 +30,9 @@ const products = [
   // More products...
 ];
 
-export const Cart = () => {
+export const Cart = ({ isOpen, onClose }) => {
   const [open, setOpen] = useState(true);
+  if (!isOpen) return null;
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -71,10 +72,10 @@ export const Cart = () => {
                           <button
                             type="button"
                             className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
-                            onClick={() => setOpen(false)}
+                            onClick={onClose}
                           >
                             <span className="absolute -inset-0.5" />
-                            <span className="sr-only">Close panel</span>
+                            <span className="sr-only">Close </span>
                             <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                           </button>
                         </div>
