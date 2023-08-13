@@ -175,7 +175,7 @@ export const Header = () => {
           <ul class="flex items-center hidden ml-auto space-x-8 lg:flex">
             <li>
               <Link
-                to="/"
+                to="/register"
                 aria-label="register"
                 title=" register"
                 class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
@@ -185,7 +185,7 @@ export const Header = () => {
             </li>
             <li>
               <Link
-                to="/"
+                to="/login"
                 class="inline-flex  items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-black hover:bg-deep-blue-accent-700 focus:shadow-outline focus:outline-none"
                 aria-label="login"
                 title="login"

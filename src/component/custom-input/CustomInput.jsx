@@ -1,13 +1,13 @@
 import React from "react";
-import { Form } from "react-router-dom";
 
 export const CustomInput = ({ label, ...rest }) => {
   return (
     <div>
-      <Form.Group className="mb-3">
-        {label && <Form.Label>{label}</Form.Label>}
-        <Form.Control {...rest} />
-      </Form.Group>
+      {label && <label className="block mb-2">{label}</label>}
+      <input
+        {...rest}
+        className="border border-gray-500 rounded px-3 py-2 w-full"
+      />
     </div>
   );
 };

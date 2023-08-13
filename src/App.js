@@ -21,6 +21,8 @@ import { CatGaming } from "./pages/categories/CatGaming";
 import { HotDeals } from "./pages/deals/HotDeals";
 import { Cart } from "./pages/shopping-cart/Cart";
 import { ProductLanding } from "./component/products/ProductLanding";
+import { Register } from "./pages/user/Register";
+import { Login } from "./pages/user/Login";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +45,8 @@ function App() {
       <Route path="/categories/gaming" element={<CatGaming />} />
       <Route path="/shopping-cart" element={<Cart />} />
       <Route path="/products/:slug" element={<ProductLanding />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
     </Routes>
   );
 }
