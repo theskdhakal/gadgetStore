@@ -23,6 +23,7 @@ import { Cart } from "./pages/shopping-cart/Cart";
 import { ProductLanding } from "./component/products/ProductLanding";
 import { Register } from "./pages/user/Register";
 import { Login } from "./pages/user/Login";
+import { Product } from "./pages/products/Product";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ function App() {
       <Route path="/products/:slug" element={<ProductLanding />} />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/products" element={<Product />} />
     </Routes>
   );
 }

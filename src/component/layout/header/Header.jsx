@@ -4,17 +4,22 @@ import logo from "../../assets/image/logo.JPG";
 import { BsFillCartFill } from "react-icons/bs";
 import { AiFillCaretDown } from "react-icons/ai";
 import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Menu, Transition } from "@headlessui/react";
 import "./Header.css";
 import { Cart } from "../../../pages/shopping-cart/Cart";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearchValue } from "../../system/SystemSlice";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const dispatch = useDispatch();
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
   }
+
+  const { searchValue } = useSelector((state) => state.searchValue);
 
   //function to open the shopping cart
   const openCart = () => {
@@ -24,6 +29,11 @@ export const Header = () => {
   //function to close the shopping cart
   const closeCart = () => {
     setIsCartOpen(false);
+  };
+
+  const handleOnSearch = (e) => {
+    const newValue = e.target.value;
+    dispatch(setSearchValue(newValue));
   };
 
   return (
@@ -202,16 +212,21 @@ export const Header = () => {
               <div className="col-span-2 lg:col-span-2  bordered round  ml-auto lg:flex ">
                 <input
                   id="searchbar"
-                  autocomplete="off"
+                  type="text"
+                  autoComplete="off"
                   aria-label="search"
                   placeholder="search"
                   className="rounded mt-0"
+                  value={searchValue}
+                  onChange={handleOnSearch}
                 />
                 <button
                   aria-label="search"
                   className="search-button bg-black text-white p-2 rounded mt-0"
+                  type="submit"
                 >
-                  Search
+                  {" "}
+                  <Link to="/products">Search</Link>
                 </button>
               </div>
 
