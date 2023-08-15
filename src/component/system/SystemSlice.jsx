@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   searchValue: [],
+  cartItem: [],
 };
 
 const searchSlice = createSlice({
@@ -11,9 +12,13 @@ const searchSlice = createSlice({
     setSearchValue: (state, action) => {
       state.searchValue = action.payload;
     },
+
+    setCartItem: (state, action) => {
+      state.cartItem = action.payload;
+    },
   },
 });
 
-export const { setSearchValue } = searchSlice.actions;
+export const { setSearchValue, setCartItem } = searchSlice.actions;
 
 export default searchSlice.reducer;
