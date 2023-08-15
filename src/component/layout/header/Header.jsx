@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/image/logo.JPG";
 import { BsFillCartFill } from "react-icons/bs";
 import { AiFillCaretDown } from "react-icons/ai";
@@ -14,6 +14,7 @@ export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -34,6 +35,13 @@ export const Header = () => {
   const handleOnSearch = (e) => {
     const newValue = e.target.value;
     dispatch(setSearchValue(newValue));
+  };
+
+  const handleOnSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchValue.trim() !== "") {
+      navigate(`/products?search=${searchValue}`);
+    }
   };
 
   return (
@@ -210,24 +218,25 @@ export const Header = () => {
             <div className="grid grid-cols-2 lg:grid-cols-3 ">
               {/* left and middle grid (col-span-1 on small screen, col-span-2 on large screens */}
               <div className="col-span-2 lg:col-span-2  bordered round  ml-auto lg:flex ">
-                <input
-                  id="searchbar"
-                  type="text"
-                  autoComplete="off"
-                  aria-label="search"
-                  placeholder="search"
-                  className="rounded mt-0"
-                  value={searchValue}
-                  onChange={handleOnSearch}
-                />
-                <button
-                  aria-label="search"
-                  className="search-button bg-black text-white p-2 rounded mt-0"
-                  type="submit"
-                >
-                  {" "}
-                  <Link to="/products">Search</Link>
-                </button>
+                <form onSubmit={handleOnSearchSubmit} className="flex">
+                  <input
+                    id="searchbar"
+                    type="text"
+                    autoComplete="off"
+                    aria-label="search"
+                    placeholder="search"
+                    className="rounded mt-0"
+                    value={searchValue}
+                    onChange={handleOnSearch}
+                  />
+                  <button
+                    aria-label="search"
+                    className="search-button bg-black text-white p-2 rounded mt-0"
+                    type="submit"
+                  >
+                    Search{" "}
+                  </button>
+                </form>
               </div>
 
               {/* right grid (col-span-1) */}
