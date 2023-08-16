@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { MainLayout } from "../../component/layout/main-layout/MainLayout";
 import dontMiss from "../../component/assets/image/promo/dontMiss.png";
-import { Link } from "react-router-dom";
 import { ProductsCard } from "../../component/products/ProductsCard";
 
 export const NewArrivalProduct = () => {
   const { product } = useSelector((state) => state.product);
   const { category } = useSelector((state) => state.category);
-  console.log(category);
+  const [filteredProduct, setFilteredProduct] = useState([]);
+  const [latestProds, setLatestProds] = useState([]);
 
   //create a shallow copy of the product array
   const sortedProducts = [...product];
@@ -16,10 +16,20 @@ export const NewArrivalProduct = () => {
   //sort the product array based on timestamp in descending order
   sortedProducts.sort((a, b) => b.addedDate - a.addedDate);
 
-  //get the first 5 items from the sorted array
-  const filteredProduct = sortedProducts.slice(0, 7);
+  useEffect(() => {
+    if (sortedProducts?.length) {
+      setLatestProds(sortedProducts.slice(0, 7));
+      setFilteredProduct(sortedProducts.slice(0, 7));
+    }
+  }, [sortedProducts?.length]);
 
-  console.log(filteredProduct);
+  const handleFilterProds = (filterSlug) => {
+    if (filterSlug) {
+      setFilteredProduct(
+        latestProds.filter((prod) => prod.parentCat === filterSlug)
+      );
+    }
+  };
 
   return (
     <MainLayout>
@@ -36,10 +46,11 @@ export const NewArrivalProduct = () => {
 
           <div className="categories-name grid grid-cols-3 gap-4 my-5  ">
             {category.map((item) => (
-              <button className="border p-3 border-black bg-[#a5f3fc] rounded">
-                <Link to="/" className="no-underline text-black font-bold">
-                  {item.name}
-                </Link>
+              <button
+                className="border p-3 border-black bg-[#a5f3fc] rounded"
+                onClick={() => handleFilterProds(item.slug)}
+              >
+                {item.name}
               </button>
             ))}
           </div>

@@ -4,7 +4,6 @@ import { RadioGroup } from "@headlessui/react";
 import { MainLayout } from "../layout/main-layout/MainLayout";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { createNewCartAction } from "../../pages/shopping-cart/CartAction";
 
 const reviews = { href: "#", average: 4, totalCount: 117 };
 
@@ -24,18 +23,6 @@ export const ProductLanding = () => {
   const { productName, price, thumbnail, salesPrice, description, imgUrlList } =
     selectedProduct;
   //   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
-
-  const handleOnAddToCart = () => {
-    //create add to cart table and add following attributes
-    const obj = {
-      slug,
-      productName,
-      price,
-      thumbnail,
-    };
-
-    dispatch(createNewCartAction(obj));
-  };
 
   return (
     <MainLayout>
@@ -190,7 +177,6 @@ export const ProductLanding = () => {
                 <button
                   type="button"
                   className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  onClick={handleOnAddToCart}
                 >
                   Add to bag
                 </button>
