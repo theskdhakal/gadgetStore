@@ -3,7 +3,8 @@ import { StarIcon } from "@heroicons/react/20/solid";
 import { RadioGroup } from "@headlessui/react";
 import { MainLayout } from "../layout/main-layout/MainLayout";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { createNewCartAction } from "../../pages/shopping-cart/CartAction";
 
 const reviews = { href: "#", average: 4, totalCount: 117 };
 
@@ -12,6 +13,7 @@ function classNames(...classes) {
 }
 
 export const ProductLanding = () => {
+  const dispatch = useDispatch();
   const { slug } = useParams();
   console.log(slug);
 
@@ -22,6 +24,18 @@ export const ProductLanding = () => {
   const { productName, price, thumbnail, salesPrice, description, imgUrlList } =
     selectedProduct;
   //   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+
+  const handleOnAddToCart = () => {
+    //create add to cart table and add following attributes
+    const obj = {
+      slug,
+      productName,
+      price,
+      thumbnail,
+    };
+
+    dispatch(createNewCartAction(obj));
+  };
 
   return (
     <MainLayout>
@@ -54,26 +68,38 @@ export const ProductLanding = () => {
             </div>
             <div className="hidden lg:grid lg:grid-cols-1 lg:gap-y-8">
               <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-                <img
-                  src={imgUrlList[1]}
-                  alt=""
-                  className="h-full w-full object-cover object-center"
-                />
+                {imgUrlList && imgUrlList[1] ? (
+                  <img
+                    src={imgUrlList[1]}
+                    alt=""
+                    className="h-full w-full object-cover object-center"
+                  />
+                ) : (
+                  <div>No image available</div>
+                )}
               </div>
               <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg">
-                <img
-                  src={imgUrlList[2]}
-                  alt=""
-                  className="h-full w-full object-cover object-center"
-                />
+                {imgUrlList && imgUrlList[2] ? (
+                  <img
+                    src={imgUrlList[2]}
+                    alt=""
+                    className="h-full w-full object-cover object-center"
+                  />
+                ) : (
+                  <div>No image available</div>
+                )}
               </div>
             </div>
             <div className="aspect-h-5 aspect-w-4 lg:aspect-h-4 lg:aspect-w-3 sm:overflow-hidden sm:rounded-lg">
-              <img
-                src={imgUrlList[3]}
-                alt=""
-                className="h-full w-full object-cover object-center"
-              />
+              {imgUrlList && imgUrlList[3] ? (
+                <img
+                  src={imgUrlList[3]}
+                  alt=""
+                  className="h-full w-full object-cover object-center"
+                />
+              ) : (
+                <div>No image available</div>
+              )}
             </div>
           </div>
 
@@ -118,7 +144,7 @@ export const ProductLanding = () => {
                 </div>
               </div>
 
-              <form className="mt-10">
+              <div className="mt-10">
                 {/* Colors */}
                 {/* <div>
                   <h3 className="text-sm font-medium text-gray-900">Color</h3>
@@ -162,12 +188,13 @@ export const ProductLanding = () => {
                 </div> */}
 
                 <button
-                  type="submit"
+                  type="button"
                   className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  onClick={handleOnAddToCart}
                 >
                   Add to bag
                 </button>
-              </form>
+              </div>
             </div>
 
             <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
