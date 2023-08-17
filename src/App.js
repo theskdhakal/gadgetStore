@@ -43,7 +43,7 @@ function App() {
         <Route path="/newProduct" element={<NewArrivalProduct />} />
         <Route path="/categories/mobile" element={<CatMobile />} />
         <Route path="/categories/laptop" element={<CatLaptop />} />
-        <Route path="/categories/tv" element={<CatTv />} />
+        <Route path="/categories/televisions" element={<CatTv />} />
         <Route path="/categories/camera" element={<CatCamera />} />
         <Route path="/categories/gaming" element={<CatGaming />} />
         <Route path="/shopping-cart" element={<Cart />} />

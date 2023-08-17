@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { StarIcon } from "@heroicons/react/20/solid";
-import { RadioGroup } from "@headlessui/react";
 import { MainLayout } from "../layout/main-layout/MainLayout";
-import { useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setCartItem } from "../system/SystemSlice";
 import { toast } from "react-toastify";
+import { setCartItems } from "../system/SystemSlice";
+import { IoIosArrowBack } from "react-icons/io";
 
 const reviews = { href: "#", average: 4, totalCount: 117 };
 
@@ -15,6 +15,7 @@ function classNames(...classes) {
 
 export const ProductLanding = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { slug } = useParams();
   console.log(slug);
 
@@ -22,12 +23,23 @@ export const ProductLanding = () => {
   const selectedProduct = product.find((item) => item.slug === slug) || {};
   console.log(selectedProduct);
 
-  const { productName, price, thumbnail, salesPrice, description, imgUrlList } =
-    selectedProduct;
+  const {
+    productName,
+    price,
+    thumbnail,
+    salesPrice,
+    description,
+    imgUrlList,
+    parentCat,
+  } = selectedProduct;
 
   const handleOnAddToCart = (obj) => {
-    dispatch(setCartItem(obj));
+    dispatch(setCartItems(obj));
     toast.success("product has been added to cart");
+  };
+
+  const handleOnarrowClick = () => {
+    navigate(`/categories/${parentCat}`);
   };
   return (
     <MainLayout>
@@ -41,8 +53,12 @@ export const ProductLanding = () => {
               <li className="text-sm">
                 <div
                   aria-current="page"
-                  className="font-medium text-gray-500 hover:text-gray-600"
+                  className="font-medium text-gray-500 hover:text-gray-600 flex gap-2"
                 >
+                  <IoIosArrowBack
+                    className="text-xl cursor-pointer"
+                    onClick={() => handleOnarrowClick()}
+                  />
                   {productName}
                 </div>
               </li>
@@ -141,7 +157,12 @@ export const ProductLanding = () => {
                   type="button"
                   className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   onClick={() =>
-                    handleOnAddToCart(productName, price, salesPrice, thumbnail)
+                    handleOnAddToCart({
+                      productName,
+                      price,
+                      salesPrice,
+                      thumbnail,
+                    })
                   }
                 >
                   Add to bag

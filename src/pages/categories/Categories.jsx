@@ -1,5 +1,6 @@
 import React from "react";
 import { MainLayout } from "../../component/layout/main-layout/MainLayout";
+import { Link } from "react-router-dom";
 
 export const Categories = () => {
   const callouts = [
@@ -16,7 +17,7 @@ export const Categories = () => {
       description: "All kind of TVs and accessories",
       imageSrc: "https://i.rtings.com/assets/pages/PtBw4Lf8/best-tv-medium.jpg",
       imageAlt: "TV from all brands",
-      href: "/categories/tv",
+      href: "/categories/televisions",
     },
     {
       name: "Laptops",
@@ -65,10 +66,10 @@ export const Categories = () => {
                     />
                   </div>
                   <h3 className="mt-6 text-sm text-gray-500">
-                    <a href={callout.href}>
+                    <Link to={callout.href}>
                       <span className="absolute inset-0" />
                       {callout.name}
-                    </a>
+                    </Link>
                   </h3>
                   <p className="text-base font-semibold text-gray-900">
                     {callout.description}
