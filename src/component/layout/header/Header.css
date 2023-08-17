@@ -1,20 +1,9 @@
 #searchbar {
-  width: 40vw !important;
-  height: 3rem !important;
-}
-
-.search-button {
   height: 3rem !important;
 }
 
 @media (max-width: 450px) {
   #searchbar {
-    width: 65vw !important;
-    height: 3rem !important;
-  }
-
-  .search-button {
-    height: 3rem !important;
-    margin-left: 0px !important;
+    width: 85vw !important;
   }
 }

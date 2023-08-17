@@ -24,6 +24,7 @@ import { ProductLanding } from "./component/products/ProductLanding";
 import { Register } from "./pages/user/Register";
 import { Login } from "./pages/user/Login";
 import { Product } from "./pages/products/Product";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,23 +34,26 @@ function App() {
     dispatch(getAllCategoriesAction());
   }, [dispatch]);
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/categories" element={<Categories />} />
-      <Route path="/new" element={<NewArrival />} />
-      <Route path="/deal" element={<HotDeals />} />
-      <Route path="/newProduct" element={<NewArrivalProduct />} />
-      <Route path="/categories/mobile" element={<CatMobile />} />
-      <Route path="/categories/laptop" element={<CatLaptop />} />
-      <Route path="/categories/tv" element={<CatTv />} />
-      <Route path="/categories/camera" element={<CatCamera />} />
-      <Route path="/categories/gaming" element={<CatGaming />} />
-      <Route path="/shopping-cart" element={<Cart />} />
-      <Route path="/products/:slug" element={<ProductLanding />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/products" element={<Product />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/new" element={<NewArrival />} />
+        <Route path="/deal" element={<HotDeals />} />
+        <Route path="/newProduct" element={<NewArrivalProduct />} />
+        <Route path="/categories/mobile" element={<CatMobile />} />
+        <Route path="/categories/laptop" element={<CatLaptop />} />
+        <Route path="/categories/tv" element={<CatTv />} />
+        <Route path="/categories/camera" element={<CatCamera />} />
+        <Route path="/categories/gaming" element={<CatGaming />} />
+        <Route path="/shopping-cart" element={<Cart />} />
+        <Route path="/products/:slug" element={<ProductLanding />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/products" element={<Product />} />
+      </Routes>
+      <ToastContainer />
+    </>
   );
 }
 

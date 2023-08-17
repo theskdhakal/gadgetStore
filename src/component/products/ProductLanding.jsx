@@ -4,6 +4,8 @@ import { RadioGroup } from "@headlessui/react";
 import { MainLayout } from "../layout/main-layout/MainLayout";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { setCartItem } from "../system/SystemSlice";
+import { toast } from "react-toastify";
 
 const reviews = { href: "#", average: 4, totalCount: 117 };
 
@@ -22,8 +24,11 @@ export const ProductLanding = () => {
 
   const { productName, price, thumbnail, salesPrice, description, imgUrlList } =
     selectedProduct;
-  //   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
 
+  const handleOnAddToCart = (obj) => {
+    dispatch(setCartItem(obj));
+    toast.success("product has been added to cart");
+  };
   return (
     <MainLayout>
       <div className="bg-white">
@@ -132,51 +137,12 @@ export const ProductLanding = () => {
               </div>
 
               <div className="mt-10">
-                {/* Colors */}
-                {/* <div>
-                  <h3 className="text-sm font-medium text-gray-900">Color</h3>
-
-                  <RadioGroup
-                    value={selectedColor}
-                    onChange={setSelectedColor}
-                    className="mt-4"
-                  >
-                    <RadioGroup.Label className="sr-only">
-                      Choose a color
-                    </RadioGroup.Label>
-                    <div className="flex items-center space-x-3">
-                      {product.colors.map((color) => (
-                        <RadioGroup.Option
-                          key={color.name}
-                          value={color}
-                          className={({ active, checked }) =>
-                            classNames(
-                              color.selectedClass,
-                              active && checked ? "ring ring-offset-1" : "",
-                              !active && checked ? "ring-2" : "",
-                              "relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none"
-                            )
-                          }
-                        >
-                          <RadioGroup.Label as="span" className="sr-only">
-                            {color.name}
-                          </RadioGroup.Label>
-                          <span
-                            aria-hidden="true"
-                            className={classNames(
-                              color.class,
-                              "h-8 w-8 rounded-full border border-black border-opacity-10"
-                            )}
-                          />
-                        </RadioGroup.Option>
-                      ))}
-                    </div>
-                  </RadioGroup>
-                </div> */}
-
                 <button
                   type="button"
                   className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  onClick={() =>
+                    handleOnAddToCart(productName, price, salesPrice, thumbnail)
+                  }
                 >
                   Add to bag
                 </button>

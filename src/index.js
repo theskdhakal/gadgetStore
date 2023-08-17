@@ -7,6 +7,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter } from "react-router-dom";
 import store from "./store";
 import { Provider } from "react-redux";
+
+import "react-toastify/dist/ReactToastify.css";
 // Put any other imports below so that CSS from your
 // components takes precedence over default styles.
 

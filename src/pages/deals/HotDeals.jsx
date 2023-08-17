@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import deal from "../../component/assets/image/promo/deal.jpg";
 import { MainLayout } from "../../component/layout/main-layout/MainLayout";
 import { Link } from "react-router-dom";
@@ -8,10 +8,24 @@ import { ProductsCard } from "../../component/products/ProductsCard";
 export const HotDeals = () => {
   const { category } = useSelector((state) => state.category);
   const { product } = useSelector((state) => state.product);
+  const [filteredProduct, setFilteredProduct] = useState([]);
 
-  const filteredProduct = product.filter(
-    (item) => item.salesPrice !== undefined
-  );
+  const salesProduct = product.filter((item) => item.salesPrice !== undefined);
+  console.log(filteredProduct);
+
+  useEffect(() => {
+    if (salesProduct?.length) {
+      setFilteredProduct([...salesProduct]);
+    }
+  }, [salesProduct?.length]);
+
+  const handleEachCategoryDeal = (catSlug) => {
+    if (catSlug) {
+      setFilteredProduct(
+        salesProduct.filter((prod) => prod.parentCat === catSlug)
+      );
+    }
+  };
   return (
     <MainLayout>
       <div className="bg-white">
@@ -22,10 +36,11 @@ export const HotDeals = () => {
 
           <div className="categories-name grid grid-cols-3 gap-4 my-5  ">
             {category.map((item) => (
-              <button className="border p-3 border-black bg-[#a5f3fc] rounded">
-                <Link to="/" className="no-underline text-black font-bold">
-                  {item.name}
-                </Link>
+              <button
+                className="border p-3 border-black bg-[#a5f3fc] rounded"
+                onClick={() => handleEachCategoryDeal(item.slug)}
+              >
+                {item.name}
               </button>
             ))}
           </div>
