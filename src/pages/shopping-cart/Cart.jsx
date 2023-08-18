@@ -32,7 +32,7 @@ export const Cart = () => {
       return; //Exit the function
     }
 
-    if (newQuantity === 0 || newQuantity === null) {
+    if (newQuantity === 0) {
       return handleOnRemove(itemId);
     }
     dispatch(updateCartItemQuantity({ itemId, newQuantity }));
@@ -133,7 +133,7 @@ export const Cart = () => {
                                         onChange={(e) =>
                                           handleOnQtyChange(e, item.id)
                                         }
-                                        className="w-16 text-center"
+                                        className="w-16 text-center border border-black rounded"
                                       />
                                     </label>
 

@@ -4,7 +4,11 @@ import { MainLayout } from "../layout/main-layout/MainLayout";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { resetCart, setCart } from "../system/cartSlice";
+import {
+  resetCart,
+  setCart,
+  updateCartItemQuantity,
+} from "../system/cartSlice";
 import { IoIosArrowBack } from "react-icons/io";
 import { setPopupShow } from "../../component/system/systemSlice";
 import { Popup } from "../../component/pop-up/Popup";
@@ -36,21 +40,33 @@ export const ProductLanding = () => {
     parentCat,
   } = selectedProduct;
 
-  let quantity = 1;
-
   const handleOnAddToCart = (e) => {
-    const obj = {
+    const newItem = {
       image: thumbnail,
       name: productName,
       id: slug,
       price: price,
       salesPrice: salesPrice,
       category: parentCat,
-      quantity: quantity,
+      quantity: 1,
     };
-    const cartItems = [...cart, obj];
-    dispatch(setCart(cartItems));
-    // dispatch(resetCart());
+
+    const existingCartItemIndex = cart.findIndex((item) => item.id === slug);
+
+    if (existingCartItemIndex !== -1) {
+      // if the item is already in the cart, update its quantity
+
+      const updatedCart = [...cart];
+      updatedCart[existingCartItemIndex] = {
+        ...updatedCart[existingCartItemIndex],
+        quantity: updatedCart[existingCartItemIndex].quantity + 1,
+      };
+      dispatch(setCart(updatedCart));
+    } else {
+      const updatedCart = [...cart, newItem];
+      dispatch(setCart(updatedCart));
+    }
+
     toast.success("product has been added to cart");
     dispatch(setPopupShow(true));
   };
