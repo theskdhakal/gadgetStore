@@ -1,19 +1,52 @@
 import { Fragment, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { setIsCartOpen } from "../../component/system/systemSlice";
+import {
+  removeCartItem,
+  updateCartItemQuantity,
+} from "../../component/system/cartSlice";
 
-export const Cart = ({ isOpen, onClose }) => {
+export const Cart = () => {
+  const dispatch = useDispatch();
   const { cart } = useSelector((state) => state.cart);
+  const { isCartOpen } = useSelector((state) => state.system);
   console.log(cart);
 
+  //function to close the shopping cart
+  const closeCart = () => {
+    dispatch(setIsCartOpen(false));
+  };
+
   const [open, setOpen] = useState(true);
-  if (!isOpen) return null;
+  if (!isCartOpen) return null;
+
+  const handleOnQtyChange = (e, itemId) => {
+    const newQuantity = parseInt(e.target.value);
+
+    if (isNaN(newQuantity)) {
+      //handle the case where newQuantity is not a valid number
+      alert("Invalid Quantity");
+      return; //Exit the function
+    }
+
+    if (newQuantity === 0 || newQuantity === null) {
+      return handleOnRemove(itemId);
+    }
+    dispatch(updateCartItemQuantity({ itemId, newQuantity }));
+  };
+
+  const handleOnRemove = (itemId) => {
+    if (window.confirm("Remove the item from cart")) {
+      dispatch(removeCartItem({ itemId }));
+    }
+  };
 
   return (
-    <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={setOpen}>
+    <Transition.Root show={open} as={Fragment} onClose={closeCart}>
+      <Dialog as="div" className="relative z-10" closeCart={setOpen}>
         <Transition.Child
           as={Fragment}
           enter="ease-in-out duration-500"
@@ -49,7 +82,7 @@ export const Cart = ({ isOpen, onClose }) => {
                           <button
                             type="button"
                             className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
-                            onClick={onClose}
+                            onClick={closeCart}
                           >
                             <span className="absolute -inset-0.5" />
                             <span className="sr-only">Close </span>
@@ -77,13 +110,13 @@ export const Cart = ({ isOpen, onClose }) => {
                                 <div className="ml-4 flex flex-1 flex-col">
                                   <div>
                                     <div className="flex justify-between text-base font-medium text-gray-900">
-                                      <h3>
+                                      <p>
                                         <Link
                                           to={`/${item.category}/${item.id}`}
                                         >
                                           {item.name}
                                         </Link>
-                                      </h3>
+                                      </p>
                                       <p className="ml-4 ">${item.price}</p>
                                     </div>
                                     <p className="mt-1 text-sm text-gray-500">
@@ -91,14 +124,24 @@ export const Cart = ({ isOpen, onClose }) => {
                                     </p>
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
-                                    <p className="text-gray-500">
-                                      Qty {item.quantity}
-                                    </p>
+                                    <label htmlFor={`quantity-${item.id}`}>
+                                      Qty:
+                                      <input
+                                        type="number"
+                                        min="1"
+                                        value={item.quantity}
+                                        onChange={(e) =>
+                                          handleOnQtyChange(e, item.id)
+                                        }
+                                        className="w-16 text-center"
+                                      />
+                                    </label>
 
                                     <div className="flex">
                                       <button
                                         type="button"
                                         className="font-medium text-indigo-600 hover:text-indigo-500"
+                                        onClick={() => handleOnRemove(item.id)}
                                       >
                                         Remove
                                       </button>

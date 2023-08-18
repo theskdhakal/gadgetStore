@@ -7,13 +7,14 @@ import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import "./Header.css";
 import { Cart } from "../../../pages/shopping-cart/Cart";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ProductsCard } from "../../products/ProductsCard";
 import { AiOutlineSearch } from "react-icons/ai";
+import { setIsCartOpen } from "../../system/systemSlice";
 
 export const Header = () => {
+  const dispatch = useDispatch();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const [searchValue, setSearchValue] = useState();
   const { product } = useSelector((state) => state.product);
@@ -25,12 +26,7 @@ export const Header = () => {
 
   //function to open the shopping cart
   const openCart = () => {
-    setIsCartOpen(true);
-  };
-
-  //function to close the shopping cart
-  const closeCart = () => {
-    setIsCartOpen(false);
+    dispatch(setIsCartOpen(true));
   };
 
   const handleOnSearch = (e) => {
@@ -60,7 +56,7 @@ export const Header = () => {
                 >
                   <Menu as="div" className="relative inline-block text-left">
                     <div>
-                      <Menu.Button className="inline-flex underline w-full justify-center gap-x-1.5 rounded-md  px-3 py-2 text-sm font-semibold text-white underlined shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-black">
+                      <Menu.Button className="inline-flex underline w-full justify-center gap-x-1.5 rounded-md  px-3 py-2 font-medium font-semibold text-white underlined shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-black">
                         Categories
                         <AiFillCaretDown />
                       </Menu.Button>
@@ -244,7 +240,7 @@ export const Header = () => {
                       >
                         <BsFillCartFill />
                       </button>
-                      <Cart isOpen={isCartOpen} onClose={closeCart} />
+                      <Cart />
                     </li>
                     <li>
                       {/* Profile dropdown */}

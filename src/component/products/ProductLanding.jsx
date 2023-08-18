@@ -4,7 +4,7 @@ import { MainLayout } from "../layout/main-layout/MainLayout";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { setCart } from "../system/cartSlice";
+import { resetCart, setCart } from "../system/cartSlice";
 import { IoIosArrowBack } from "react-icons/io";
 import { setPopupShow } from "../../component/system/systemSlice";
 import { Popup } from "../../component/pop-up/Popup";
@@ -36,6 +36,8 @@ export const ProductLanding = () => {
     parentCat,
   } = selectedProduct;
 
+  let quantity = 1;
+
   const handleOnAddToCart = (e) => {
     const obj = {
       image: thumbnail,
@@ -44,9 +46,11 @@ export const ProductLanding = () => {
       price: price,
       salesPrice: salesPrice,
       category: parentCat,
+      quantity: quantity,
     };
     const cartItems = [...cart, obj];
     dispatch(setCart(cartItems));
+    // dispatch(resetCart());
     toast.success("product has been added to cart");
     dispatch(setPopupShow(true));
   };
@@ -57,7 +61,7 @@ export const ProductLanding = () => {
 
   return (
     <MainLayout>
-      <Popup />
+      <Popup image={thumbnail} />
       <div className="bg-white">
         <div key={slug} className="pt-6">
           <nav aria-label="Breadcrumb">
@@ -137,8 +141,8 @@ export const ProductLanding = () => {
             {/* Options */}
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
-              <div className="bg-[#dc2626] rounded w-1/5 border border-2 border-black  relative">
-                <p className="text-3xl tracking-tight px-2 text-white ">
+              <div className="bg-[#dc2626] rounded w-2/5 border border-2 border-black  relative">
+                <p className="text-3xl tracking-tight px-3 text-white ">
                   <span className="text-lg absolute top-0 left-0">$</span>
                   {price}
                 </p>
