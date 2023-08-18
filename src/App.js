@@ -47,7 +47,7 @@ function App() {
         <Route path="/categories/camera" element={<CatCamera />} />
         <Route path="/categories/gaming" element={<CatGaming />} />
         <Route path="/shopping-cart" element={<Cart />} />
-        <Route path="/products/:slug" element={<ProductLanding />} />
+        <Route path="/:parentCat/:slug" element={<ProductLanding />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/products" element={<Product />} />

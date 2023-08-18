@@ -1,19 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  cartItems: [],
+  popupShow: false,
 };
 
-const cartSlice = createSlice({
-  name: "cart",
+const systemSlice = createSlice({
+  name: "system",
   initialState,
   reducers: {
-    setCartItems: (state, action) => {
-      state.cartItems = action.payload;
+    setPopupShow: (state, action) => {
+      state.popupShow = action.payload;
     },
   },
 });
 
-export const { setCartItems } = cartSlice.actions;
-
-export default cartSlice.reducer;
+export const { setPopupShow } = systemSlice.actions;
+export default systemSlice.reducer;

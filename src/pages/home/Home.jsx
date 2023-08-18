@@ -1,7 +1,7 @@
 import React from "react";
 import { MainLayout } from "../../component/layout/main-layout/MainLayout";
 import { Caroussel } from "../../component/caroussel/Caroussel";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Banner } from "../../component/banner/Banner";
 import games from "../../component/assets/image/games.webp";
 import laptops from "../../component/assets/image/laptops.webp";
@@ -9,6 +9,7 @@ import phones from "../../component/assets/image/phones.avif";
 import tv from "../../component/assets/image/tv.jpg";
 
 export const Home = () => {
+  const dispatch = useDispatch();
   const { product } = useSelector((state) => state.product);
   console.log(product);
 

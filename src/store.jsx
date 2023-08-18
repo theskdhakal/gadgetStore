@@ -4,7 +4,8 @@ import storage from "redux-persist/lib/storage"; //defaults to loaclstorage
 
 import productReducer from "./pages/products/ProductSlice";
 import categoryReducer from "./pages/categories/CategorySlice";
-import cartReducer from "./component/system/SystemSlice";
+import cartReducer from "./component/system/cartSlice";
+import systemReducer from "./component/system/systemSlice";
 
 const persistConfig = {
   key: "root", //key for the persisted state in storage
@@ -17,6 +18,7 @@ const store = configureStore({
   reducer: {
     product: productReducer,
     category: categoryReducer,
+    system: systemReducer,
     cart: persistedCartReducer,
   },
 });

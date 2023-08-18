@@ -4,8 +4,10 @@ import { MainLayout } from "../layout/main-layout/MainLayout";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { setCartItems } from "../system/SystemSlice";
+import { setCart } from "../system/cartSlice";
 import { IoIosArrowBack } from "react-icons/io";
+import { setPopupShow } from "../../component/system/systemSlice";
+import { Popup } from "../../component/pop-up/Popup";
 
 const reviews = { href: "#", average: 4, totalCount: 117 };
 
@@ -20,8 +22,9 @@ export const ProductLanding = () => {
   console.log(slug);
 
   const { product } = useSelector((state) => state.product);
+  const { cart } = useSelector((state) => state.cart);
   const selectedProduct = product.find((item) => item.slug === slug) || {};
-  console.log(selectedProduct);
+  console.log(cart);
 
   const {
     productName,
@@ -33,16 +36,28 @@ export const ProductLanding = () => {
     parentCat,
   } = selectedProduct;
 
-  const handleOnAddToCart = (obj) => {
-    dispatch(setCartItems(obj));
+  const handleOnAddToCart = (e) => {
+    const obj = {
+      image: thumbnail,
+      name: productName,
+      id: slug,
+      price: price,
+      salesPrice: salesPrice,
+      category: parentCat,
+    };
+    const cartItems = [...cart, obj];
+    dispatch(setCart(cartItems));
     toast.success("product has been added to cart");
+    dispatch(setPopupShow(true));
   };
 
-  const handleOnarrowClick = () => {
+  const handleOnArrowClick = () => {
     navigate(`/categories/${parentCat}`);
   };
+
   return (
     <MainLayout>
+      <Popup />
       <div className="bg-white">
         <div key={slug} className="pt-6">
           <nav aria-label="Breadcrumb">
@@ -57,7 +72,7 @@ export const ProductLanding = () => {
                 >
                   <IoIosArrowBack
                     className="text-xl cursor-pointer"
-                    onClick={() => handleOnarrowClick()}
+                    onClick={handleOnArrowClick}
                   />
                   {productName}
                 </div>
@@ -122,7 +137,12 @@ export const ProductLanding = () => {
             {/* Options */}
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
-              <p className="text-3xl tracking-tight text-gray-900">${price}</p>
+              <div className="bg-[#dc2626] rounded w-1/5 border border-2 border-black  relative">
+                <p className="text-3xl tracking-tight px-2 text-white ">
+                  <span className="text-lg absolute top-0 left-0">$</span>
+                  {price}
+                </p>
+              </div>
 
               {/* Reviews */}
               <div className="mt-6">
@@ -156,14 +176,7 @@ export const ProductLanding = () => {
                 <button
                   type="button"
                   className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  onClick={() =>
-                    handleOnAddToCart({
-                      productName,
-                      price,
-                      salesPrice,
-                      thumbnail,
-                    })
-                  }
+                  onClick={() => handleOnAddToCart(selectedProduct)}
                 >
                   Add to bag
                 </button>

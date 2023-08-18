@@ -10,7 +10,10 @@ export const ProductsCard = ({ filteredProduct }) => {
             key={product.slug}
             className="bg-white p-4 border border-gray-200 rounded-lg shadow-md transition duration-300 transform hover:scale-105"
           >
-            <Link to={`/products/${product.slug}`} className="block">
+            <Link
+              to={`/${product.parentCat}/${product.slug}`}
+              className="block"
+            >
               <img
                 src={product.thumbnail}
                 alt={product.productName}
