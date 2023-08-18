@@ -10,6 +10,7 @@ import { Cart } from "../../../pages/shopping-cart/Cart";
 import { useDispatch, useSelector } from "react-redux";
 import { ProductsCard } from "../../products/ProductsCard";
 import { AiOutlineSearch } from "react-icons/ai";
+import { BsFillCircleFill } from "react-icons/bs";
 import { setIsCartOpen } from "../../system/systemSlice";
 
 export const Header = () => {
@@ -18,6 +19,7 @@ export const Header = () => {
 
   const [searchValue, setSearchValue] = useState();
   const { product } = useSelector((state) => state.product);
+  const { cart } = useSelector((state) => state.cart);
   let filteredProduct = [];
 
   function classNames(...classes) {
@@ -234,13 +236,24 @@ export const Header = () => {
                 <div className="lg:col-span-1 " style={{ marginLeft: "15rem" }}>
                   <ul className="absolute top-7 right-2 flex ml-auto lg:static">
                     <li>
-                      <button
-                        onClick={openCart}
-                        className="text-white text-2xl "
-                      >
-                        <BsFillCartFill />
-                      </button>
-                      <Cart />
+                      <div className="relative">
+                        <button
+                          onClick={openCart}
+                          className="text-white text-2xl p-1 "
+                        >
+                          <BsFillCartFill />
+                        </button>
+                        {cart.length > 0 && (
+                          <>
+                            <BsFillCircleFill className="text-red-500 absolute top-0 right-0 " />
+                            <span className="absolute top-0 right-1 text-xs text-bold text-white">
+                              {cart.length}
+                            </span>
+                          </>
+                        )}
+
+                        <Cart />
+                      </div>
                     </li>
                     <li>
                       {/* Profile dropdown */}
