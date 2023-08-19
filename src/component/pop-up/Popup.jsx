@@ -8,6 +8,7 @@ export const Popup = ({ image }) => {
   const dispatch = useDispatch();
 
   const { popupShow } = useSelector((state) => state.system);
+  const { cart } = useSelector((state) => state.cart);
 
   const handleOnClose = () => {
     dispatch(setPopupShow(false));
@@ -35,7 +36,15 @@ export const Popup = ({ image }) => {
             <h5 className="flex items-center justify-center">
               <TiTick className="text-green-500 text-2xl mr-2" /> Added to Cart
             </h5>
-            <p>Cart Total:</p>
+            <p>
+              Cart Total ({cart.length} items):{" "}
+              <span className="font-bold text-green-800">
+                $
+                {cart.reduce((accumulator, item) => {
+                  return accumulator + +(item.price * item.quantity);
+                }, 0)}
+              </span>
+            </p>
           </div>
         </div>
         <div className="mt-2 space-y-4">

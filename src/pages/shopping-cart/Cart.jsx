@@ -45,7 +45,7 @@ export const Cart = () => {
   };
 
   const totalAmount = cart.reduce((accumulator, item) => {
-    return accumulator + +item.price;
+    return accumulator + +(item.price * item.quantity);
   }, 0);
 
   return (
@@ -161,7 +161,7 @@ export const Cart = () => {
 
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
-                        <p>Subtotal</p>
+                        <p>Subtotal:</p>
                         <p>${totalAmount}</p>
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">
