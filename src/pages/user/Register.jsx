@@ -33,3 +33,27 @@ export const Register = () => {
     </MainLayout>
   );
 };
+
+//   if (existingCartItem) {
+//
+//   } else {
+//     //if the product is not in the cart, add it with quantity 1
+//     state.cart.push({ name, id, quantity: 1 });
+//   }
+// },
+
+// updateCartItemQuantity: (state, action) => {
+//   const { id, newQuantity } = action.payload;
+
+//   const cartItemToUpdate = state.cart.find((item) => item.id === id);
+
+//   if (cartItemToUpdate) {
+//     cartItemToUpdate.quantity = newQuantity;
+//   }
+// },
+
+// removeFromCart: (state, action) => {
+//   const id = action.payload;
+
+//   state.cart = state.cart.filter((item) => item.id !== id);
+// },

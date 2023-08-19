@@ -44,6 +44,10 @@ export const Cart = () => {
     }
   };
 
+  const totalAmount = cart.reduce((accumulator, item) => {
+    return accumulator + +item.price;
+  }, 0);
+
   return (
     <Transition.Root show={open} as={Fragment} onClose={closeCart}>
       <Dialog as="div" className="relative z-10" closeCart={setOpen}>
@@ -158,7 +162,7 @@ export const Cart = () => {
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>$262.00</p>
+                        <p>${totalAmount}</p>
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">
                         Shipping and taxes calculated at checkout.

@@ -15,6 +15,13 @@ const firebaseConfig = {
   storageBucket: process.env.REACT_APP_STORAGEBUCKET,
   messagingSenderId: process.env.REACT_APP_MESSAGINGSENDERID,
   appId: process.env.REACT_APP_APPID,
+
+  // apiKey: "AIzaSyBPpEVaFden0MPyxJnhklNcM8-NxK1tkgs",
+  // authDomain: "echineko-e-commerce.firebaseapp.com",
+  // projectId: "echineko-e-commerce",
+  // storageBucket: "echineko-e-commerce.appspot.com",
+  // messagingSenderId: "42593853328",
+  // appId: "1:42593853328:web:d2e7eb66bc356bef591d15",
 };
 
 // Initialize Firebase
