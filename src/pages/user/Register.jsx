@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { InputFields } from "../../component/input-fields/InputFields";
 import { CustomInput } from "../../component/custom-input/CustomInput";
 import { MainLayout } from "../../component/layout/main-layout/MainLayout";
+import { registerUserAction } from "./UserAction";
+import { useNavigate } from "react-router-dom";
 
 export const Register = () => {
+  const [form, setForm] = useState();
+  const navigate = useNavigate();
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+
+    const isUserCreated = await registerUserAction(form);
+    isUserCreated && navigate("/");
+  };
+
   return (
     <MainLayout>
       <div className="grid min-h-screen place-items-center">
@@ -14,9 +31,14 @@ export const Register = () => {
               please fill in your information to continue
             </span>
           </h1>
-          <form className="mt-6">
+          <form className="mt-6" onSubmit={handleRegister}>
             {InputFields.map((item, i) => (
-              <CustomInput key={i} {...item} className="mb-2" />
+              <CustomInput
+                key={i}
+                {...item}
+                className="mb-2"
+                onChange={handleOnChange}
+              />
             ))}
             <button
               type="submit"
@@ -33,27 +55,3 @@ export const Register = () => {
     </MainLayout>
   );
 };
-
-//   if (existingCartItem) {
-//
-//   } else {
-//     //if the product is not in the cart, add it with quantity 1
-//     state.cart.push({ name, id, quantity: 1 });
-//   }
-// },
-
-// updateCartItemQuantity: (state, action) => {
-//   const { id, newQuantity } = action.payload;
-
-//   const cartItemToUpdate = state.cart.find((item) => item.id === id);
-
-//   if (cartItemToUpdate) {
-//     cartItemToUpdate.quantity = newQuantity;
-//   }
-// },
-
-// removeFromCart: (state, action) => {
-//   const id = action.payload;
-
-//   state.cart = state.cart.filter((item) => item.id !== id);
-// },
