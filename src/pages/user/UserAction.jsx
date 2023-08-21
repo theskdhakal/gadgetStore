@@ -1,4 +1,7 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { CLIENT } from "../../component/assets/constant/Constant";
@@ -41,6 +44,28 @@ export const getUSerAction = (uid) => async (dispatch) => {
     if (docSnap.exists()) {
       const user = { ...docSnap.data(), uid };
       dispatch(setClient(user));
+    }
+  } catch (error) {
+    toast.error(error.message);
+  }
+};
+
+export const loginAction = (form) => async (dispatch) => {
+  try {
+    const pendingUser = signInWithEmailAndPassword(
+      auth,
+      form.email,
+      form.password
+    );
+
+    toast.promise(pendingUser, {
+      pending: "please wait...",
+    });
+
+    const { user } = await pendingUser;
+
+    if (user?.uid) {
+      dispatch(getUSerAction(user.uid));
     }
   } catch (error) {
     toast.error(error.message);
