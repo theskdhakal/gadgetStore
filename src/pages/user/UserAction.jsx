@@ -35,7 +35,7 @@ export const registerUserAction = async ({
   }
 };
 
-export const getUSerAction = (uid) => async (dispatch) => {
+export const getUserAction = (uid) => async (dispatch) => {
   try {
     //read user id from firebase
 
@@ -65,7 +65,7 @@ export const loginAction = (form) => async (dispatch) => {
     const { user } = await pendingUser;
 
     if (user?.uid) {
-      dispatch(getUSerAction(user.uid));
+      dispatch(getUserAction(user.uid));
     }
   } catch (error) {
     toast.error(error.message);

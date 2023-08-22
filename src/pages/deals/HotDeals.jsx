@@ -10,8 +10,10 @@ export const HotDeals = () => {
   const { product } = useSelector((state) => state.product);
   const [filteredProduct, setFilteredProduct] = useState([]);
 
-  const salesProduct = product.filter((item) => item.salesPrice !== undefined);
-  console.log(filteredProduct);
+  const salesProduct = product.filter(
+    (item) => item.salesPrice !== undefined && item.salesPrice !== ""
+  );
+  console.log(salesProduct);
 
   useEffect(() => {
     if (salesProduct?.length) {

@@ -23,7 +23,23 @@ export const ProductsCard = ({ filteredProduct }) => {
                 <h3 className="text-lg font-semibold text-gray-900">
                   {product.productName}
                 </h3>
-                <p className="mt-2 text-sm text-gray-700">${product.price}</p>
+
+                {product.salesPrice ? (
+                  <>
+                    <p className="mt-2 text-sm text-gray-700 line-through">
+                      ${product.price}
+                    </p>
+
+                    <p className="mt-2 text-sm text-gray-700">
+                      <span className="text-red-500">
+                        ${product.salesPrice}
+                      </span>
+                      &nbsp;(Sale price)
+                    </p>
+                  </>
+                ) : (
+                  <p className="mt-2 text-sm text-gray-700">${product.price}</p>
+                )}
               </div>
             </Link>
             <form className="mt-4">

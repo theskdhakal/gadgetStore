@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 export const CatCamera = () => {
   const { product } = useSelector((state) => state.product);
   const filteredProduct = product.filter((item) => item.parentCat === "camera");
+  console.log(filteredProduct);
   const features = [
     {
       icon: (

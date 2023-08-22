@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { CustomInput } from "../../component/custom-input/CustomInput";
 import { MainLayout } from "../../component/layout/main-layout/MainLayout";
 import { LoginInput } from "../../component/input-fields/InputFields";
+import { getUSerAction, loginAction } from "./UserAction";
+import { useDispatch } from "react-redux";
 
 export const Login = () => {
+  const [form, setForm] = useState();
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    dispatch(loginAction(form));
+  };
   return (
     <MainLayout>
       <div className="grid min-h-screen place-items-center">
@@ -11,9 +25,14 @@ export const Login = () => {
           <h1 className="text-xl font-semibold">
             Welcome Back ! <span className="font-normal"></span>
           </h1>
-          <form className="mt-6">
+          <form className="mt-6" onSubmit={handleLogin}>
             {LoginInput.map((item, i) => (
-              <CustomInput key={i} {...item} className="mb-2" />
+              <CustomInput
+                key={i}
+                {...item}
+                className="mb-2"
+                onChange={handleChange}
+              />
             ))}
             <button
               type="submit"
@@ -22,7 +41,7 @@ export const Login = () => {
               Login
             </button>
             <p className="flex justify-between inline-block mt-4 text-xs text-gray-500 cursor-pointer hover:text-black">
-              Already registered?
+              Forgot Password ?
             </p>
           </form>
         </div>

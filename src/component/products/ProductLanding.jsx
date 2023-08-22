@@ -158,10 +158,25 @@ export const ProductLanding = () => {
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
               <div className="bg-[#dc2626] rounded w-2/5 border border-2 border-black  relative">
-                <p className="text-3xl tracking-tight px-3 text-white ">
+                {/* <p className="text-3xl tracking-tight px-3 text-white ">
                   <span className="text-lg absolute top-0 left-0">$</span>
                   {price}
-                </p>
+                </p> */}
+
+                {salesPrice ? (
+                  <>
+                    <p className="text-3xl tracking-tight px-3 text-white ">
+                      <span className="text-lg absolute top-0 left-0">$</span>
+                      {salesPrice}
+                    </p>
+                  </>
+                ) : (
+                  <p className="mt-2 text-sm text-gray-700">
+                    <span className="text-lg absolute top-0 left-0">$</span>
+
+                    {price}
+                  </p>
+                )}
               </div>
 
               {/* Reviews */}
