@@ -171,7 +171,7 @@ export const ProductLanding = () => {
                     </p>
                   </>
                 ) : (
-                  <p className="mt-2 text-sm text-gray-700">
+                  <p className="text-3xl tracking-tight px-3 text-white ">
                     <span className="text-lg absolute top-0 left-0">$</span>
 
                     {price}

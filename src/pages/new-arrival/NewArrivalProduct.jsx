@@ -57,7 +57,7 @@ export const NewArrivalProduct = () => {
         </div>
         <hr />
         <div>
-          <ProductsCard filteredProduct={filteredProduct} />
+          <ProductsCard filteredProduct={filteredProduct} isNew={true} />
         </div>
       </div>
     </MainLayout>

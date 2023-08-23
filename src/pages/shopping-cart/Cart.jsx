@@ -121,7 +121,9 @@ export const Cart = () => {
                                           {item.name}
                                         </Link>
                                       </p>
-                                      <p className="ml-4 ">${item.price}</p>
+                                      <p className="ml-4 ">
+                                        ${item.price * item.quantity}
+                                      </p>
                                     </div>
                                     <p className="mt-1 text-sm text-gray-500">
                                       {item.color}

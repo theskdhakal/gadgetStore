@@ -53,7 +53,7 @@ export const HotDeals = () => {
         <div>
           <h2 className="text-center underline text-red-500">Hot-Deals</h2>
 
-          <ProductsCard filteredProduct={filteredProduct} />
+          <ProductsCard filteredProduct={filteredProduct} isDeal={true} />
         </div>
       </div>
     </MainLayout>

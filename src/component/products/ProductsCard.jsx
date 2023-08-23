@@ -1,15 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import special from "../assets/image/promo/special.png";
+import newArrival from "../assets/image/promo/newArrival.png";
 
-export const ProductsCard = ({ filteredProduct }) => {
+export const ProductsCard = ({ filteredProduct, isDeal, isNew }) => {
   return (
     <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-      <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8">
+      <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8 relative">
         {filteredProduct.map((product) => (
           <div
             key={product.slug}
-            className="bg-white p-4 border border-gray-200 rounded-lg shadow-md transition duration-300 transform hover:scale-105"
+            className="bg-white p-4 border border-gray-200 rounded-lg shadow-md transition duration-300 transform hover:scale-105 relative"
           >
+            {isDeal && (
+              <img src={special} alt="deal" className="absolute -top-11 " />
+            )}
+            {isNew && (
+              <img
+                src={newArrival}
+                alt="deal"
+                className="w-1/4 absolute -top-2 -left-2 "
+              />
+            )}
             <Link
               to={`/${product.parentCat}/${product.slug}`}
               className="block"
