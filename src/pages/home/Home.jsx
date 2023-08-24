@@ -8,9 +8,12 @@ import laptops from "../../component/assets/image/laptops.webp";
 import phones from "../../component/assets/image/phones.avif";
 import tv from "../../component/assets/image/tv.jpg";
 import { ProductsCard } from "../../component/products/ProductsCard";
+import { FiArrowRight } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { product } = useSelector((state) => state.product);
   // const { latestProducts } = useSelector((state) => state.featured);
   const [filteredProduct, setFilteredProduct] = useState([]);
@@ -83,8 +86,26 @@ export const Home = () => {
         />
       </div>
 
-      <div>
-        <ProductsCard filteredProduct={filteredProduct} />
+      <div className="mt-5 pt-5 w-3/5 mx-auto">
+        <span>
+          <hr className="w-full mx-auto" />
+        </span>
+
+        <div className="space-y-5">
+          <h4 className="text-center">DEALS</h4>
+          <p
+            className="flex  justify-end  mx-3 cursor-pointer"
+            onClick={() => {
+              navigate("/deal");
+            }}
+          >
+            Show More{" "}
+            <span>
+              <FiArrowRight className="m-1" />
+            </span>
+          </p>
+        </div>
+        <ProductsCard filteredProduct={filteredProduct} isDeal={true} />
       </div>
 
       {/* <div className="bg-white">
