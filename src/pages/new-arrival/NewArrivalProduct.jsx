@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { MainLayout } from "../../component/layout/main-layout/MainLayout";
 import dontMiss from "../../component/assets/image/promo/dontMiss.png";
 import { ProductsCard } from "../../component/products/ProductsCard";
@@ -9,6 +9,7 @@ export const NewArrivalProduct = () => {
   const { category } = useSelector((state) => state.category);
   const [filteredProduct, setFilteredProduct] = useState([]);
   const [latestProds, setLatestProds] = useState([]);
+  const dispatch = useDispatch();
 
   //create a shallow copy of the product array
   const sortedProducts = [...product];

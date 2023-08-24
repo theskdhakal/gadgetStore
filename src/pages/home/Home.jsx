@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MainLayout } from "../../component/layout/main-layout/MainLayout";
 import { Caroussel } from "../../component/caroussel/Caroussel";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,11 +7,26 @@ import games from "../../component/assets/image/games.webp";
 import laptops from "../../component/assets/image/laptops.webp";
 import phones from "../../component/assets/image/phones.avif";
 import tv from "../../component/assets/image/tv.jpg";
+import { ProductsCard } from "../../component/products/ProductsCard";
 
 export const Home = () => {
   const dispatch = useDispatch();
   const { product } = useSelector((state) => state.product);
-  console.log(product);
+  // const { latestProducts } = useSelector((state) => state.featured);
+  const [filteredProduct, setFilteredProduct] = useState([]);
+
+  const salesProduct = product.filter(
+    (item) => item.salesPrice !== undefined && item.salesPrice !== ""
+  );
+  console.log(salesProduct);
+
+  useEffect(() => {
+    if (salesProduct?.length) {
+      setFilteredProduct([...salesProduct].slice(0, 3));
+    }
+  }, [salesProduct?.length]);
+
+  console.log(filteredProduct);
 
   const customCarouselHeight = { height: "60vh" };
 
@@ -59,16 +74,20 @@ export const Home = () => {
 
   return (
     <MainLayout>
-      {/* <Banner /> */}
+      <Banner />
 
-      <div className="py-3">
+      <div>
         <Caroussel
           carouselStyle={customCarouselHeight}
           slides={carouselSlides}
         />
       </div>
 
-      <div className="bg-white">
+      <div>
+        <ProductsCard filteredProduct={filteredProduct} />
+      </div>
+
+      {/* <div className="bg-white">
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">
             Customers also purchased
@@ -95,7 +114,7 @@ export const Home = () => {
                     {/* <p className="mt-1 text-sm text-gray-500">
                       {product.color}
                     </p> */}
-                  </div>
+      {/* </div>
                   <p className="text-sm font-medium text-gray-900">
                     {product.salesPrice}
                   </p>
@@ -104,82 +123,7 @@ export const Home = () => {
             ))}
           </div>
         </div>
-      </div>
-
-      <div className="max-w-screen-xl bg-gray-100 mx-auto px-4 py-1 gap-12 shadow text-gray-600  md:px-8 xl:flex">
-        <div className=" min-h-screen flex flex-col">
-          {/* first row  */}
-
-          <div className="flex flex-col lg:flex-row lg:h-1/2">
-            <div className="lg:w-1/2 p-8">
-              <img
-                src="https://static.toiimg.com/thumb/resizemode-4,width-1200,height-900,msid-90782693/90782693.jpg"
-                alt="First Image"
-                className="w-full h-auto rounded-lg shadow"
-              />
-            </div>
-            <div className="lg:w-1/2 p-8 flex  items-center">
-              <div>
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                  Intelligent Auto Modes
-                </h2>
-                <p className="text-gray-600">
-                  Streamline your photography experience with intelligent auto
-                  modes that optimize settings like exposure, focus, and white
-                  balance, ensuring great results even for beginners.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Second Row */}
-          <div className="flex flex-col-reverse lg:flex-row lg:h-1/2">
-            <div className="lg:w-1/2 p-8 flex items-center">
-              <div>
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                  Advanced Sensor Technology
-                </h2>
-                <p className="text-gray-600">
-                  Capture stunning images with precision and clarity thanks to
-                  advanced sensor technology, which enhances low-light
-                  performance and detail in every shot.
-                </p>
-              </div>
-            </div>
-            <div className="lg:w-1/2 p-8">
-              <img
-                src="https://www.findingtheuniverse.com/wp-content/uploads/2017/01/Best-Travel-Camera.jpg"
-                alt="Second Image"
-                className="w-full h-auto rounded-lg shadow"
-              />
-            </div>
-          </div>
-
-          {/* Third Row */}
-          <div className="flex flex-col lg:flex-row lg:h-1/2">
-            <div className="lg:w-1/2 p-8">
-              <img
-                src="https://www.thinkingtech.in/wp-content/uploads/2017/04/photography-camera-wallpaper-hd-resolution-1024x640.jpg"
-                alt="Third Image"
-                className="w-full h-auto rounded-lg shadow"
-              />
-            </div>
-            <div className="lg:w-1/2 p-8 flex items-center">
-              <div>
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-                  Versatile Lens Options
-                </h2>
-                <p className="text-gray-600">
-                  Enjoy creative freedom with interchangeable lenses that cater
-                  to different photography styles, from wide-angle landscapes to
-                  close-up portraits, making them ideal for wildlife
-                  photography.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      </div> */}
     </MainLayout>
   );
 };
