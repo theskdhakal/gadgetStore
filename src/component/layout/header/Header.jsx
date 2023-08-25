@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/image/logo.JPG";
 import { BsFillCartFill } from "react-icons/bs";
@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ProductsCard } from "../../products/ProductsCard";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BsFillCircleFill } from "react-icons/bs";
+import { RxCross2 } from "react-icons/rx";
 import { setIsCartOpen } from "../../system/systemSlice";
 
 export const Header = () => {
@@ -43,6 +44,13 @@ export const Header = () => {
     );
   }
 
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [isMenuOpen]);
   return (
     <>
       <div class="bg-mycolor">
@@ -51,7 +59,7 @@ export const Header = () => {
             <ul class="flex items-center hidden space-x-8 lg:flex">
               <li>
                 <Link
-                  to="/categories"
+                  // to="/categories"
                   aria-label="Our product"
                   title="Our product"
                   class="font-medium  tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
@@ -350,31 +358,24 @@ export const Header = () => {
                 </svg>
               </button>
               {isMenuOpen && (
-                <div class="absolute top-4 left-0 w-50" style={{ zIndex: 999 }}>
-                  <div class="p-2 bg-mycolor border rounded shadow-sm">
-                    <div class="flex items-center justify-between mb-4">
-                      <div>
-                        <Link
-                          to="/"
-                          aria-label="Company"
-                          title="Company"
-                          class="inline-flex items-center"
-                        >
-                          <img src={logo} alt="" style={{ width: "65px" }} />
-                        </Link>
+                <div
+                  class="absolute -top-2 -left-6 w-screen  "
+                  style={{ zIndex: 999 }}
+                >
+                  <div class="p-2 bg-mycolor  border  shadow-sm h-screen">
+                    <div class="flex items-center justify-between mb-4 ">
+                      <div className="flex items-center justify-center w-80">
+                        <img src={logo} alt="" style={{ width: "95px" }} />
                       </div>
                       <div>
                         <button
                           aria-label="Close Menu"
                           title="Close Menu"
-                          class="p-2 -mt-2 -mr-2 transition duration-200 rounded hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                          class="p-2 -mt-2 -mr-2  transition duration-200 rounded hover:bg-white focus:bg-white focus:outline-none focus:shadow-outline"
                           onClick={() => setIsMenuOpen(false)}
                         >
                           <svg class="w-5 text-gray-600" viewBox="0 0 24 24">
-                            <path
-                              fill="currentColor"
-                              d="M19.7,4.3c-0.4-0.4-1-0.4-1.4,0L12,10.6L5.7,4.3c-0.4-0.4-1-0.4-1.4,0s-0.4,1,0,1.4l6.3,6.3l-6.3,6.3 c-0.4,0.4-0.4,1,0,1.4C4.5,19.9,4.7,20,5,20s0.5-0.1,0.7-0.3l6.3-6.3l6.3,6.3c0.2,0.2,0.5,0.3,0.7,0.3s0.5-0.1,0.7-0.3 c0.4-0.4,0.4-1,0-1.4L13.4,12l6.3-6.3C20.1,5.3,20.1,4.7,19.7,4.3z"
-                            />
+                            <RxCross2 className="text-2xl text-white" />
                           </svg>
                         </button>
                       </div>
@@ -383,12 +384,116 @@ export const Header = () => {
                       <ul class="space-y-4">
                         <li>
                           <Link
-                            to="/categories"
+                            // to="/categories"
                             aria-label="Our product"
                             title="Our product"
-                            class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                            class="font-medium tracking-wide text-white no-underline transition-colors duration-200 hover:text-deep-purple-accent-400"
                           >
-                            Categories
+                            <Menu
+                              as="div"
+                              className="relative inline-block text-left"
+                            >
+                              <div>
+                                <Menu.Button className="inline-flex underline w-full justify-center gap-x-1.5 py-2 font-medium font-semibold text-white ring-1 ring-inset ring-gray-300 ">
+                                  Categories
+                                  <AiFillCaretDown />
+                                </Menu.Button>
+                              </div>
+
+                              <Transition
+                                as={Fragment}
+                                enter="transition ease-out duration-100"
+                                enterFrom="transform opacity-0 scale-95"
+                                enterTo="transform opacity-100 scale-100"
+                                leave="transition ease-in duration-75"
+                                leaveFrom="transform opacity-100 scale-100"
+                                leaveTo="transform opacity-0 scale-95"
+                              >
+                                <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                  <div className="py-1">
+                                    <Menu.Item>
+                                      {({ active }) => (
+                                        <Link
+                                          to="/categories/mobile"
+                                          className={classNames(
+                                            active
+                                              ? "bg-gray-100 text-gray-900"
+                                              : "text-gray-700",
+                                            "block px-4 py-2 text-sm"
+                                          )}
+                                        >
+                                          Mobile
+                                        </Link>
+                                      )}
+                                    </Menu.Item>
+                                    <Menu.Item>
+                                      {({ active }) => (
+                                        <Link
+                                          to="/categories/laptop"
+                                          className={classNames(
+                                            active
+                                              ? "bg-gray-100 text-gray-900"
+                                              : "text-gray-700",
+                                            "block px-4 py-2 text-sm"
+                                          )}
+                                        >
+                                          Laptops
+                                        </Link>
+                                      )}
+                                    </Menu.Item>
+                                  </div>
+                                  <div className="py-1">
+                                    <Menu.Item>
+                                      {({ active }) => (
+                                        <Link
+                                          to="/categories/televisions"
+                                          className={classNames(
+                                            active
+                                              ? "bg-gray-100 text-gray-900"
+                                              : "text-gray-700",
+                                            "block px-4 py-2 text-sm"
+                                          )}
+                                        >
+                                          Tv
+                                        </Link>
+                                      )}
+                                    </Menu.Item>
+                                    <Menu.Item>
+                                      {({ active }) => (
+                                        <Link
+                                          to="/categories/Camera"
+                                          className={classNames(
+                                            active
+                                              ? "bg-gray-100 text-gray-900"
+                                              : "text-gray-700",
+                                            "block px-4 py-2 text-sm"
+                                          )}
+                                        >
+                                          Camera
+                                        </Link>
+                                      )}
+                                    </Menu.Item>
+                                  </div>
+                                  <div className="py-1">
+                                    <Menu.Item>
+                                      {({ active }) => (
+                                        <Link
+                                          to="/categories/gaming"
+                                          className={classNames(
+                                            active
+                                              ? "bg-gray-100 text-gray-900"
+                                              : "text-gray-700",
+                                            "block px-4 py-2 text-sm"
+                                          )}
+                                        >
+                                          Gaming
+                                        </Link>
+                                      )}
+                                    </Menu.Item>
+                                  </div>
+                                </Menu.Items>
+                              </Transition>
+                            </Menu>
                           </Link>
                         </li>
                         <li>
@@ -396,7 +501,7 @@ export const Header = () => {
                             to="/new"
                             aria-label="New Arrival"
                             title="New Arrival"
-                            class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                            class="font-medium tracking-wide text-white no-underline transition-colors duration-200 hover:text-deep-purple-accent-400"
                           >
                             New Arrivals
                           </Link>
@@ -406,7 +511,7 @@ export const Header = () => {
                             to="/"
                             aria-label="Product pricing"
                             title="Product pricing"
-                            class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                            class="font-medium tracking-wide text-white no-underline transition-colors duration-200 hover:text-deep-purple-accent-400"
                           >
                             Deals
                           </Link>
@@ -416,12 +521,12 @@ export const Header = () => {
                             to="/"
                             aria-label="register"
                             title="register"
-                            class="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                            class="font-medium tracking-wide text-white no-underline transition-colors duration-200 hover:text-deep-purple-accent-400"
                           >
                             Register
                           </Link>
                         </li>
-                        <li>
+                        {/* <li>
                           <Link
                             to="/"
                             class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
@@ -430,7 +535,7 @@ export const Header = () => {
                           >
                             Login
                           </Link>
-                        </li>
+                        </li> */}
                       </ul>
                     </nav>
                   </div>

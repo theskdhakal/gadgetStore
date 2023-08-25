@@ -37,8 +37,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/categories" element={<Categories />} />
-        <Route path="/new" element={<NewArrival />} />
+        `` <Route path="/new" element={<NewArrival />} />
         <Route path="/deal" element={<HotDeals />} />
         <Route path="/newProduct" element={<NewArrivalProduct />} />
         <Route path="/categories/mobile" element={<CatMobile />} />
