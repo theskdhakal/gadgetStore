@@ -1,8 +1,6 @@
-import React from 'react'
+import React from "react";
 
 export const Checkout = () => {
-
-  return (
-      
-  )
-}
+  return <p>j</p>;
+};
+cd;
