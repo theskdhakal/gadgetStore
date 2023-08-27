@@ -25,6 +25,7 @@ import { Register } from "./pages/user/Register";
 import { Login } from "./pages/user/Login";
 import { Product } from "./pages/products/Product";
 import { ToastContainer } from "react-toastify";
+import Checkout from "./pages/checkout/Checkout";
 
 function App() {
   const dispatch = useDispatch();
@@ -50,6 +51,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/products" element={<Product />} />
+        <Route path="/checkout" element={<Checkout />} />
       </Routes>
       <ToastContainer />
     </>
