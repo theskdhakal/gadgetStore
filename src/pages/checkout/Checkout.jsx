@@ -2,7 +2,7 @@ import React from "react";
 import { HiBadgeCheck } from "react-icons/hi";
 import { AiFillInfoCircle } from "react-icons/ai";
 import { AiFillLock } from "react-icons/ai";
-import checkout from "../../component/assets/image/promo/checkout.png";
+import checkout from "../../component/assets/image/promo/checkout.jpg";
 
 import { useSelector } from "react-redux";
 import { MainLayout } from "../../component/layout/main-layout/MainLayout";
@@ -166,7 +166,7 @@ const Checkout = () => {
             <img
               src={checkout}
               alt=""
-              className="absolute inset-0 w-full h-full"
+              className="absolute top-0 right-0 object-cover  h-full"
             />
             <div className="absolute inset-0 w-full h-full bg-gradient-to-t from-skyblue-800 to-skyblue-400 opacity-75" />
           </div>
@@ -181,16 +181,16 @@ const Checkout = () => {
                   <div className="inline-flex">
                     <img src={item.image} alt="" className="max-h-16" />
                     <div className="ml-3">
-                      <p className="text-base text-white font-semibold">
+                      <p className="text-base text-black font-semibold">
                         {item.name}
                       </p>
-                      <p className="text-sm text-white text-opacity-80 font-medium">
+                      <p className="text-sm text-black text-opacity-80 font-medium">
                         {item.details}
                       </p>
                     </div>
                   </div>
                   {/* ::::item price */}
-                  <p className="text-sm text-white font-semibold">{`$${item.price}`}</p>
+                  <p className="text-sm text-black font-semibold">{`$${item.price}`}</p>
                 </li>
               ))}
             </ul>
@@ -199,12 +199,17 @@ const Checkout = () => {
             {/* :::Total */}
             <div className="space-y-2">
               {/* ::::total price */}
-              <p className="flex justify-between text-lg text-white font-bold">
-                <span>Total price:</span>
+              <p className="flex justify-between text-lg text-black font-bold">
+                <span>
+                  Total price:&nbsp; $
+                  {cart.reduce((accumulator, item) => {
+                    return accumulator + +(item.price * item.quantity);
+                  }, 0)}
+                </span>
                 {/* <span>{`$${order.total.toFixed(2)}`}</span> */}
               </p>
               {/* ::::vat */}
-              <p className="flex justify-between text-sm text-white font-medium">
+              <p className="flex justify-between text-sm text-black font-medium">
                 <span>Vat: 20%</span>
                 {/* <span>{`$${order.vat.toFixed(2)}`}</span> */}
               </p>
@@ -212,7 +217,7 @@ const Checkout = () => {
           </div>
 
           {/* ::Contact Infos */}
-          <div className="relative mt-10 text-white">
+          <div className="relative mt-10 text-black">
             <h3 className="mb-5 text-lg font-bold">Hotline</h3>
             <p className="text-sm font-semibold">
               +01 23 456 789 <span className="font-light">(International)</span>
@@ -227,12 +232,12 @@ const Checkout = () => {
 
           {/* ::Guarantee */}
           <div className="relative mt-10 flex">
-            <HiBadgeCheck className="mr-3 w-10 h-10 text-yellow-400" />
+            <HiBadgeCheck className="mr-3 w-10 h-10 text-green-900" />
             <p className="flex flex-col">
-              <span className="text-sm text-white font-bold">
+              <span className="text-sm text-black font-bold">
                 Money Back Guarantee
               </span>
-              <span className="text-xs text-white font-medium">
+              <span className="text-xs text-black font-medium">
                 within 30 days of purchase
               </span>
             </p>
