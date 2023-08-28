@@ -7,6 +7,7 @@ import categoryReducer from "./pages/categories/CategorySlice";
 import cartReducer from "./component/system/cartSlice";
 import NewReducer from "./pages/new-arrival/NewSlice";
 import ClientReducer from "./pages/user/ClientSlice";
+import orderReducer from "./pages/checkout/OrderSlice";
 import systemReducer from "./component/system/systemSlice";
 
 const persistConfig = {
@@ -23,6 +24,7 @@ const store = configureStore({
     system: systemReducer,
     client: ClientReducer,
     featured: NewReducer,
+    order: orderReducer,
     cart: persistedCartReducer,
   },
 });

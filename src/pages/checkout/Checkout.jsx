@@ -10,6 +10,10 @@ import { MainLayout } from "../../component/layout/main-layout/MainLayout";
 const Checkout = () => {
   const { cart } = useSelector((state) => state.cart);
 
+  const totalAmount = cart.reduce((accumulator, item) => {
+    return accumulator + +(item.price * item.quantity);
+  }, 0);
+
   return (
     <div className="relative mx-auto w-full max-w-7xl bg-white py-5">
       <div className="grid grid-cols-10">
@@ -200,18 +204,16 @@ const Checkout = () => {
             <div className="space-y-2">
               {/* ::::total price */}
               <p className="flex justify-between text-lg text-black font-bold">
-                <span>
-                  Total price:&nbsp; $
-                  {cart.reduce((accumulator, item) => {
-                    return accumulator + +(item.price * item.quantity);
-                  }, 0)}
-                </span>
-                {/* <span>{`$${order.total.toFixed(2)}`}</span> */}
+                <span>SubTotal:&nbsp; ${totalAmount}</span>
               </p>
               {/* ::::vat */}
               <p className="flex justify-between text-sm text-black font-medium">
-                <span>Vat: 20%</span>
-                {/* <span>{`$${order.vat.toFixed(2)}`}</span> */}
+                <span>Gst: 13%</span>
+              </p>
+              <p className="flex justify-between text-lg text-black font-bold">
+                <span>
+                  Total price:&nbsp; $ <span>{`$${1.13 * totalAmount}`}</span>
+                </span>
               </p>
             </div>
           </div>
