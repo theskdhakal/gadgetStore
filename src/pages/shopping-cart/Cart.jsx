@@ -44,9 +44,13 @@ export const Cart = () => {
     }
   };
 
-  const totalAmount = cart.reduce((accumulator, item) => {
-    return accumulator + +(item.price * item.quantity);
-  }, 0);
+  let totalAmount = 0;
+
+  if (cart.length > 0) {
+    totalAmount = cart.reduce((accumulator, item) => {
+      return accumulator + +(item.price * item.quantity);
+    }, 0);
+  }
 
   return (
     <Transition.Root show={open} as={Fragment} onClose={closeCart}>
@@ -101,7 +105,7 @@ export const Cart = () => {
                             role="list"
                             className="-my-6 divide-y divide-gray-200"
                           >
-                            {cart.map((item) => (
+                            {cart?.map((item) => (
                               <li key={item.id} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                   <img
@@ -163,8 +167,7 @@ export const Cart = () => {
 
                     <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
-                        <p>Subtotal:</p>
-                        <p>${totalAmount}</p>
+                        <p>Total Amount:${totalAmount}</p>
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">
                         Shipping and taxes calculated at checkout.
@@ -175,7 +178,7 @@ export const Cart = () => {
                           totalAmount={totalAmount}
                           className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                         >
-                          Checkout
+                          Proceed to Checkout
                         </Link>
                       </div>
                       <div className="mt-6 flex justify-center text-center text-sm text-gray-500">

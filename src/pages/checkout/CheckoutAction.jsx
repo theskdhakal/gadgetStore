@@ -1,7 +1,9 @@
-import swal from "sweetalert";
 import { ORDER } from "../../component/assets/constant/Constant";
-import { collection, getDocs, query } from "firebase/firestore";
+import { addDoc, collection, getDocs, query } from "firebase/firestore";
 import { setOrder } from "./OrderSlice";
+import { db } from "../../component/firebase/FIrebaseConfig";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 export const getAllOrderACtion = () => async (dispatch) => {
   try {
@@ -31,11 +33,17 @@ export const AddOrderAction = (orderData) => async (dispatch) => {
     const orderRef = await addDoc(collection(db, ORDER), orderData);
 
     if (orderRef?.id) {
-      swal.fire("your order has been placed !", "success");
+      Swal.fire({
+        icon: "success",
+        title: "Your order has been placed",
+        timer: 1000,
+        allowOutsideClick: false,
+      });
       dispatch(getAllOrderACtion());
+      return;
     }
 
-    swal.fire("something went wrong", "error");
+    toast.error("something went wrong", "error");
   } catch (error) {
     toast.error(error.message);
   }

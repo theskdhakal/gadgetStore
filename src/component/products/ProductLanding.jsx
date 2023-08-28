@@ -12,6 +12,7 @@ import {
 import { IoIosArrowBack } from "react-icons/io";
 import { setPopupShow } from "../../component/system/systemSlice";
 import { Popup } from "../../component/pop-up/Popup";
+import { CartConfirmation } from "./CartConfirmation";
 
 const reviews = { href: "#", average: 4, totalCount: 117 };
 
@@ -77,7 +78,9 @@ export const ProductLanding = () => {
 
   return (
     <MainLayout>
-      <Popup image={thumbnail} />
+      <Popup>
+        <CartConfirmation image={thumbnail} />
+      </Popup>
       <div className="bg-white">
         <div key={slug} className="pt-6">
           <nav aria-label="Breadcrumb">
