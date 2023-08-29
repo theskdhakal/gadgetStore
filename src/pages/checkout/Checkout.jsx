@@ -17,9 +17,11 @@ const Checkout = () => {
   const [form, setForm] = useState();
   const dispatch = useDispatch();
 
-  const totalAmount = cart.reduce((accumulator, item) => {
+  const subTotal = cart.reduce((accumulator, item) => {
     return accumulator + +(item.price * item.quantity);
   }, 0);
+
+  const totalAmount = Math.round(1.13 * subTotal);
 
   // useEffect(() => {
   //   window.onload = function () {
@@ -59,7 +61,7 @@ const Checkout = () => {
 
   return (
     <>
-      <Popup>
+      <Popup isOrderConfirmation={true}>
         <OrderSummary totalAmount={totalAmount} />
       </Popup>
       <div className="relative mx-auto w-full max-w-7xl bg-white py-5">
@@ -67,95 +69,94 @@ const Checkout = () => {
           {/* :CHECKOUT FORM CONTAINER */}
           <div className="col-span-full lg:col-span-6 py-6 sm:py-12 lg:py-24 px-4">
             <div className="mx-auto w-full max-w-lg">
-              <form onSubmit={handleOnPlaceOrder}>
+              <form action="" onSubmit={handleOnPlaceOrder}>
                 {/* ::Title */}
                 <h1 className="relative text-2xl sm:text-3xl text-gray-700 font-medium">
                   Secure Checkout
                   <span className="mt-2 w-10 sm:w-20 h-1 block bg-indigo-600" />
                 </h1>
 
-                {/* ::Checkout Form */}
-                <form action="" className="mt-10 flex flex-col space-y-4">
-                  {/* :::Email address */}
-                  <div>
-                    {/* ::::label */}
-                    <label
-                      htmlFor="email"
-                      className="text-xs text-gray-500 font-semibold "
-                    >
-                      Email
-                    </label>
-                    {/* ::::input */}
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      placeholder="myaddress@example.com"
-                      className="form-input px-1 mt-1 w-full block shadow-sm rounded border-gray-300 bg-gray-50 text-sm placeholder-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                      onChange={handleOnChange}
-                    />
-                  </div>
-                  <div>
-                    {/* ::::label */}
-                    <label
-                      htmlFor="address"
-                      className="text-xs text-gray-500 font-semibold"
-                    >
-                      Address
-                    </label>
-                    {/* ::::input */}
-                    <input
-                      type="text"
-                      id="address"
-                      name="address"
-                      placeholder="1/2 mystreet, there"
-                      className="form-input px-1 mt-1 w-full block shadow-sm rounded border-gray-300 bg-gray-50 text-sm placeholder-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                      onChange={handleOnChange}
-                    />
-                  </div>
-                  {/* :::Card number */}
-                  <div className="relative">
-                    {/* ::::label */}
-                    <label
-                      htmlFor="card-number"
-                      className="text-xs text-gray-500 font-semibold"
-                    >
-                      Card number
-                    </label>
-                    {/* ::::input */}
-                    <input
-                      type="text"
-                      id="card-number"
-                      name="card-number"
-                      placeholder="1234-5678-XXXX-XXXX"
-                      className="form-input px-1 pr-10 w-full block shadow-sm rounded border-gray-300 bg-gray-50 text-sm placeholder-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                    />
-                    {/* ::::visa logo */}
-                    <img
-                      src="https://fancytailwind.com/static/visa-icon-5282a8660b2ad42cbdcf817d51129c0a.png"
-                      alt=""
-                      className="absolute bottom-3 right-3 max-h-4"
-                    />
-                  </div>
-                  {/* :::Expiration date */}
-                  <div>
-                    {/* ::::title */}
-                    <p className="text-xs text-gray-500 font-semibold">
-                      Expiration date
-                    </p>
-                    <div className="mr-6 flex flex-wrap">
-                      {/* ::::select month */}
-                      <div className="my-1">
-                        <label htmlFor="month" className="sr-only">
-                          Select expiration month
-                        </label>
-                        <select
-                          name="month"
-                          id="month"
-                          className={`form-select shadow-sm rounded border-gray-300 bg-gray-50 text-sm cursor-pointer focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500`}
-                        >
-                          <option value="">Month</option>
-                          {/* <option value="">Jan.</option>
+                <div>
+                  {/* ::::label */}
+                  <label
+                    htmlFor="email"
+                    className="text-xs text-gray-500 font-semibold "
+                  >
+                    Email
+                  </label>
+                  {/* ::::input */}
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required={true}
+                    placeholder="myaddress@example.com"
+                    className="form-input px-1 mt-1 w-full block shadow-sm rounded border-gray-300 bg-gray-50 text-sm placeholder-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    onChange={handleOnChange}
+                  />
+                </div>
+                <div>
+                  {/* ::::label */}
+                  <label
+                    htmlFor="address"
+                    className="text-xs text-gray-500 font-semibold"
+                  >
+                    Address
+                  </label>
+                  {/* ::::input */}
+                  <input
+                    type="text"
+                    id="address"
+                    name="address"
+                    required={true}
+                    placeholder="1/2 mystreet, there"
+                    className="form-input px-1 mt-1 w-full block shadow-sm rounded border-gray-300 bg-gray-50 text-sm placeholder-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                    onChange={handleOnChange}
+                  />
+                </div>
+                {/* :::Card number */}
+                <div className="relative">
+                  {/* ::::label */}
+                  <label
+                    htmlFor="card-number"
+                    className="text-xs text-gray-500 font-semibold"
+                  >
+                    Card number
+                  </label>
+                  {/* ::::input */}
+                  <input
+                    type="text"
+                    id="card-number"
+                    name="card-number"
+                    placeholder="1234-5678-XXXX-XXXX"
+                    className="form-input px-1 pr-10 w-full block shadow-sm rounded border-gray-300 bg-gray-50 text-sm placeholder-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  />
+                  {/* ::::visa logo */}
+                  <img
+                    src="https://fancytailwind.com/static/visa-icon-5282a8660b2ad42cbdcf817d51129c0a.png"
+                    alt=""
+                    className="absolute bottom-3 right-3 max-h-4"
+                  />
+                </div>
+                {/* :::Expiration date */}
+                <div>
+                  {/* ::::title */}
+                  <p className="text-xs text-gray-500 font-semibold">
+                    Expiration date
+                  </p>
+                  <div className="mr-6 flex flex-wrap">
+                    {/* ::::select month */}
+                    <div className="my-1">
+                      <label htmlFor="month" className="sr-only">
+                        Select expiration month
+                      </label>
+                      <select
+                        name="month"
+                        id="month"
+                        className={`form-select shadow-sm rounded border-gray-300 bg-gray-50 text-sm cursor-pointer focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500`}
+                      >
+                        <option value="">Month</option>
+                        {/* <option value="">Jan.</option>
                       <option value="">Feb.</option>
                       <option value="">Mar.</option>
                       <option value="">April</option>
@@ -167,55 +168,54 @@ const Checkout = () => {
                       <option value="">Oct.</option>
                       <option value="">Nov.</option>
                       <option value="">Dec.</option> */}
-                        </select>
-                      </div>
-                      {/* ::::select year */}
-                      <div className="my-1 ml-3 mr-6">
-                        <label htmlFor="year" className="sr-only">
-                          Select expiration year
-                        </label>
-                        <select
-                          name="year"
-                          id="year"
-                          className={`form-select shadow-sm rounded border-gray-300 bg-gray-50 text-sm cursor-pointer focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500`}
-                        >
-                          <option value="">Year</option>
-                        </select>
-                      </div>
-                      {/* ::::security code */}
-                      <div className="my-1 relative">
-                        <label htmlFor="security-code" className="sr-only">
-                          Security code
-                        </label>
-                        <input
-                          type="text"
-                          id="security-code"
-                          name="security-code"
-                          placeholder="Security code"
-                          className="form-input px-1  w-36 block shadow-sm rounded border-gray-300 bg-gray-50 text-sm placeholder-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                        />
-                        <button className="absolute top-1/2 -right-6 inline-flex justify-center items-center text-gray-400 hover:text-indigo-600 transform -translate-y-1/2">
-                          <AiFillInfoCircle className="w-5 h-5" />
-                        </button>
-                      </div>
+                      </select>
+                    </div>
+                    {/* ::::select year */}
+                    <div className="my-1 ml-3 mr-6">
+                      <label htmlFor="year" className="sr-only">
+                        Select expiration year
+                      </label>
+                      <select
+                        name="year"
+                        id="year"
+                        className={`form-select shadow-sm rounded border-gray-300 bg-gray-50 text-sm cursor-pointer focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500`}
+                      >
+                        <option value="">Year</option>
+                      </select>
+                    </div>
+                    {/* ::::security code */}
+                    <div className="my-1 relative">
+                      <label htmlFor="security-code" className="sr-only">
+                        Security code
+                      </label>
+                      <input
+                        type="text"
+                        id="security-code"
+                        name="security-code"
+                        placeholder="Security code"
+                        className="form-input px-1  w-36 block shadow-sm rounded border-gray-300 bg-gray-50 text-sm placeholder-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                      />
+                      <button className="absolute top-1/2 -right-6 inline-flex justify-center items-center text-gray-400 hover:text-indigo-600 transform -translate-y-1/2">
+                        <AiFillInfoCircle className="w-5 h-5" />
+                      </button>
                     </div>
                   </div>
-                  {/* :::Card name */}
-                  <div>
-                    {/* ::::label */}
-                    <label htmlFor="card-name" className="sr-only">
-                      Card name
-                    </label>
-                    {/* ::::input */}
-                    <input
-                      type="text"
-                      id="card-name"
-                      name="card-name"
-                      placeholder="Name on the card"
-                      className="form-input px-1 mt-1 w-full block shadow-sm rounded border-gray-300 bg-gray-50 text-sm placeholder-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                    />
-                  </div>
-                </form>
+                </div>
+                {/* :::Card name */}
+                <div>
+                  {/* ::::label */}
+                  <label htmlFor="card-name" className="sr-only">
+                    Card name
+                  </label>
+                  {/* ::::input */}
+                  <input
+                    type="text"
+                    id="card-name"
+                    name="card-name"
+                    placeholder="Name on the card"
+                    className="form-input px-1 mt-1 w-full block shadow-sm rounded border-gray-300 bg-gray-50 text-sm placeholder-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  />
+                </div>
 
                 {/* ::Info */}
                 <p className="mt-10 text-center text-sm text-gray-500 font-semibold">
@@ -284,7 +284,7 @@ const Checkout = () => {
               <div className="space-y-2">
                 {/* ::::total price */}
                 <p className="flex justify-between text-lg text-white font-bold">
-                  <span>SubTotal:&nbsp; ${totalAmount}</span>
+                  <span>SubTotal:&nbsp; ${subTotal}</span>
                 </p>
                 {/* ::::vat */}
                 <p className="flex justify-between text-sm text-white font-medium">
@@ -292,7 +292,7 @@ const Checkout = () => {
                 </p>
                 <p className="flex justify-between text-lg text-white font-bold">
                   <span>
-                    Total price:&nbsp; $ <span>{1.13 * totalAmount}</span>
+                    Total price:&nbsp; $ <span>{totalAmount}</span>
                   </span>
                 </p>
               </div>

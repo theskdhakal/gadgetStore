@@ -17,17 +17,17 @@ export const OrderSummary = ({ totalAmount }) => {
     dispatch(setPopupShow(false));
     dispatch(setIsCartOpen(false));
 
-    setTimeout(() => {
-      dispatch(resetCart());
-    }, 2000);
+    dispatch(resetCart());
   };
+
+  const subTotal = Math.round(totalAmount * 1.13);
   return (
     <div>
       <div className="thankYou  ">
         <div>
           <img
             className=""
-            src="https://www.pngkey.com/png/detail/174-1749808_thank-you-for-your-order-oval-stickers-thank.png"
+            src="https://static.vecteezy.com/system/resources/previews/007/653/495/non_2x/thank-you-for-your-order-simple-hand-drawn-lettering-text-illustration-logo-label-design-for-business-marketing-etc-letter-template-design-vector.jpg"
             alt=""
           />
         </div>
@@ -36,12 +36,13 @@ export const OrderSummary = ({ totalAmount }) => {
           <ul className="space-y-5">
             {cart.map((item) => (
               <li key={item.id}>
-                {item.name}&nbsp;{item.price}
+                {item.name}&nbsp;-
+                <span className="text-red-400">{`$${item.price}`}</span>
               </li>
             ))}
           </ul>
           <hr />
-          <h5>Total Amount:{1.13 * totalAmount}</h5>
+          <h5>Total Amount:${subTotal}</h5>
           <button
             className="bg-blue-500 w-full text-white px-4 py-2 rounded"
             onClick={() => {
