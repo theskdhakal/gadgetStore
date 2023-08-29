@@ -26,6 +26,8 @@ import { Login } from "./pages/user/Login";
 import { Product } from "./pages/products/Product";
 import { ToastContainer } from "react-toastify";
 import Checkout from "./pages/checkout/Checkout";
+import { OrderHistory } from "./pages/checkout/OrderHistory";
+import { getAllOrderACtion } from "./pages/checkout/CheckoutAction";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,6 +35,7 @@ function App() {
   useEffect(() => {
     dispatch(getAllProductAction());
     dispatch(getAllCategoriesAction());
+    dispatch(getAllOrderACtion());
   }, [dispatch]);
   return (
     <>
@@ -52,6 +55,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/products" element={<Product />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/orderHistory" element={<OrderHistory />} />
       </Routes>
       <ToastContainer />
     </>

@@ -47,10 +47,13 @@ export const ProductLanding = () => {
       name: productName,
       id: slug,
       price: price,
-      salesPrice: salesPrice,
       category: parentCat,
       quantity: 1,
     };
+
+    if (salesPrice) {
+      newItem.salesPrice = salesPrice;
+    }
 
     const existingCartItemIndex = cart.findIndex((item) => item.id === slug);
 

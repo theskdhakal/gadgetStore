@@ -11,6 +11,8 @@ import { resetCart } from "../../component/system/cartSlice";
 import { Popup } from "../../component/pop-up/Popup";
 import { OrderSummary } from "./OrderSummary";
 import { setPopupShow } from "../../component/system/systemSlice";
+import { Link } from "react-router-dom";
+import logo from "../../component/assets/image/logo.JPG";
 
 const Checkout = () => {
   const { cart } = useSelector((state) => state.cart);
@@ -55,12 +57,24 @@ const Checkout = () => {
       cart,
     };
 
+    console.log(orderData);
+
     dispatch(AddOrderAction(orderData));
     dispatch(setPopupShow(true));
   };
 
   return (
     <>
+      <div className="bg-mycolor shadow">
+        <Link
+          to="/"
+          aria-label="Company"
+          title="Company"
+          class="inline-flex  mm-auto lg:ml-10"
+        >
+          <img src={logo} alt="" style={{ width: "115px" }} />
+        </Link>
+      </div>
       <Popup isOrderConfirmation={true}>
         <OrderSummary totalAmount={totalAmount} />
       </Popup>
