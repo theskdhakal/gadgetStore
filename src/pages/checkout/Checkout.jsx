@@ -55,6 +55,7 @@ const Checkout = () => {
     const orderData = {
       ...form,
       cart,
+      orderDate: Date.now(),
     };
 
     console.log(orderData);
