@@ -4,6 +4,7 @@ import { setOrder } from "./OrderSlice";
 import { db } from "../../component/firebase/FIrebaseConfig";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import { setPopupShow } from "../../component/system/systemSlice";
 
 export const getAllOrderACtion = () => async (dispatch) => {
   try {
@@ -30,7 +31,7 @@ export const getAllOrderACtion = () => async (dispatch) => {
 
 export const AddOrderAction = (orderData) => async (dispatch) => {
   try {
-    const orderRef = await setDoc(collection(db, ORDER), orderData);
+    const orderRef = await addDoc(collection(db, ORDER), orderData);
 
     if (orderRef?.id) {
       Swal.fire({
@@ -40,6 +41,8 @@ export const AddOrderAction = (orderData) => async (dispatch) => {
         allowOutsideClick: false,
       });
       dispatch(getAllOrderACtion());
+      dispatch(setPopupShow(true));
+
       return;
     }
 

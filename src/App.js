@@ -30,15 +30,22 @@ import { OrderHistory } from "./pages/checkout/OrderHistory";
 import { getAllOrderACtion } from "./pages/checkout/CheckoutAction";
 import { PrivateRoute } from "./component/private-routing/PrivateRoute";
 import { getUserAction } from "./pages/user/UserAction";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./component/firebase/FIrebaseConfig";
 
 function App() {
   const dispatch = useDispatch();
+
+  onAuthStateChanged(auth, (userData) => {
+    if (userData?.uid) {
+      dispatch(getUserAction(userData.uid));
+    }
+  });
 
   useEffect(() => {
     dispatch(getAllProductAction());
     dispatch(getAllCategoriesAction());
     dispatch(getAllOrderACtion());
-    dispatch(getUserAction());
   }, [dispatch]);
   return (
     <>
@@ -56,7 +63,6 @@ function App() {
         <Route path="/:parentCat/:slug" element={<ProductLanding />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/products" element={<Product />} />
         <Route
           path="/checkout"
           element={

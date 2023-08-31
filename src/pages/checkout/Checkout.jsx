@@ -61,7 +61,6 @@ const Checkout = () => {
     console.log(orderData);
 
     dispatch(AddOrderAction(orderData));
-    dispatch(setPopupShow(true));
   };
 
   return (
