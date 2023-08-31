@@ -1,5 +1,5 @@
 import { ORDER } from "../../component/assets/constant/Constant";
-import { addDoc, collection, getDocs, query } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, setDoc } from "firebase/firestore";
 import { setOrder } from "./OrderSlice";
 import { db } from "../../component/firebase/FIrebaseConfig";
 import { toast } from "react-toastify";
@@ -30,7 +30,7 @@ export const getAllOrderACtion = () => async (dispatch) => {
 
 export const AddOrderAction = (orderData) => async (dispatch) => {
   try {
-    const orderRef = await addDoc(collection(db, ORDER), orderData);
+    const orderRef = await setDoc(collection(db, ORDER), orderData);
 
     if (orderRef?.id) {
       Swal.fire({

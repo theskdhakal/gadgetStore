@@ -28,6 +28,8 @@ import { ToastContainer } from "react-toastify";
 import Checkout from "./pages/checkout/Checkout";
 import { OrderHistory } from "./pages/checkout/OrderHistory";
 import { getAllOrderACtion } from "./pages/checkout/CheckoutAction";
+import { PrivateRoute } from "./component/private-routing/PrivateRoute";
+import { getUserAction } from "./pages/user/UserAction";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +38,7 @@ function App() {
     dispatch(getAllProductAction());
     dispatch(getAllCategoriesAction());
     dispatch(getAllOrderACtion());
+    dispatch(getUserAction());
   }, [dispatch]);
   return (
     <>
@@ -54,8 +57,22 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/products" element={<Product />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/orderHistory" element={<OrderHistory />} />
+        <Route
+          path="/checkout"
+          element={
+            <PrivateRoute>
+              <Checkout />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/orderHistory"
+          element={
+            <PrivateRoute>
+              <OrderHistory />
+            </PrivateRoute>
+          }
+        />
       </Routes>
       <ToastContainer />
     </>

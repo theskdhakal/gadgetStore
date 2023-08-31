@@ -1,6 +1,7 @@
 import React from "react";
 import { MainLayout } from "../../component/layout/main-layout/MainLayout";
 import { useSelector } from "react-redux";
+import { format } from "date-fns";
 
 export const OrderHistory = () => {
   const { order } = useSelector((state) => state.order);
@@ -21,8 +22,12 @@ export const OrderHistory = () => {
               <h3 className="text-lg font-semibold mb-2">
                 Order {eachOrderIndex + 1}
               </h3>
+              <p className="text-gray-600 mb-1">
+                Date:{format(new Date(eachOrder.orderDate), "MM dd, yyyy")}
+              </p>
               <p className="text-gray-600 mb-1">Email: {eachOrder.email}</p>
               <p className="text-gray-600 mb-1">Address: {eachOrder.address}</p>
+
               <h4 className="mt-3 text-lg font-semibold">Ordered Items:</h4>
               <ul className="space-y-2">
                 {eachOrder.cart.map((item, i) => (
