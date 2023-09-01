@@ -23,7 +23,7 @@ export const OrderHistory = () => {
                 Order {eachOrderIndex + 1}
               </h3>
               <p className="text-gray-600 mb-1">
-                Date:{format(new Date(eachOrder.orderDate), "MM dd, yyyy")}
+                Date:{format(new Date(eachOrder.orderDate), "MM/dd/yyyy")}
               </p>
               <p className="text-gray-600 mb-1">Email: {eachOrder.email}</p>
               <p className="text-gray-600 mb-1">Address: {eachOrder.address}</p>

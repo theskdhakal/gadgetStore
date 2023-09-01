@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import "./App.css";
-import { Footer } from "./component/layout/footer/Footer";
-import { Header } from "./component/layout/header/abcd";
+
 import { Home } from "./pages/home/Home";
 import {
   getAllProduct,

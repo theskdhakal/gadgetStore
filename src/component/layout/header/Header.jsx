@@ -13,6 +13,10 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { BsFillCircleFill } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 import { setIsCartOpen } from "../../system/systemSlice";
+import { setClient } from "../../../pages/user/ClientSlice";
+import { auth } from "../../firebase/FIrebaseConfig";
+import { signOut } from "firebase/auth";
+import { toast } from "react-toastify";
 
 export const Header = () => {
   const dispatch = useDispatch();
@@ -21,6 +25,7 @@ export const Header = () => {
   const [searchValue, setSearchValue] = useState();
   const { product } = useSelector((state) => state.product);
   const { cart } = useSelector((state) => state.cart);
+  const { client } = useSelector((state) => state.client);
   let filteredProduct = [];
 
   function classNames(...classes) {
@@ -51,6 +56,13 @@ export const Header = () => {
       document.body.classList.remove("overflow-hidden");
     }
   }, [isMenuOpen]);
+
+  const handleOnLogout = () => {
+    signOut(auth).then(() => {
+      dispatch(setClient({}));
+      toast.success("you have been logged out");
+    });
+  };
   return (
     <>
       <div class="bg-mycolor">
@@ -198,27 +210,40 @@ export const Header = () => {
             >
               <img src={logo} alt="" style={{ width: "115px" }} />
             </Link>
-            <ul class="flex items-center hidden ml-auto space-x-8 lg:flex">
-              <li>
-                <Link
-                  to="/register"
-                  aria-label="register"
-                  title=" register"
-                  class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
-                >
-                  Register
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/login"
-                  class="inline-flex  items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-black hover:bg-deep-blue-accent-700 focus:shadow-outline focus:outline-none"
-                  aria-label="login"
-                  title="login"
-                >
-                  Login
-                </Link>
-              </li>
+            <ul class="flex items-center hidden ml-auto  space-x-8  lg:flex">
+              {client?.uid ? (
+                <li>
+                  <p
+                    className="inline-flex  items-center justify-center mt-3  h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-black hover:bg-deep-blue-accent-700 focus:shadow-outline focus:outline-none"
+                    style={{ marginRight: "2rem" }}
+                  >
+                    Hi&nbsp;! {client.fName}
+                  </p>
+                </li>
+              ) : (
+                <>
+                  <li>
+                    <Link
+                      to="/register"
+                      aria-label="register"
+                      title=" register"
+                      class="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                    >
+                      Register
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/login"
+                      class="inline-flex  items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-black hover:bg-deep-blue-accent-700 focus:shadow-outline focus:outline-none"
+                      aria-label="login"
+                      title="login"
+                    >
+                      Login
+                    </Link>
+                  </li>
+                </>
+              )}
             </ul>
 
             {/* //second row of header  */}
@@ -286,14 +311,14 @@ export const Header = () => {
                           leaveFrom="transform opacity-100 scale-100"
                           leaveTo="transform opacity-0 scale-95"
                         >
-                          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                          <Menu.Items className="absolute  right-0 z-10 mt-2 w-48  origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                             <Menu.Item>
                               {({ active }) => (
                                 <Link
                                   to="#"
                                   className={classNames(
-                                    active ? "bg-gray-100" : "",
-                                    "block px-4 py-2 text-sm text-gray-700"
+                                    active ? "bg-gray-100  " : "",
+                                    "block px-4 py-2 text-sm text-gray-700 no-underline"
                                   )}
                                 >
                                   Your Profile
@@ -306,26 +331,43 @@ export const Header = () => {
                                   to="/orderHistory"
                                   className={classNames(
                                     active ? "bg-gray-100" : "",
-                                    "block px-4 py-2 text-sm text-gray-700"
+                                    "block px-4 py-2 text-sm text-gray-700 no-underline"
                                   )}
                                 >
                                   Order History
                                 </Link>
                               )}
                             </Menu.Item>
-                            <Menu.Item>
-                              {({ active }) => (
-                                <Link
-                                  to="#"
-                                  className={classNames(
-                                    active ? "bg-gray-100" : "",
-                                    "block px-4 py-2 text-sm text-gray-700"
-                                  )}
-                                >
-                                  Sign out
-                                </Link>
-                              )}
-                            </Menu.Item>
+                            {client?.uid ? (
+                              <Menu.Item>
+                                {({ active }) => (
+                                  <Link
+                                    to="/"
+                                    className={classNames(
+                                      active ? "bg-gray-100" : "",
+                                      "block px-4 py-2 text-sm text-gray-700 no-underline"
+                                    )}
+                                    onClick={handleOnLogout}
+                                  >
+                                    Sign out
+                                  </Link>
+                                )}
+                              </Menu.Item>
+                            ) : (
+                              <Menu.Item>
+                                {({ active }) => (
+                                  <Link
+                                    to="/login"
+                                    className={classNames(
+                                      active ? "bg-gray-100" : "",
+                                      "block px-4 py-2 text-sm text-gray-700"
+                                    )}
+                                  >
+                                    Login
+                                  </Link>
+                                )}
+                              </Menu.Item>
+                            )}
                           </Menu.Items>
                         </Transition>
                       </Menu>
