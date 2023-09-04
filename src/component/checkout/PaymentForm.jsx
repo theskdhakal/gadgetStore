@@ -1,11 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillInfoCircle } from "react-icons/ai";
 import { AiFillLock } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { AddOrderAction } from "../../pages/checkout/CheckoutAction";
+import {
+  PaymentElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
+import axios from "axios";
 
 export const PaymentForm = () => {
   const [form, setForm] = useState();
+
+  const stripe = useStripe();
+  const elements = useElements();
+
+  useEffect(() => {
+    if (!stripe) return;
+  }, []);
+
   const dispatch = useDispatch();
   const { cart } = useSelector((state) => state.cart);
 
@@ -18,16 +32,46 @@ export const PaymentForm = () => {
     });
   };
 
-  const handleOnPlaceOrder = (e) => {
+  const handleOnPlaceOrder = async (e) => {
     e.preventDefault();
-
     const orderData = {
       ...form,
       cart,
       orderDate: Date.now(),
     };
 
-    dispatch(AddOrderAction(orderData));
+    if (!stripe || !elements) {
+      return;
+    }
+
+    const { error: submitError } = await elements.submit();
+    if (submitError) {
+      return;
+    }
+
+    const { data } = await axios({
+      method: "post",
+      url: "http://localhost:8000/api/v1/payment/create-payment-intent",
+      data: {
+        amount: 10000,
+        currency: "aud",
+      },
+    });
+
+    const { clientSecret } = data;
+
+    const { paymentIntent } = await stripe.confirmPayment({
+      elements,
+      clientSecret,
+      confirmParams: { return_url: "hhtp://localhost:3001" },
+      redirect: "if_required",
+    });
+
+    if (paymentIntent?.status === "succeeded") {
+      dispatch(AddOrderAction(orderData));
+    } else {
+      alert("payment unseucessful");
+    }
   };
   return (
     <div>
@@ -80,7 +124,7 @@ export const PaymentForm = () => {
 
           {/* //payment card  */}
 
-          {/* <PaymentForm /> */}
+          <PaymentElement />
 
           {/* ::Info */}
           <p className="mt-10 text-center text-sm text-gray-500 font-semibold">

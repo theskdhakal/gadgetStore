@@ -2,18 +2,34 @@ import React, { useEffect, useState } from "react";
 import { HiBadgeCheck } from "react-icons/hi";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-
 import checkout from "../../component/assets/image/promo/checkout.jpg";
-
 import { useDispatch, useSelector } from "react-redux";
-
 import { Popup } from "../../component/pop-up/Popup";
 import { OrderSummary } from "./OrderSummary";
 import { Link } from "react-router-dom";
 import logo from "../../component/assets/image/logo.JPG";
 import { PaymentForm } from "../../component/checkout/PaymentForm";
+import axios from "axios";
 
 const Checkout = () => {
+  // const [clientSecret, setClientSecret] = useState("");
+
+  // useEffect(() => {
+  //   const getSecret = async () => {
+  //     const res = await axios({
+  //       method: "post",
+  //       url: "http://localhost:8000/api/v1/payment/create-payment-intent",
+  //       data: {
+  //         amount: 10000,
+  //         currency: "aud",
+  //       },
+  //     });
+
+  //     setClientSecret(res.data.clientSecret);
+  //   };
+  //   getSecret();
+  // }, []);
+
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
@@ -28,6 +44,8 @@ const Checkout = () => {
   const stripePromise = loadStripe(publishableKey);
 
   const options = {
+    // clientSecret,
+
     mode: "payment",
     currency: "aud",
     amount: 30000,
