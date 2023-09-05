@@ -1,13 +1,32 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { CustomInput } from "../../component/custom-input/CustomInput";
+import { addNewReviewAction } from "../checkout/CheckoutAction";
 
 export const ReviewForm = ({ itemForReview }) => {
   const [form, setForm] = useState({});
 
   const dispatch = useDispatch();
 
-  const { name, id } = itemForReview;
+  const { orderId, clientId, clientName, id, name } = itemForReview;
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    const reviewObj = {
+      ...form,
+      prodId: id,
+      orderId,
+      clientId,
+      clientName,
+      prodName: name,
+    };
+    dispatch(addNewReviewAction(reviewObj));
+  };
 
   const inputs = [
     {
@@ -44,12 +63,17 @@ export const ReviewForm = ({ itemForReview }) => {
     <div className="w-3/4 m-auto ">
       <h3 clasName="text-center">Review Form</h3>
       <hr />
-      <form>
+      <form onSubmit={handleOnSubmit}>
         <h4>
           <span className="text-red-500">{name}</span>
         </h4>
         {inputs.map((item, i) => (
-          <CustomInput key={i} {...item} className="mb-2" />
+          <CustomInput
+            key={i}
+            {...item}
+            className="mb-2"
+            onChange={handleOnChange}
+          />
         ))}
 
         <button

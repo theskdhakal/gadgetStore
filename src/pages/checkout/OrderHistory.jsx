@@ -18,10 +18,12 @@ export const OrderHistory = (Uid) => {
 
   const [itemForReview, setItemForReview] = useState({});
 
-  const handleOnGiveReview = (item) => {
-    setItemForReview(item);
+  const handleOnGiveReview = (item, orderId, clientId, clientName) => {
+    setItemForReview({ ...item, orderId, clientId, clientName });
     dispatch(setPopupShow(true));
   };
+
+  console.log(itemForReview);
 
   return (
     <MainLayout>
@@ -62,7 +64,14 @@ export const OrderHistory = (Uid) => {
                     </div>
                     <button
                       className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600"
-                      onClick={() => handleOnGiveReview(item)}
+                      onClick={() =>
+                        handleOnGiveReview(
+                          item,
+                          eachOrder.id,
+                          client.uid,
+                          client.fName
+                        )
+                      }
                     >
                       Review
                     </button>
