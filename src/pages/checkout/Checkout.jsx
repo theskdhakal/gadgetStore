@@ -12,24 +12,6 @@ import { PaymentForm } from "../../component/checkout/PaymentForm";
 import axios from "axios";
 
 const Checkout = () => {
-  // const [clientSecret, setClientSecret] = useState("");
-
-  // useEffect(() => {
-  //   const getSecret = async () => {
-  //     const res = await axios({
-  //       method: "post",
-  //       url: "http://localhost:8000/api/v1/payment/create-payment-intent",
-  //       data: {
-  //         amount: 10000,
-  //         currency: "aud",
-  //       },
-  //     });
-
-  //     setClientSecret(res.data.clientSecret);
-  //   };
-  //   getSecret();
-  // }, []);
-
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
@@ -137,12 +119,11 @@ const Checkout = () => {
             <div className="relative mt-10 text-white">
               <h3 className="mb-5 text-lg font-bold">Hotline</h3>
               <p className="text-sm font-semibold">
-                +01 23 456 789{" "}
+                +01 111 111 11{" "}
                 <span className="font-light">(International)</span>
               </p>
               <p className="mt-1 text-sm font-semibold">
-                +9(876) 543 210{" "}
-                <span className="font-light">(USA / Canada)</span>
+                +61(410) 410 000 <span className="font-light">(Australia)</span>
               </p>
               <p className="mt-2 text-xs font-medium">
                 (24/7 English phone support for online payment related issues)

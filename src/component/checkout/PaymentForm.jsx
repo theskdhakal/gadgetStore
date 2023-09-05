@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { AiFillInfoCircle } from "react-icons/ai";
 import { AiFillLock } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { AddOrderAction } from "../../pages/checkout/CheckoutAction";
@@ -22,6 +21,8 @@ export const PaymentForm = () => {
 
   const dispatch = useDispatch();
   const { cart } = useSelector((state) => state.cart);
+  const { client } = useSelector((state) => state.client);
+  const { uid } = client;
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -36,7 +37,9 @@ export const PaymentForm = () => {
     e.preventDefault();
     const orderData = {
       ...form,
+      uid: uid,
       cart,
+
       orderDate: Date.now(),
     };
 
@@ -74,23 +77,51 @@ export const PaymentForm = () => {
     }
   };
   return (
-    <div>
+    <div className="shadow-lg p-3 rounded">
       <div className="mx-auto w-full max-w-lg">
         <form action="" onSubmit={handleOnPlaceOrder}>
           {/* ::Title */}
-          <h1 className="relative text-2xl sm:text-3xl text-gray-700 font-medium">
+          <h1 className="relative mb-5 shadow-sm  text-2xl sm:text-3xl text-gray-700 font-medium">
             Secure Checkout
-            <span className="mt-2 w-10 sm:w-20 h-1 block bg-indigo-600" />
+            <span className="mt-2 w-10 sm:w-20 h-1 block bg-sky-700" />
           </h1>
 
-          <div>
+          <div className="flex justify-between">
+            <div>
+              {/* ::::label */}
+              <label htmlFor="fName">First Name </label>
+              {/* ::::input */}
+              <input
+                type="text"
+                id="fName"
+                name="fName"
+                value={client.fName}
+                required={true}
+                placeholder="Harry"
+                className="form-input px-1 py-2 mt-1 w-full block  rounded border border-gray-600 "
+                onChange={handleOnChange}
+              />
+            </div>
+            <div>
+              {/* ::::label */}
+              <label htmlFor="lName">Last Name </label>
+              {/* ::::input */}
+              <input
+                type="text"
+                id="lName"
+                name="lName"
+                value={client.lName}
+                required={true}
+                placeholder="Potter"
+                className="form-input px-1 py-2 mt-1 w-full  rounded border border-gray-600 "
+                onChange={handleOnChange}
+              />
+            </div>
+          </div>
+
+          <div className="mt-2">
             {/* ::::label */}
-            <label
-              htmlFor="email"
-              className="text-xs text-gray-500 font-semibold "
-            >
-              Email
-            </label>
+            <label htmlFor="email">Email</label>
             {/* ::::input */}
             <input
               type="email"
@@ -98,18 +129,13 @@ export const PaymentForm = () => {
               name="email"
               required={true}
               placeholder="myaddress@example.com"
-              className="form-input px-1 mt-1 w-full block shadow-sm rounded border-gray-300 bg-gray-50 text-sm placeholder-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+              className="form-input px py-2 mt-1 w-full block  rounded border border-gray-600 "
               onChange={handleOnChange}
             />
           </div>
-          <div>
+          <div className="mt-2">
             {/* ::::label */}
-            <label
-              htmlFor="address"
-              className="text-xs text-gray-500 font-semibold"
-            >
-              Address
-            </label>
+            <label htmlFor="address">Address</label>
             {/* ::::input */}
             <input
               type="text"
@@ -117,14 +143,14 @@ export const PaymentForm = () => {
               name="address"
               required={true}
               placeholder="1/2 mystreet, there"
-              className="form-input px-1 mt-1 w-full block shadow-sm rounded border-gray-300 bg-gray-50 text-sm placeholder-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+              className="form-input px-1 py-2 mt-1 w-full block  rounded border border-gray-600"
               onChange={handleOnChange}
             />
           </div>
 
           {/* //payment card  */}
 
-          <PaymentElement />
+          <PaymentElement className="mt-2" />
 
           {/* ::Info */}
           <p className="mt-10 text-center text-sm text-gray-500 font-semibold">
@@ -140,7 +166,7 @@ export const PaymentForm = () => {
           {/* ::Submit Button */}
           <button
             type="submit"
-            className="mt-4 py-2.5 px-4 w-full inline-flex justify-center items-center rounded bg-indigo-600 text-base sm:text-lg text-white text-opacity-80 font-semibold tracking-wide hover:text-opacity-100"
+            className="mt-4 py-2.5 px-4 w-full inline-flex justify-center items-center rounded bg-sky-700 text-base sm:text-lg text-white text-opacity-80 font-semibold tracking-wide hover:text-opacity-100"
           >
             <AiFillLock className="mr-3 w-5 h-5" />
             Place Order

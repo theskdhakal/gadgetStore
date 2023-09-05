@@ -7,7 +7,7 @@ export const ReviewForm = ({ itemForReview }) => {
 
   const dispatch = useDispatch();
 
-  const { cart, email } = itemForReview;
+  const { name, id } = itemForReview;
 
   const inputs = [
     {
@@ -33,25 +33,32 @@ export const ReviewForm = ({ itemForReview }) => {
       name: "feedback",
       type: "text",
       required: true,
-      as: "textarea",
-      rows: "3",
+      placeholder: "Enter your feedback",
+      className: "resize-y w-full px-3 py-2 border rounded-lg ",
+
       value: form.feedback,
     },
   ];
 
   return (
-    <div className="w-1/2">
+    <div className="w-3/4 m-auto ">
+      <h3 clasName="text-center">Review Form</h3>
+      <hr />
       <form>
-        <h3>Review for:{cart.slug}</h3>
+        <h4>
+          <span className="text-red-500">{name}</span>
+        </h4>
         {inputs.map((item, i) => (
           <CustomInput key={i} {...item} className="mb-2" />
         ))}
 
-        <button className="bg-blue-400" type="submit">
+        <button
+          className="bg-blue-700 text-white mt-4 flex mx-auto p-2 border rounded"
+          type="submit"
+        >
           Submit Review
         </button>
       </form>
     </div>
   );
 };
-1;

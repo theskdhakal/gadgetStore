@@ -11,8 +11,6 @@ export const Popup = ({ children, isOrderConfirmation }) => {
 
   const { popupShow } = useSelector((state) => state.system);
 
-  console.log(isOrderConfirmation);
-
   const handleOnClose = () => {
     if (isOrderConfirmation) {
       navigate("/");

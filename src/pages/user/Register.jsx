@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { InputFields } from "../../component/input-fields/InputFields";
 import { CustomInput } from "../../component/custom-input/CustomInput";
 import { MainLayout } from "../../component/layout/main-layout/MainLayout";
 import { registerUserAction } from "./UserAction";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export const Register = () => {
   const [form, setForm] = useState();
   const navigate = useNavigate();
+
+  const { client } = useSelector((state) => state.client);
+
+  useEffect(() => {
+    if (client.uid) {
+      navigate("/");
+    }
+  }, [client.uid, navigate]);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;

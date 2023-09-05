@@ -1,13 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MainLayout } from "../../component/layout/main-layout/MainLayout";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { format } from "date-fns";
+import { getAllOrderACtion } from "./CheckoutAction";
+import { setPopupShow } from "../../component/system/systemSlice";
+import { Popup } from "../../component/pop-up/Popup";
+import { ReviewForm } from "../review/ReviewForm";
 
-export const OrderHistory = () => {
+export const OrderHistory = (Uid) => {
+  const { client } = useSelector((state) => state.client);
   const { order } = useSelector((state) => state.order);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllOrderACtion(client.uid));
+  }, [client?.uid]);
+
+  const [itemForReview, setItemForReview] = useState({});
+
+  const handleOnGiveReview = (item) => {
+    setItemForReview(item);
+    dispatch(setPopupShow(true));
+  };
 
   return (
     <MainLayout>
+      <Popup>
+        <ReviewForm itemForReview={itemForReview} />
+      </Popup>
       <div className="mt-5 w-3/4 m-auto">
         <h2 className="text-center text-3xl font-semibold mb-4 text-gray-800">
           Order History
@@ -40,7 +60,10 @@ export const OrderHistory = () => {
                       <p className="text-gray-700">Price: ${item.price}</p>
                       <p className="text-gray-700">Quantity: {item.quantity}</p>
                     </div>
-                    <button className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600">
+                    <button
+                      className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+                      onClick={() => handleOnGiveReview(item)}
+                    >
                       Review
                     </button>
                   </li>

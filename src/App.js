@@ -38,13 +38,13 @@ function App() {
   onAuthStateChanged(auth, (userData) => {
     if (userData?.uid) {
       dispatch(getUserAction(userData.uid));
+      dispatch(getAllOrderACtion(userData.uid));
     }
   });
 
   useEffect(() => {
     dispatch(getAllProductAction());
     dispatch(getAllCategoriesAction());
-    dispatch(getAllOrderACtion());
   }, [dispatch]);
   return (
     <>

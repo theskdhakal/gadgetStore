@@ -13,7 +13,6 @@ export const Cart = () => {
   const dispatch = useDispatch();
   const { cart } = useSelector((state) => state.cart);
   const { isCartOpen } = useSelector((state) => state.system);
-  console.log(cart);
 
   //function to close the shopping cart
   const closeCart = () => {
@@ -48,7 +47,10 @@ export const Cart = () => {
 
   if (cart.length > 0) {
     totalAmount = cart.reduce((accumulator, item) => {
-      return accumulator + +(item.price * item.quantity);
+      const priceToUse =
+        item.salesPrice !== undefined || "" ? item.salesPrice : item.price;
+
+      return accumulator + +(priceToUse * item.quantity);
     }, 0);
   }
 
@@ -125,9 +127,16 @@ export const Cart = () => {
                                           {item.name}
                                         </Link>
                                       </p>
-                                      <p className="ml-4 ">
-                                        ${item.price * item.quantity}
-                                      </p>
+                                      {item.salesPrice ? (
+                                        <p className="ml-4">
+                                          {" "}
+                                          ${item.salesPrice * item.quantity}
+                                        </p>
+                                      ) : (
+                                        <p className="ml-4 ">
+                                          ${item.price * item.quantity}
+                                        </p>
+                                      )}
                                     </div>
                                     <p className="mt-1 text-sm text-gray-500">
                                       {item.color}
@@ -177,6 +186,9 @@ export const Cart = () => {
                           to="/checkout"
                           totalAmount={totalAmount}
                           className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                          onClick={() => {
+                            closeCart();
+                          }}
                         >
                           Proceed to Checkout
                         </Link>
