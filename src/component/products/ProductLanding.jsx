@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { MainLayout } from "../layout/main-layout/MainLayout";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -13,6 +13,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { setPopupShow } from "../../component/system/systemSlice";
 import { Popup } from "../../component/pop-up/Popup";
 import { CartConfirmation } from "./CartConfirmation";
+import { getSelectedProductReview } from "../../pages/checkout/CheckoutAction";
 
 const reviews = { href: "#", average: 4, totalCount: 117 };
 
@@ -30,6 +31,16 @@ export const ProductLanding = () => {
   const { cart } = useSelector((state) => state.cart);
   const selectedProduct = product.find((item) => item.slug === slug) || {};
   console.log(cart);
+
+  useEffect(() => {
+    if (!product) {
+      navigate("/");
+    }
+
+    //fetch all review for this product
+
+    dispatch(getSelectedProductReview(slug));
+  }, [slug, dispatch, navigate, product.length]);
 
   const {
     productName,

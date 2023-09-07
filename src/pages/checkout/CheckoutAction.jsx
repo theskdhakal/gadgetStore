@@ -11,7 +11,7 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { setOrder } from "./OrderSlice";
+import { setOrder, setReview } from "./OrderSlice";
 import { db } from "../../component/firebase/FIrebaseConfig";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
@@ -136,16 +136,6 @@ export const deleteReviewAction =
     try {
       await deleteDoc(doc(db, REVIEW, reviewId));
 
-      // make reviewId,feedback and rating null from order
-
-      // const obj={
-      //   rating:null,
-      //   reviewId:null,
-      //   feedback:null,
-      // }
-
-      //fetch the order document
-
       const orderRef = doc(db, ORDER, orderId);
       const orderDoc = await getDoc(orderRef);
 
@@ -175,3 +165,25 @@ export const deleteReviewAction =
       toast.error("something went wrong while deleting review");
     }
   };
+
+//fetch review for selected product
+
+export const getSelectedProductReview = (slug) => async (dispatch) => {
+  console.log(slug);
+  try {
+    const q = query(collection(db, REVIEW), where("prodId", "==", slug));
+    const { docs } = await getDocs(q);
+
+    if (docs.length) {
+      let selectedBookReview = [];
+
+      docs.forEach((doc) => {
+        const reviewObj = { id: doc.id, ...doc.data() };
+        selectedBookReview.push(reviewObj);
+      });
+      dispatch(setReview(selectedBookReview));
+    }
+  } catch (error) {
+    toast.error("something went wrong while fetching review");
+  }
+};
