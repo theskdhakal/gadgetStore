@@ -187,3 +187,26 @@ export const getSelectedProductReview = (slug) => async (dispatch) => {
     toast.error("something went wrong while fetching review");
   }
 };
+
+//get review of all products
+export const getAllProductReview = () => async (dispatch) => {
+  try {
+    //define search query
+    const q = query(collection(db, REVIEW));
+
+    //run queries to get Data
+    let reviews = [];
+
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc) => {
+      reviews.push({
+        ...doc.data(),
+        id: doc.id,
+      });
+    });
+    dispatch(setReview(reviews));
+  } catch (error) {
+    toast.error("couldnot load all review");
+  }
+};

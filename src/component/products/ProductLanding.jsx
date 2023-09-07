@@ -13,9 +13,11 @@ import { IoIosArrowBack } from "react-icons/io";
 import { setPopupShow } from "../../component/system/systemSlice";
 import { Popup } from "../../component/pop-up/Popup";
 import { CartConfirmation } from "./CartConfirmation";
-import { getSelectedProductReview } from "../../pages/checkout/CheckoutAction";
-
-const reviews = { href: "#", average: 4, totalCount: 117 };
+import {
+  getAllProductReview,
+  getSelectedProductReview,
+} from "../../pages/checkout/CheckoutAction";
+import { Rating } from "../rating/Rating";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -29,6 +31,8 @@ export const ProductLanding = () => {
 
   const { product } = useSelector((state) => state.product);
   const { cart } = useSelector((state) => state.cart);
+  const { review } = useSelector((state) => state.order);
+
   const selectedProduct = product.find((item) => item.slug === slug) || {};
   console.log(cart);
 
@@ -37,10 +41,15 @@ export const ProductLanding = () => {
       navigate("/");
     }
 
-    //fetch all review for this product
+    dispatch(getAllProductReview());
+  }, [dispatch, navigate, product.length]);
 
-    dispatch(getSelectedProductReview(slug));
-  }, [slug, dispatch, navigate, product.length]);
+  const thisProduct = review.filter((item) => item.prodId === slug);
+
+  const rate = thisProduct?.length
+    ? thisProduct.reduce((acc, { rating }) => acc + +rating, 0) /
+      thisProduct.length
+    : 5;
 
   const {
     productName,
@@ -203,28 +212,10 @@ export const ProductLanding = () => {
               {/* Reviews */}
               <div className="mt-6">
                 <h3 className="sr-only">Reviews</h3>
-                <div className="flex items-center">
-                  <div className="flex items-center">
-                    {[0, 1, 2, 3, 4].map((rating) => (
-                      <StarIcon
-                        key={rating}
-                        className={classNames(
-                          reviews.average > rating
-                            ? "text-gray-900"
-                            : "text-gray-200",
-                          "h-5 w-5 flex-shrink-0"
-                        )}
-                        aria-hidden="true"
-                      />
-                    ))}
-                  </div>
-                  <p className="sr-only">{reviews.average} out of 5 stars</p>
-                  <a
-                    href={reviews.href}
-                    className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                  >
-                    {reviews.totalCount} reviews
-                  </a>
+                <div className="flex items-center gap-2">
+                  {" "}
+                  <Rating rate={rate} />
+                  <p className="pt-3">({thisProduct.length} reviews)</p>
                 </div>
               </div>
 
