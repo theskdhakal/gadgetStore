@@ -18,6 +18,8 @@ import {
   getSelectedProductReview,
 } from "../../pages/checkout/CheckoutAction";
 import { Rating } from "../rating/Rating";
+import { ReviewBox } from "../rating/ReviewBox";
+import { setReview } from "../../pages/checkout/OrderSlice";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -27,28 +29,29 @@ export const ProductLanding = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { slug } = useParams();
-  console.log(slug);
 
   const { product } = useSelector((state) => state.product);
   const { cart } = useSelector((state) => state.cart);
   const { review } = useSelector((state) => state.order);
 
   const selectedProduct = product.find((item) => item.slug === slug) || {};
-  console.log(cart);
 
   useEffect(() => {
     if (!product) {
       navigate("/");
     }
 
-    dispatch(getAllProductReview());
-  }, [dispatch, navigate, product.length]);
+    dispatch(getSelectedProductReview(slug));
 
-  const thisProduct = review.filter((item) => item.prodId === slug);
+    return () => {
+      dispatch(setReview([]));
+    };
+  }, [dispatch, navigate, product.length, slug]);
 
-  const rate = thisProduct?.length
-    ? thisProduct.reduce((acc, { rating }) => acc + +rating, 0) /
-      thisProduct.length
+  // const thisProduct = review.filter((item) => item.prodId === slug);
+
+  const rate = review?.length
+    ? review.reduce((acc, { rating }) => acc + +rating, 0) / review.length
     : 5;
 
   const {
@@ -184,15 +187,10 @@ export const ProductLanding = () => {
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
               <div className="bg-[#dc2626] rounded w-2/5 border border-2 border-black  relative">
-                {/* <p className="text-3xl tracking-tight px-3 text-white ">
-                  <span className="text-lg absolute top-0 left-0">$</span>
-                  {price}
-                </p> */}
-
                 {salesPrice ? (
                   <>
                     <p className="text-3xl tracking-tight px-3 text-center text-white ">
-                      <span className="text-lg text-center absolute top-0 left-0">
+                      <span className="text-lg text-center absolute top-0 left-10">
                         $
                       </span>
                       {salesPrice}
@@ -215,7 +213,7 @@ export const ProductLanding = () => {
                 <div className="flex items-center gap-2">
                   {" "}
                   <Rating rate={rate} />
-                  <p className="pt-3">({thisProduct.length} reviews)</p>
+                  <p className="pt-3">({review.length} reviews)</p>
                 </div>
               </div>
 
@@ -266,6 +264,8 @@ export const ProductLanding = () => {
             </div>
           </div>
         </div>
+
+        <ReviewBox />
       </div>
     </MainLayout>
   );

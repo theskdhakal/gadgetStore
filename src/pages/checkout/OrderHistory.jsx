@@ -7,6 +7,7 @@ import { setPopupShow } from "../../component/system/systemSlice";
 import { Popup } from "../../component/pop-up/Popup";
 import { ReviewForm } from "../review/ReviewForm";
 import { Rating } from "../../component/rating/Rating";
+import { Link } from "react-router-dom";
 
 export const OrderHistory = (Uid) => {
   const { client } = useSelector((state) => state.client);
@@ -70,7 +71,14 @@ export const OrderHistory = (Uid) => {
                     className="bg-gray-100 flex items-center justify-between p-2 rounded-lg"
                   >
                     <div className="flex-1">
-                      <p className="text-gray-700">{item.name}</p>
+                      <p className="text-gray-700 ">
+                        <Link
+                          to={`/${item.category}/${item.id}`}
+                          className="text-gray-700 no-underline"
+                        >
+                          {item.name}
+                        </Link>
+                      </p>
                       <p className="text-gray-700">Price: ${item.price}</p>
                       <p className="text-gray-700">Quantity: {item.quantity}</p>
                       {item.feedback && (
