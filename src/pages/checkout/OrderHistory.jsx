@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { MainLayout } from "../../component/layout/main-layout/MainLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { format } from "date-fns";
-import { getAllOrderACtion } from "./CheckoutAction";
+import { deleteReviewAction, getAllOrderACtion } from "./CheckoutAction";
 import { setPopupShow } from "../../component/system/systemSlice";
 import { Popup } from "../../component/pop-up/Popup";
 import { ReviewForm } from "../review/ReviewForm";
+import { Rating } from "../../component/rating/Rating";
 
 export const OrderHistory = (Uid) => {
   const { client } = useSelector((state) => state.client);
@@ -23,7 +24,18 @@ export const OrderHistory = (Uid) => {
     dispatch(setPopupShow(true));
   };
 
-  console.log(itemForReview);
+  const handleOnDeleteReview = (item, orderId, uid) => {
+    const deleteObj = {
+      prodId: item.id,
+      uid,
+      orderId,
+      reviewId: item.reviewId,
+    };
+
+    if (window.confirm("Are you sure you want to delete this review")) {
+      dispatch(deleteReviewAction(deleteObj));
+    }
+  };
 
   return (
     <MainLayout>
@@ -61,20 +73,40 @@ export const OrderHistory = (Uid) => {
                       <p className="text-gray-700">{item.name}</p>
                       <p className="text-gray-700">Price: ${item.price}</p>
                       <p className="text-gray-700">Quantity: {item.quantity}</p>
+                      {item.feedback && (
+                        <p className="text-gray-700">
+                          Your Feedback: {item.feedback}
+                        </p>
+                      )}
                     </div>
-                    <button
-                      className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600"
-                      onClick={() =>
-                        handleOnGiveReview(
-                          item,
-                          eachOrder.id,
-                          client.uid,
-                          client.fName
-                        )
-                      }
-                    >
-                      Review
-                    </button>
+
+                    {item?.rating ? (
+                      <div className="flex flex-column gap-2">
+                        <Rating rate={item.rating} />
+                        <button
+                          className="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-lg hover:bg-red-600"
+                          onClick={() =>
+                            handleOnDeleteReview(item, eachOrder.id, client.uid)
+                          }
+                        >
+                          Delete Review
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        className="px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+                        onClick={() =>
+                          handleOnGiveReview(
+                            item,
+                            eachOrder.id,
+                            client.uid,
+                            client.fName
+                          )
+                        }
+                      >
+                        Review
+                      </button>
+                    )}
                   </li>
                 ))}
               </ul>

@@ -21,7 +21,7 @@ export const ReviewForm = ({ itemForReview }) => {
       ...form,
       prodId: id,
       orderId,
-      clientId,
+      uid: clientId,
       clientName,
       prodName: name,
     };
@@ -39,7 +39,7 @@ export const ReviewForm = ({ itemForReview }) => {
     },
     {
       label: "Ratings",
-      name: "ratings",
+      name: "rating",
       type: "number",
       required: true,
       min: 1,

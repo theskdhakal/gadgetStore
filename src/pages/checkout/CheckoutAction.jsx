@@ -2,11 +2,13 @@ import { ORDER } from "../../component/assets/constant/Constant";
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
   query,
   setDoc,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import { setOrder } from "./OrderSlice";
@@ -62,7 +64,7 @@ export const AddOrderAction = (orderData) => async (dispatch) => {
 };
 
 export const updateOrderAction =
-  ({ orderId, clientId, prodId, ...obj }) =>
+  ({ orderId, uid, prodId, rating, feedback, reviewId }) =>
   async (dispatch) => {
     try {
       //fetch the order document
@@ -80,16 +82,17 @@ export const updateOrderAction =
           if (item.id === prodId) {
             //add the review to the item
 
-            item.review = obj;
+            item.rating = rating;
+            item.feedback = feedback;
+            item.reviewId = reviewId;
           }
           return item;
         });
 
         //update the order docs with modified cart
+        await updateDoc(orderRef, { cart: updatedCart });
 
-        await setDoc(orderRef, { cart: updatedCart });
-
-        dispatch(getAllOrderACtion(clientId));
+        dispatch(getAllOrderACtion(uid));
       } else {
         toast.error("order not found");
       }
@@ -100,7 +103,7 @@ export const updateOrderAction =
 
 export const addNewReviewAction = (reviewObj) => async (dispatch) => {
   try {
-    const { orderId, prodId, ratings, clientId } = reviewObj;
+    const { orderId, prodId, rating, feedback, uid } = reviewObj;
 
     const docRef = await addDoc(collection(db, REVIEW), reviewObj);
 
@@ -113,15 +116,62 @@ export const addNewReviewAction = (reviewObj) => async (dispatch) => {
     const obj = {
       orderId,
       prodId,
-      clientId,
+      uid,
+      rating,
+      feedback,
       reviewId: docRef.id,
-      ratings,
     };
 
-    // dispatch(updateOrderAction(obj));
+    dispatch(updateOrderAction(obj));
     dispatch(setPopupShow(false));
     return;
   } catch (error) {
     toast.error("Error in adding Review");
   }
 };
+
+export const deleteReviewAction =
+  ({ reviewId, prodId, orderId, uid }) =>
+  async (dispatch) => {
+    try {
+      await deleteDoc(doc(db, REVIEW, reviewId));
+
+      // make reviewId,feedback and rating null from order
+
+      // const obj={
+      //   rating:null,
+      //   reviewId:null,
+      //   feedback:null,
+      // }
+
+      //fetch the order document
+
+      const orderRef = doc(db, ORDER, orderId);
+      const orderDoc = await getDoc(orderRef);
+
+      if (orderDoc.exists()) {
+        //get the order data
+
+        const orderData = orderDoc.data();
+
+        //find the specific item in the cart
+        const updatedCart = orderData.cart.map((item) => {
+          if (item.id === prodId) {
+            //add the review to the item
+
+            item.rating = null;
+            item.feedback = null;
+            item.reviewId = null;
+          }
+          return item;
+        });
+
+        //update the order docs with modified cart
+        await updateDoc(orderRef, { cart: updatedCart });
+
+        dispatch(getAllOrderACtion(uid));
+      }
+    } catch (error) {
+      toast.error("something went wrong while deleting review");
+    }
+  };
