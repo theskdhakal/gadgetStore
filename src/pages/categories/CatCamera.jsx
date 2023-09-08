@@ -3,8 +3,10 @@ import { MainLayout } from "../../component/layout/main-layout/MainLayout";
 import camera from "../../component/assets/image/categories/camera.png";
 import { ProductsCard } from "../../component/products/ProductsCard";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export const CatCamera = () => {
+  const navigate = useNavigate();
   const { product } = useSelector((state) => state.product);
   const filteredProduct = product.filter((item) => item.parentCat === "camera");
   console.log(filteredProduct);
@@ -78,7 +80,13 @@ export const CatCamera = () => {
                 <div className="mt-0 lg:mt-6 max-w-7xl sm:flex">
                   <div className="mt-3 rounded-lg sm:mt-0">
                     <button className="items-center block px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                      Browse Cameras
+                      <a
+                        href="#productCamera"
+                        className="text-white no-underline"
+                      >
+                        {" "}
+                        Browse Cameras
+                      </a>
                     </button>
                   </div>
                   <div className="mt-3 rounded-lg sm:mt-0 sm:ml-3">

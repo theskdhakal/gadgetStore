@@ -32,6 +32,9 @@ import { getUserAction } from "./pages/user/UserAction";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./component/firebase/FIrebaseConfig";
 import { Profile } from "./pages/user/Profile";
+import { About } from "./pages/Other/About";
+import { Team } from "./pages/Other/Team";
+import { Careers } from "./pages/Other/Careers";
 
 function App() {
   const dispatch = useDispatch();
@@ -61,6 +64,9 @@ function App() {
         <Route path="/categories/gaming" element={<CatGaming />} />
         <Route path="/shopping-cart" element={<Cart />} />
         <Route path="/:parentCat/:slug" element={<ProductLanding />} />
+        <Route path="/careers" element={<Careers />} />
+        <Route path="/team" element={<Team />} />
+        <Route path="/about-us" element={<About />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route

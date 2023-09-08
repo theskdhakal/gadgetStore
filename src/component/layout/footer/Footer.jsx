@@ -6,23 +6,24 @@ import { BsInstagram } from "react-icons/bs";
 export const Footer = () => {
   const footerNavs = [
     {
-      href: "/",
+      href: "/about-us",
       name: "About",
     },
     {
-      href: "/",
+      href: "https://gadgetverse.hashnode.dev/tech-trends-2023-what-gadgetverse-has-in-store-for-you",
       name: "Blog",
+      EventTarget: "_blank",
     },
     {
       href: "/",
       name: "",
     },
     {
-      href: "/",
+      href: "/team",
       name: "Team",
     },
     {
-      href: "/",
+      href: "/careers",
       name: "Careers",
     },
 
