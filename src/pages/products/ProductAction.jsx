@@ -1,12 +1,15 @@
 import { toast } from "react-toastify";
 import { PRODUCTTABLE } from "../../component/assets/constant/Constant";
 import { setProduct } from "./ProductSlice";
-import { collection, doc, getDocs, query } from "firebase/firestore";
+import { collection, doc, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../component/firebase/FIrebaseConfig";
 
 export const getAllProductAction = () => async (dispatch) => {
   try {
-    const q = query(collection(db, PRODUCTTABLE));
+    const q = query(
+      collection(db, PRODUCTTABLE),
+      where("status", "==", "active")
+    );
 
     const productSnap = await getDocs(q);
 

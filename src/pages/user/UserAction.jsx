@@ -71,3 +71,15 @@ export const loginAction = (form) => async (dispatch) => {
     toast.error(error.message);
   }
 };
+
+export const updateProfileAction =
+  ({ uid, ...form }) =>
+  async (dispatch) => {
+    try {
+      await setDoc(doc(db, CLIENT, uid), form, { merge: true });
+      toast.success("Your profile has been updated");
+      dispatch(getUserAction(uid));
+    } catch (error) {
+      toast.error("Something went wrong while updating profile");
+    }
+  };

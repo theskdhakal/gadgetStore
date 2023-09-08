@@ -6,9 +6,7 @@ import { ProductsCard } from "../../component/products/ProductsCard";
 
 export const CatTv = () => {
   const { product } = useSelector((state) => state.product);
-  const filteredProduct = product.filter(
-    (item) => item.parentCat === "televsions"
-  );
+  const filteredProduct = product.filter((item) => item.parentCat === "tv");
 
   const features = [
     {

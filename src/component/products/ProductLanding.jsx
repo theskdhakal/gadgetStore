@@ -190,7 +190,7 @@ export const ProductLanding = () => {
                 {salesPrice ? (
                   <>
                     <p className="text-3xl tracking-tight px-3 text-center text-white ">
-                      <span className="text-lg text-center absolute top-0 left-10">
+                      <span className="text-lg text-center absolute top-0 left-5">
                         $
                       </span>
                       {salesPrice}
@@ -198,7 +198,7 @@ export const ProductLanding = () => {
                   </>
                 ) : (
                   <p className="text-3xl tracking-tight px-3 text-center text-white space-x-5">
-                    <span className="text-lg  text-center absolute left-11 top-0 ">
+                    <span className="text-lg  text-center absolute left-5 top-0 ">
                       $
                     </span>
 

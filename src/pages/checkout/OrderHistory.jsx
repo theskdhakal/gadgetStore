@@ -16,7 +16,7 @@ export const OrderHistory = (Uid) => {
 
   useEffect(() => {
     dispatch(getAllOrderACtion(client.uid));
-  }, [client?.uid]);
+  }, [client?.uid, dispatch]);
 
   const [itemForReview, setItemForReview] = useState({});
 

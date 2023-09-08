@@ -5,9 +5,7 @@ import { ProductsCard } from "../../component/products/ProductsCard";
 
 export const CatLaptop = () => {
   const { product } = useSelector((state) => state.product);
-  const filteredProduct = product.filter(
-    (item) => item.parentCat === "laptops"
-  );
+  const filteredProduct = product.filter((item) => item.parentCat === "laptop");
   console.log(filteredProduct);
   return (
     <MainLayout>

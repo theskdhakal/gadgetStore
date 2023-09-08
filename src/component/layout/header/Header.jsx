@@ -130,7 +130,7 @@ export const Header = () => {
                           <Menu.Item>
                             {({ active }) => (
                               <Link
-                                to="/categories/televisions"
+                                to="/categories/tv"
                                 className={classNames(
                                   active
                                     ? "bg-gray-100 text-gray-900"
@@ -145,7 +145,7 @@ export const Header = () => {
                           <Menu.Item>
                             {({ active }) => (
                               <Link
-                                to="/categories/Camera"
+                                to="/categories/camera"
                                 className={classNames(
                                   active
                                     ? "bg-gray-100 text-gray-900"
@@ -316,7 +316,7 @@ export const Header = () => {
                               <Menu.Item>
                                 {({ active }) => (
                                   <Link
-                                    to="#"
+                                    to="/profile"
                                     className={classNames(
                                       active ? "bg-gray-100  " : "",
                                       "block px-4 py-2 text-sm text-gray-700 no-underline"

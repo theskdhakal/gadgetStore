@@ -1,4 +1,4 @@
-import { collection, getDocs, query } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { CATEGORYTABLE } from "../../component/assets/constant/Constant";
 import { setcategory } from "./CategorySlice";
 import { db } from "../../component/firebase/FIrebaseConfig";
@@ -6,7 +6,10 @@ import { toast } from "react-toastify";
 
 export const getAllCategoriesAction = () => async (dispatch) => {
   try {
-    const q = query(collection(db, CATEGORYTABLE));
+    const q = query(
+      collection(db, CATEGORYTABLE),
+      where("status", "==", "active")
+    );
 
     const catSnap = await getDocs(q);
 
