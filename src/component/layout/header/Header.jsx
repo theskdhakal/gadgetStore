@@ -403,7 +403,7 @@ export const Header = () => {
               </button>
               {isMenuOpen && (
                 <div
-                  class="absolute -top-2 -left-6 w-screen  "
+                  class="absolute -top-2 -left-6 w-80  "
                   style={{ zIndex: 999 }}
                 >
                   <div class="p-2 bg-mycolor  border  shadow-sm h-screen">
@@ -427,12 +427,111 @@ export const Header = () => {
                     <nav>
                       <ul class="space-y-4">
                         <li>
-                          <Link
-                            // to="/categories"
-                            aria-label="Our product"
-                            title="Our product"
-                            class="font-medium tracking-wide text-white no-underline transition-colors duration-200 hover:text-deep-purple-accent-400"
-                          ></Link>
+                          <Menu
+                            as="div"
+                            className="relative inline-block text-left"
+                          >
+                            <div>
+                              <Menu.Button className="inline-flex  w-full justify-center gap-x-1.5 rounded-md   py-2 font-medium font-semibold text-white underlined shadow-sm ring-1 ring-inset ring-gray-300 ">
+                                Categories
+                                <AiFillCaretDown />
+                              </Menu.Button>
+                            </div>
+
+                            <Transition
+                              as={Fragment}
+                              enter="transition ease-out duration-100"
+                              enterFrom="transform opacity-0 scale-95"
+                              enterTo="transform opacity-100 scale-100"
+                              leave="transition ease-in duration-75"
+                              leaveFrom="transform opacity-100 scale-100"
+                              leaveTo="transform opacity-0 scale-95"
+                            >
+                              <Menu.Items className="absolute left-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-mycolor  shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                <div className="py-1">
+                                  <Menu.Item>
+                                    {({ active }) => (
+                                      <Link
+                                        to="/categories/mobile"
+                                        className={classNames(
+                                          active
+                                            ? "bg-gray-100 text-white"
+                                            : "text-white no-underline",
+                                          "block px-4 py-2 text-sm"
+                                        )}
+                                      >
+                                        Mobile
+                                      </Link>
+                                    )}
+                                  </Menu.Item>
+                                  <Menu.Item>
+                                    {({ active }) => (
+                                      <Link
+                                        to="/categories/laptop"
+                                        className={classNames(
+                                          active
+                                            ? "bg-gray-100 text-white"
+                                            : "text-white  no-underline",
+                                          "block px-4 py-2 text-sm"
+                                        )}
+                                      >
+                                        Laptops
+                                      </Link>
+                                    )}
+                                  </Menu.Item>
+                                </div>
+                                <div className="py-1">
+                                  <Menu.Item>
+                                    {({ active }) => (
+                                      <Link
+                                        to="/categories/tv"
+                                        className={classNames(
+                                          active
+                                            ? "bg-gray-100 text-white"
+                                            : "text-white  no-underline",
+                                          "block px-4 py-2 text-sm"
+                                        )}
+                                      >
+                                        Tv
+                                      </Link>
+                                    )}
+                                  </Menu.Item>
+                                  <Menu.Item>
+                                    {({ active }) => (
+                                      <Link
+                                        to="/categories/camera"
+                                        className={classNames(
+                                          active
+                                            ? "bg-gray-100 text-white"
+                                            : "text-white  no-underline",
+                                          "block px-4 py-2 text-sm"
+                                        )}
+                                      >
+                                        Camera
+                                      </Link>
+                                    )}
+                                  </Menu.Item>
+                                </div>
+                                <div className="py-1">
+                                  <Menu.Item>
+                                    {({ active }) => (
+                                      <Link
+                                        to="/categories/gaming"
+                                        className={classNames(
+                                          active
+                                            ? "bg-gray-100 text-white"
+                                            : "text-white  no-underline",
+                                          "block px-4 py-2 text-sm"
+                                        )}
+                                      >
+                                        Gaming
+                                      </Link>
+                                    )}
+                                  </Menu.Item>
+                                </div>
+                              </Menu.Items>
+                            </Transition>
+                          </Menu>
                         </li>
                         <li>
                           <Link
@@ -446,7 +545,7 @@ export const Header = () => {
                         </li>
                         <li>
                           <Link
-                            to="/"
+                            to="/deal"
                             aria-label="Product pricing"
                             title="Product pricing"
                             class="font-medium tracking-wide text-white no-underline transition-colors duration-200 hover:text-deep-purple-accent-400"
@@ -456,7 +555,7 @@ export const Header = () => {
                         </li>
                         <li>
                           <Link
-                            to="/"
+                            to="/register"
                             aria-label="register"
                             title="register"
                             class="font-medium tracking-wide text-white no-underline transition-colors duration-200 hover:text-deep-purple-accent-400"
@@ -464,16 +563,16 @@ export const Header = () => {
                             Register
                           </Link>
                         </li>
-                        {/* <li>
+                        <li>
                           <Link
-                            to="/"
+                            to="/login"
                             class="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                             aria-label="login"
                             title="login"
                           >
                             Login
                           </Link>
-                        </li> */}
+                        </li>
                       </ul>
                     </nav>
                   </div>

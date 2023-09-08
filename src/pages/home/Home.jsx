@@ -96,7 +96,7 @@ export const Home = () => {
         />
       </div>
 
-      <div className="mt-5 pt-5 lg:w-4/5 mx-auto">
+      <div className="mt-5 pt-5 lg:w-4/5 mx-auto" id="#deal">
         <span>
           <hr className="w-full mx-auto" />
         </span>

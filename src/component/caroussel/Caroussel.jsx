@@ -27,15 +27,14 @@ export const Caroussel = ({ slides, carouselStyle }) => {
           disableOnInteraction: false,
         }}
         navigation
-        // pagination={{ clickable: true }}
+        pagination={{ clickable: true }}
         // scrollbar={{ draggable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
+        // onSwiper={(swiper) => console.log(swiper)}
+        // onSlideChange={() => console.log("slide change")}
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index} style={slide.style}></SwiperSlide>
         ))}
-        ...
       </Swiper>
     </div>
   );
