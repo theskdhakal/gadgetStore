@@ -35,6 +35,7 @@ import { Profile } from "./pages/user/Profile";
 import { About } from "./pages/Other/About";
 import { Team } from "./pages/Other/Team";
 import { Careers } from "./pages/Other/Careers";
+import { ContactUs } from "./pages/Other/ContactUs";
 
 function App() {
   const dispatch = useDispatch();
@@ -65,6 +66,7 @@ function App() {
         <Route path="/shopping-cart" element={<Cart />} />
         <Route path="/:parentCat/:slug" element={<ProductLanding />} />
         <Route path="/careers" element={<Careers />} />
+        <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/team" element={<Team />} />
         <Route path="/about-us" element={<About />} />
         <Route path="/register" element={<Register />} />

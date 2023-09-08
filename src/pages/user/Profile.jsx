@@ -4,6 +4,7 @@ import { updateProfileAction } from "./UserAction";
 import { CustomInput } from "../../component/custom-input/CustomInput";
 import { MainLayout } from "../../component/layout/main-layout/MainLayout";
 import moomin from "../../component/assets/image/moomin.png";
+import { useMediaQuery } from "react-responsive";
 
 export const Profile = () => {
   const [form, setForm] = useState();
@@ -27,6 +28,8 @@ export const Profile = () => {
 
     dispatch(updateProfileAction(form));
   };
+
+  const isMobile = useMediaQuery({ maxWidth: 450 });
 
   const InputFields = [
     {
@@ -54,24 +57,24 @@ export const Profile = () => {
   ];
   return (
     <MainLayout>
-      <div className="flex justify-center items-center h-screen ">
-        <div className="w-3/4 mx-auto p-5 shadow-lg rounded-lg">
-          <h5 className="text-center text-xl font-semibold mb-4">
-            Update Your Profile Information
-          </h5>
-          <hr />
-
-          <div className="flex mt-4">
-            <div className="w-1/4">
+      <div className="flex justify-center items-center lg:h-screen ">
+        <div className="w-3/4 mx-0 lg:mx-auto lg:p-5 shadow-lg rounded-lg">
+          <div className="lg:flex mt-4">
+            <div className="w-full lg:w-1/4  ">
               <img
                 src={moomin}
                 alt="Profile Image"
-                className="w-full rounded-full"
+                className="w-full rounded"
+                style={{ height: isMobile ? "250px" : "550px" }}
               />
             </div>
 
-            <div className="w-3/4 pl-4">
-              <form onSubmit={handleOnSubmit}>
+            <div className="w-full p-0 mt-5 lg:w-3/4 lg:pl-4">
+              <h5 className="text-center text-xl font-semibold mb-4">
+                Update Your Profile Information
+              </h5>
+              <hr />
+              <form onSubmit={handleOnSubmit} className="p-2">
                 {InputFields.map((item, i) => (
                   <CustomInput
                     key={i}

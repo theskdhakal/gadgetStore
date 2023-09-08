@@ -28,7 +28,7 @@ export const Footer = () => {
     },
 
     {
-      href: "/",
+      href: "/contact-us",
       name: "Support",
     },
   ];
