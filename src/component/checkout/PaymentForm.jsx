@@ -8,6 +8,7 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import axios from "axios";
+import { updateProductAction } from "../../pages/products/ProductAction";
 
 export const PaymentForm = () => {
   const [form, setForm] = useState();
@@ -78,6 +79,7 @@ export const PaymentForm = () => {
 
     if (paymentIntent?.status === "succeeded") {
       dispatch(AddOrderAction(orderData));
+      dispatch(updateProductAction(cart));
     } else {
       alert("payment unsucessful");
     }
