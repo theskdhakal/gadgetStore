@@ -30,8 +30,8 @@ export const NewArrival = () => {
                       <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                         <div className="h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100">
                           <img
-                            src="https://azcd.harveynorman.com.au/media/catalog/product/cache/21/small_image/400x225/9df78eab33525d08d6e5fb8d27136e95/s/a/samsung-galaxy-z-fold5-hero.jpg"
-                            alt=""
+                            src="https://womenlovetech.com/wp-content/uploads/2022/09/Motorola-Ultra.jpg"
+                            alt="a"
                             className="h-full w-full object-cover object-center"
                           />
                         </div>

@@ -43,8 +43,11 @@ export const getAllOrderACtion = (uid) => async (dispatch) => {
 
 export const AddOrderAction = (orderData) => async (dispatch) => {
   try {
-    const orderRef = await addDoc(collection(db, ORDER), orderData);
-    console.log(orderData);
+    const orderRef = await addDoc(collection(db, ORDER), {
+      ...orderData,
+      orderStatus: "pending",
+    });
+
     if (orderRef?.id) {
       Swal.fire({
         icon: "success",

@@ -30,7 +30,7 @@ const Checkout = () => {
 
     mode: "payment",
     currency: "aud",
-    amount: 30000,
+    // amount: 30000,
   };
 
   return (

@@ -8,6 +8,7 @@ import { Popup } from "../../component/pop-up/Popup";
 import { ReviewForm } from "../review/ReviewForm";
 import { Rating } from "../../component/rating/Rating";
 import { Link } from "react-router-dom";
+import classnames from "classnames";
 
 export const OrderHistory = (Uid) => {
   const { client } = useSelector((state) => state.client);
@@ -38,6 +39,21 @@ export const OrderHistory = (Uid) => {
     }
   };
 
+  const getOrderStatusClass = (orderStatus) => {
+    switch (orderStatus) {
+      case "pending":
+        return "bg-yellow-400";
+      case "processing":
+        return "bg-blue-400";
+      case "shipped":
+        return "bg-gray-400";
+      case "delivered":
+        return "bg-green-400";
+      case "cancelled":
+        return "bg-red-400";
+    }
+  };
+
   return (
     <MainLayout>
       <Popup>
@@ -62,6 +78,17 @@ export const OrderHistory = (Uid) => {
               </p>
               <p className="text-gray-600 mb-1">Email: {eachOrder.email}</p>
               <p className="text-gray-600 mb-1">Address: {eachOrder.address}</p>
+              <p>
+                Order Status:
+                <span
+                  className={classnames(
+                    "text-gray-600 mb-1  border ",
+                    getOrderStatusClass(eachOrder.orderStatus)
+                  )}
+                >
+                  {eachOrder.orderStatus}
+                </span>
+              </p>
 
               <h4 className="mt-3 text-lg font-semibold">Ordered Items:</h4>
               <ul className="space-y-2">

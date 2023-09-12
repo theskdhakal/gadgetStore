@@ -24,6 +24,12 @@ export const PaymentForm = () => {
   const { client } = useSelector((state) => state.client);
   const { uid } = client;
 
+  const subTotal = cart.reduce((accumulator, item) => {
+    return accumulator + +(item.price * item.quantity);
+  }, 0);
+
+  const totalAmount = Math.round(1.13 * subTotal);
+
   const handleOnChange = (e) => {
     const { name, value } = e.target;
 
@@ -56,7 +62,7 @@ export const PaymentForm = () => {
       method: "post",
       url: "http://localhost:8000/api/v1/payment/create-payment-intent",
       data: {
-        amount: 10000,
+        amount: totalAmount * 100,
         currency: "aud",
       },
     });
@@ -66,14 +72,14 @@ export const PaymentForm = () => {
     const { paymentIntent } = await stripe.confirmPayment({
       elements,
       clientSecret,
-      confirmParams: { return_url: "hhtp://localhost:3001" },
+      confirmParams: { return_url: "hhtp://localhost:3000" },
       redirect: "if_required",
     });
 
     if (paymentIntent?.status === "succeeded") {
       dispatch(AddOrderAction(orderData));
     } else {
-      alert("payment unseucessful");
+      alert("payment unsucessful");
     }
   };
   return (
