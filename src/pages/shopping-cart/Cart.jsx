@@ -3,11 +3,11 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { setIsCartOpen } from "../../component/system/systemSlice";
+import { setIsCartOpen } from "../../component/system/SystemSlice";
 import {
   removeCartItem,
   updateCartItemQuantity,
-} from "../../component/system/cartSlice";
+} from "../../component/system/CartSlice";
 
 export const Cart = () => {
   const dispatch = useDispatch();

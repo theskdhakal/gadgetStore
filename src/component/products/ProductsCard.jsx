@@ -3,15 +3,16 @@ import { Link } from "react-router-dom";
 import special from "../assets/image/promo/special.png";
 import newArrival from "../assets/image/promo/newArrival.png";
 import { useDispatch, useSelector } from "react-redux";
-import { setCart } from "../system/cartSlice";
+import { setCart } from "../system/CartSlice";
 import { toast } from "react-toastify";
-import { setPopupShow } from "../system/systemSlice";
+import { setPopupShow } from "../system/SystemSlice";
 import { Popup } from "../pop-up/Popup";
 import { CartConfirmation } from "./CartConfirmation";
 
 export const ProductsCard = ({ filteredProduct, isDeal, isNew }) => {
   const { cart } = useSelector((state) => state.cart);
   const [image, setImage] = useState();
+  const [show, setshow] = useState(false);
   const dispatch = useDispatch();
 
   const handleAddToCart = ({
@@ -54,13 +55,16 @@ export const ProductsCard = ({ filteredProduct, isDeal, isNew }) => {
     setImage(thumbnail);
     toast.success("product has been added to cart");
     dispatch(setPopupShow(true));
+    setshow(true);
   };
 
   return (
     <>
-      <Popup>
-        <CartConfirmation image={image} />
-      </Popup>
+      {show && (
+        <Popup>
+          <CartConfirmation image={image} />
+        </Popup>
+      )}
 
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8 relative">

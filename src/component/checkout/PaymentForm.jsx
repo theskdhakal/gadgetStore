@@ -61,7 +61,8 @@ export const PaymentForm = () => {
 
     const { data } = await axios({
       method: "post",
-      url: "http://localhost:8000/api/v1/payment/create-payment-intent",
+      // url: "http://localhost:8000/api/v1/payment/create-payment-intent",
+      url: "https://wild-erin-ladybug-gown.cyclic.app/api/v1/payment/create-payment-intent",
       data: {
         amount: totalAmount * 100,
         currency: "aud",

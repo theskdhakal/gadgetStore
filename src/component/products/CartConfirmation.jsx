@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsCartOpen, setPopupShow } from "../system/systemSlice";
+import { setIsCartOpen, setPopupShow } from "../system/SystemSlice";
 import { TiTick } from "react-icons/ti";
 
 export const CartConfirmation = ({ image }) => {

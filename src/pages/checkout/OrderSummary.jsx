@@ -1,11 +1,11 @@
 import React from "react";
-import { resetCart, setCart } from "../../component/system/cartSlice";
+import { resetCart, setCart } from "../../component/system/CartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   setIsCartOpen,
   setPopupShow,
-} from "../../component/system/systemSlice";
+} from "../../component/system/SystemSlice";
 
 export const OrderSummary = ({ totalAmount }) => {
   const dispatch = useDispatch();

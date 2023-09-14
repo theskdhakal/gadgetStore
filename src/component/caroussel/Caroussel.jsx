@@ -23,7 +23,7 @@ export const Caroussel = ({ slides, carouselStyle }) => {
         spaceBetween={20}
         slidesPerView={1}
         autoplay={{
-          delay: 8500,
+          delay: 3500,
           disableOnInteraction: false,
         }}
         navigation

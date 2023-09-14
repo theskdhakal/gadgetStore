@@ -3,7 +3,7 @@ import { MainLayout } from "../../component/layout/main-layout/MainLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { format } from "date-fns";
 import { deleteReviewAction, getAllOrderACtion } from "./CheckoutAction";
-import { setPopupShow } from "../../component/system/systemSlice";
+import { setPopupShow } from "../../component/system/SystemSlice";
 import { Popup } from "../../component/pop-up/Popup";
 import { ReviewForm } from "../review/ReviewForm";
 import { Rating } from "../../component/rating/Rating";

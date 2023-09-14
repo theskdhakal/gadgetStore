@@ -8,7 +8,7 @@ export const ReviewBox = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="mx-auto py-8 px-4 w-full max-w-7xl bg-white">
+    <div className=" py-8 px-1 w-full max-w-7xl bg-white">
       <div className="mx-auto max-w-4xl flex flex-col">
         {/* :HEADER */}
         <div className="pb-5 w-full flex justify-center border-b-2 border-gray-200">

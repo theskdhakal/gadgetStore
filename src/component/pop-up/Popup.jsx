@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsCartOpen, setPopupShow } from "../system/systemSlice";
+import { setIsCartOpen, setPopupShow } from "../system/SystemSlice";
 import { RxCross2 } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
-import { resetCart } from "../system/cartSlice";
+import { resetCart } from "../system/CartSlice";
 
 export const Popup = ({ children, isOrderConfirmation }) => {
   const dispatch = useDispatch();

@@ -4,11 +4,11 @@ import storage from "redux-persist/lib/storage"; //defaults to loaclstorage
 
 import productReducer from "./pages/products/ProductSlice";
 import categoryReducer from "./pages/categories/CategorySlice";
-import cartReducer from "./component/system/cartSlice";
+import cartReducer from "./component/system/CartSlice";
 import NewReducer from "./pages/new-arrival/NewSlice";
 import ClientReducer from "./pages/user/ClientSlice";
 import orderReducer from "./pages/checkout/OrderSlice";
-import systemReducer from "./component/system/systemSlice";
+import systemReducer from "./component/system/SystemSlice";
 
 const persistConfig = {
   key: "root", //key for the persisted state in storage

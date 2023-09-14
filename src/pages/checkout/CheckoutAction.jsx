@@ -15,7 +15,7 @@ import { setOrder, setReview } from "./OrderSlice";
 import { db } from "../../component/firebase/FIrebaseConfig";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
-import { setPopupShow } from "../../component/system/systemSlice";
+import { setPopupShow } from "../../component/system/SystemSlice";
 import { REVIEW } from "../../component/assets/constant/Constant";
 
 export const getAllOrderACtion = (uid) => async (dispatch) => {

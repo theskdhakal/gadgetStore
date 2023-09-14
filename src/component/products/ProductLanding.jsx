@@ -8,9 +8,9 @@ import {
   resetCart,
   setCart,
   updateCartItemQuantity,
-} from "../system/cartSlice";
+} from "../system/CartSlice";
 import { IoIosArrowBack } from "react-icons/io";
-import { setPopupShow } from "../../component/system/systemSlice";
+import { setPopupShow } from "../../component/system/SystemSlice";
 import { Popup } from "../../component/pop-up/Popup";
 import { CartConfirmation } from "./CartConfirmation";
 import {
