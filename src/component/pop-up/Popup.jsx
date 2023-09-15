@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIsCartOpen, setPopupShow } from "../system/SystemSlice";
 import { RxCross2 } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
-import { resetCart } from "../system/CartSlice";
+import { resetCart } from "../system/cartSlice";
 
 export const Popup = ({ children, isOrderConfirmation }) => {
   const dispatch = useDispatch();

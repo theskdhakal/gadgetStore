@@ -1,5 +1,5 @@
 import React from "react";
-import { resetCart, setCart } from "../../component/system/CartSlice";
+import { resetCart, setCart } from "../../component/system/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {

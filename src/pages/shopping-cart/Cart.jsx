@@ -7,7 +7,7 @@ import { setIsCartOpen } from "../../component/system/SystemSlice";
 import {
   removeCartItem,
   updateCartItemQuantity,
-} from "../../component/system/CartSlice";
+} from "../../component/system/cartSlice";
 
 export const Cart = () => {
   const dispatch = useDispatch();

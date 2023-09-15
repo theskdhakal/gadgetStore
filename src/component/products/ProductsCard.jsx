@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import special from "../assets/image/promo/special.png";
 import newArrival from "../assets/image/promo/newArrival.png";
 import { useDispatch, useSelector } from "react-redux";
-import { setCart } from "../system/CartSlice";
+import { setCart } from "../system/cartSlice";
 import { toast } from "react-toastify";
 import { setPopupShow } from "../system/SystemSlice";
 import { Popup } from "../pop-up/Popup";
