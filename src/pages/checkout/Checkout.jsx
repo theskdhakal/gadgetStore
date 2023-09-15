@@ -15,9 +15,16 @@ const Checkout = () => {
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  const subTotal = cart.reduce((accumulator, item) => {
-    return accumulator + +(item.price * item.quantity);
-  }, 0);
+  let subTotal = 0;
+
+  if (cart.length > 0) {
+    subTotal = cart.reduce((accumulator, item) => {
+      const priceToUse =
+        item.salesPrice !== undefined || "" ? item.salesPrice : item.price;
+
+      return accumulator + +(priceToUse * item.quantity);
+    }, 0);
+  }
 
   const totalAmount = Math.round(1.13 * subTotal);
 
@@ -85,13 +92,19 @@ const Checkout = () => {
                         <p className="text-base text-white font-semibold">
                           {item.name}
                         </p>
-                        <p className="text-sm text-white text-opacity-80 font-medium">
-                          {item.details}
-                        </p>
                       </div>
                     </div>
                     {/* ::::item price */}
-                    <p className="text-sm text-white font-semibold">{`$${item.price}`}</p>
+                    {item.salesPrice ? (
+                      <p className="ml-4 text-white">
+                        {" "}
+                        ${item.salesPrice * item.quantity}
+                      </p>
+                    ) : (
+                      <p className="ml-4 text-white">
+                        ${item.price * item.quantity}
+                      </p>
+                    )}
                   </li>
                 ))}
               </ul>

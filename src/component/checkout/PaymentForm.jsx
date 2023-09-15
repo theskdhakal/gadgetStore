@@ -25,9 +25,16 @@ export const PaymentForm = () => {
   const { client } = useSelector((state) => state.client);
   const { uid } = client;
 
-  const subTotal = cart.reduce((accumulator, item) => {
-    return accumulator + +(item.price * item.quantity);
-  }, 0);
+  let subTotal = 0;
+
+  if (cart.length > 0) {
+    subTotal = cart.reduce((accumulator, item) => {
+      const priceToUse =
+        item.salesPrice !== undefined || "" ? item.salesPrice : item.price;
+
+      return accumulator + +(priceToUse * item.quantity);
+    }, 0);
+  }
 
   const totalAmount = Math.round(1.13 * subTotal);
 
@@ -46,6 +53,7 @@ export const PaymentForm = () => {
       ...form,
       uid: uid,
       cart,
+      totalAmount,
 
       orderDate: Date.now(),
     };

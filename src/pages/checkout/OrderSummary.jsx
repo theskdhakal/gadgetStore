@@ -20,7 +20,6 @@ export const OrderSummary = ({ totalAmount }) => {
     dispatch(resetCart());
   };
 
-  const subTotal = Math.round(totalAmount * 1.13);
   return (
     <div>
       <div className="thankYou  ">
@@ -42,7 +41,7 @@ export const OrderSummary = ({ totalAmount }) => {
             ))}
           </ul>
           <hr />
-          <h5>Total Amount:${subTotal}</h5>
+          <h5>Total Amount:${totalAmount}</h5>
           <button
             className="bg-blue-500 w-full text-white px-4 py-2 rounded"
             onClick={() => {

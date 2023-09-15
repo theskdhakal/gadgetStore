@@ -106,7 +106,16 @@ export const OrderHistory = (Uid) => {
                           {item.name}
                         </Link>
                       </p>
-                      <p className="text-gray-700">Price: ${item.price}</p>
+                      {item.salesPrice ? (
+                        <p className="text-gray-700">
+                          {" "}
+                          Price: ${item.salesPrice} * {item.quantity}
+                        </p>
+                      ) : (
+                        <p className="text-gray-700 ">
+                          Price:${item.price} * {item.quantity}
+                        </p>
+                      )}
                       <p className="text-gray-700">Quantity: {item.quantity}</p>
                       {item.feedback && (
                         <p className="text-gray-700">
