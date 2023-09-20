@@ -180,7 +180,7 @@ export const Cart = () => {
                           <p>Total Amount:${totalAmount}</p>
                         </div>
                         <p className="mt-0.5 text-sm text-gray-500">
-                          Shipping and taxes calculated at checkout.
+                          Shipping and taxe calculated at checkout.
                         </p>
                         <div className="mt-6">
                           <Link
