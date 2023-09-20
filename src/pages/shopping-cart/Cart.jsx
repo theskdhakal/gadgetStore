@@ -159,7 +159,7 @@ export const Cart = () => {
                                     <div className="flex">
                                       <button
                                         type="button"
-                                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                                        className="font-medium text-blue-600 hover:text-indigo-500"
                                         onClick={() => handleOnRemove(item.id)}
                                       >
                                         Remove
@@ -186,7 +186,7 @@ export const Cart = () => {
                           <Link
                             to="/checkout"
                             totalAmount={totalAmount}
-                            className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                            className="flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                             onClick={() => {
                               closeCart();
                             }}
@@ -199,7 +199,7 @@ export const Cart = () => {
                             or
                             <button
                               type="button"
-                              className="font-medium text-indigo-600 hover:text-indigo-500"
+                              className="font-medium text-blue-600 hover:text-indigo-500"
                               onClick={() => setOpen(false)}
                             >
                               Continue Shopping
